@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public GameObject traceObject;
-    
+    public static CameraMove instance;
+    public float speed;
+    public Transform target;
+
+    private void Awake() {
+        instance = this;
+    }
+
     void Update()
     {
-        transform.position = new Vector3 (traceObject.transform.position.x, traceObject.transform.position.y, -10f);
+        if(target != null)
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, transform.position.z), speed*Time.deltaTime);
+    }
+
+    public void ChangeTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 }
