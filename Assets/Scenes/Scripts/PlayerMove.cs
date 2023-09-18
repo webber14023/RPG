@@ -7,10 +7,8 @@ public class PlayerMove : MonoBehaviour
     public float attackCooldown;    //攻擊冷卻
     public float attackTime;        //攻擊時間
     public float attackRange;       //攻擊距離
-    private bool canAttack = true;
     public bool canControl = true;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
-    public GameObject myBag;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
@@ -27,7 +25,6 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
-        OpenMyBag();
         if(canControl) {
             Move();
             //Attack();
@@ -53,13 +50,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void OpenMyBag()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            myBag.SetActive(!myBag.activeSelf);
-        }
-    }
 
     /*void Attack() {
         if(Input.GetMouseButton(0) && canAttack) {
