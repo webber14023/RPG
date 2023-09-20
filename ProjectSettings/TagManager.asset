@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - slot
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -49,9 +50,15 @@ TagManager:
   - name: Ground
     uniqueID: 3452763693
     locked: 0
+  - name: Room
+    uniqueID: 3303272441
+    locked: 0
   - name: Door
     uniqueID: 3242634001
     locked: 0
   - name: Player
     uniqueID: 256577499
+    locked: 0
+  - name: UI
+    uniqueID: 3545518867
     locked: 0

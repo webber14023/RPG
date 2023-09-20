@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicAttack
   m_EditorClassIdentifier: 
   name: Attack
-  cooldownTime: 0.7
-  activeTime: 0.31
+  cooldownTime: 0.01
+  activeTime: 0.1
   attackRange: 1
-  AttackEffectPrefab: {fileID: 7500805520195669496, guid: 1dd400a5c0597734dac4191af217b647, type: 3}
+  AttackEffectPrefab: {fileID: 3562804448289436880, guid: e5333331031b2c14186dea445f0a3486, type: 3}
