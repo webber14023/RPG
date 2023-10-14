@@ -6,9 +6,11 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string ItemName;
+    public string type;
     public Sprite ItemImage;
+    public bool isStackable;
     public int ItemHeld;
     [TextArea]
     public string ItemInfo;
-    public bool Equip;
+    
 }

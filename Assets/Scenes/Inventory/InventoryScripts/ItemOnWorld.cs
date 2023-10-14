@@ -14,9 +14,8 @@ public class ItemOnWorld : MonoBehaviour
         }
     }
     public void AddNewItem() {
-        if(!playerInventory.itemList.Contains(ThisItem)) {
-            //playerInventory.itemList.Add(ThisItem);
-            //InventoryManager.CreateNewItem(ThisItem);
+        if(!playerInventory.itemList.Contains(ThisItem) || !ThisItem.isStackable) {
+            Debug.Log("Add New Item");
             for(int i = 0; i < playerInventory.itemList.Count; i++) {
                 if(playerInventory.itemList[i] == null) {
                     playerInventory.itemList[i] = ThisItem;

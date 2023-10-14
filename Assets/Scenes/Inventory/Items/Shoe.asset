@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shoe
   m_EditorClassIdentifier: 
   ItemName: shoe
+  type: Feet
   ItemImage: {fileID: 21300034, guid: 03dd1ef6fb163214c9e1ac0242dab3ba, type: 3}
+  isStackable: 0
   ItemHeld: 1
   ItemInfo: 123213
-  Equip: 0

@@ -23,7 +23,10 @@ public class Slot : MonoBehaviour
             return;
         }
         slotImage.sprite = item.ItemImage;
-        slotNum.text = item.ItemHeld.ToString();
+        if(item.isStackable)
+            slotNum.text = item.ItemHeld.ToString();
+        else
+            slotNum.gameObject.SetActive(false);
         slotInfo = item.ItemInfo;
     }
 }

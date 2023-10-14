@@ -10,19 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c048b862fa9ab4049a6fe544012fa026, type: 3}
-  m_Name: MyBag
+  m_Name: PlayerEquipment
   m_EditorClassIdentifier: 
   itemList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 5c4a2eeea7a0ea141b55b4ed17488787, type: 2}
-  - {fileID: 11400000, guid: ae39ae3f3e8e885489d728b4f96ce0c7, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

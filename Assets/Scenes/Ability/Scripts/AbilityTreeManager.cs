@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Purchasing;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +29,7 @@ public class AbilityTreeManager : MonoBehaviour
 
     private void Start() {
         UpdatePointUI();
+        DisplayAbilityLevel();
     }
 
     public void UpgradeButton() {
@@ -46,10 +49,11 @@ public class AbilityTreeManager : MonoBehaviour
         }
     }
     public void UpdateAbility() {
-        AbilityButtons[activeAbility.abilityID].GetComponent<Image>().color = Color.white;
         activeAbility.AbilityLevel++;
         AbilityPoint--;
         activeAbility.isUnlocked = true;
+        AbilityButtons[activeAbility.abilityID].gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
+        AbilityButtons[activeAbility.abilityID].LevelText.text = activeAbility.AbilityLevel.ToString();
         DisplayAbilityInfo();
         UpdatePointUI();
     }
@@ -61,5 +65,16 @@ public class AbilityTreeManager : MonoBehaviour
 
     public void UpdatePointUI() {
         AbilityPointText.text = "Skill Point : " + AbilityPoint;
+    }
+
+    public void DisplayAbilityLevel() {
+        for(int i=0; i < AbilityButtons.Length; i++)
+        {
+            AbilityButtons[i].LevelText.text = AbilityButtons[i].AbilityData.AbilityLevel.ToString();
+            if(AbilityButtons[i].AbilityData.isUnlocked) {
+                AbilityButtons[i].gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
+            }
+        }
+        
     }
 }
