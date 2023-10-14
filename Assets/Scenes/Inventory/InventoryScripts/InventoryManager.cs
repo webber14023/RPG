@@ -49,6 +49,7 @@ public class InventoryManager : MonoBehaviour
             //CreateNewItem(intance.myBag.itemList[i]);
             intance.slots.Add(Instantiate(intance.emptySlot));
             intance.slots[i].transform.SetParent(intance.slotGrid.transform);
+            intance.slots[i].transform.localScale = new Vector3(1,1,1);
             intance.slots[i].GetComponent<Slot>().slotID = i;
             intance.slots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i]);
         }

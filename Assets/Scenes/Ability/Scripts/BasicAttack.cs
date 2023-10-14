@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "BasicAttack", menuName = "Ability/BasicAttack")]
 public class BasicAttack : Ability
 {
     public float attackRange;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
-    private GameObject attack;
     Vector2 mouseDerection;
     
     public override void Activate(GameObject parent) {
@@ -16,13 +15,11 @@ public class BasicAttack : Ability
         PlayerMove move = parent.GetComponent<PlayerMove>();
         
         animator.SetTrigger("Attacking");
-        mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - parent.transform.position);
+        mouseDerection = PlayerMove.GetMouseDerection();
         move.canControl = false;
-        GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.position + mouseDerection.normalized * attackRange, Quaternion.identity, parent.transform);
-        attack = attackEffect;
-        rb.velocity = Vector2.zero;//mouseDerection.normalized * attackRange * 2;
-        attack.gameObject.GetComponent<Animator>().SetTrigger("isAttacking");
-        attack.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+        GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange, Quaternion.identity, parent.transform);
+        
+        rb.velocity = Vector2.zero;
 
     }
 
@@ -30,7 +27,6 @@ public class BasicAttack : Ability
         Animator animator = parent.GetComponent<Animator>();
         PlayerMove move = parent.GetComponent<PlayerMove>();
 
-        //attack.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         move.canControl = true;
     }
 }

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class Ability : ScriptableObject
 {
-    public new string name;
+    public int abilityID;
+    public string abilityName;
+    public int AbilityLevel;
+    [TextArea]
+    public string abilityDes;
+    public bool isUnlocked;
+    public Ability[] preskills;
     public float cooldownTime;
     public float activeTime;
 

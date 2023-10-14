@@ -1,28 +1,29 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
-    public Slider healthBar;
+    public GameObject hpBar;
     public GameObject damageTextPrefab;
-    private bool canMove;
     private Animator animator;
     private Rigidbody2D rb;
+    private SpriteRenderer sp;
 
     private void Start() {
         currentHealth = maxHealth;
-        UpdateHealthBar();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sp = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(int damage, Vector2 knockBack) {
         rb.AddForce(knockBack, ForceMode2D.Impulse);
-        animator.SetTrigger("getDamage");
+        StartCoroutine(Hurt());
         currentHealth -= damage;
-        UpdateHealthBar();
+        hpBar.GetComponent<HealthBar>().UpdateHealthBar((float)currentHealth/maxHealth);
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
         }
@@ -34,12 +35,14 @@ public class Enemy : MonoBehaviour
         damageText.SetDamageText(damage);
     }
 
-    private void UpdateHealthBar() {
-        Debug.Log((float)currentHealth / maxHealth);
-        healthBar.value = (float)currentHealth / maxHealth;
-    }
-
     private void Die() {
         Destroy(gameObject);
     }
+    IEnumerator Hurt()
+    {
+        sp.material.SetFloat("_FlashAmount", 1);
+        yield return new WaitForSeconds(.1f);
+        sp.material.SetFloat("_FlashAmount", 0);
+    }
+
 }

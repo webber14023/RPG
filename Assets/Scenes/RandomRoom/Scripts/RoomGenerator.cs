@@ -25,7 +25,7 @@ public class RoomGenerator : MonoBehaviour
     {
         for (int i = 0; i < roomNumber-1; i++)
         {
-            rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity).GetComponent<Room>());
+            rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity,gameObject.transform).GetComponent<Room>());
 
             //改變Point位置
             ChangePointPos();
@@ -118,10 +118,10 @@ public class RoomGenerator : MonoBehaviour
             }
 
         Destroy(longwayRoom.transform.Find(GetWallType(room.roomUp,room.roomDown,room.roomLeft,room.roomRight)+"(Clone)").gameObject);
-        rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity).GetComponent<Room>());
+        rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity,gameObject.transform).GetComponent<Room>());
         rooms[roomNumber-1].SetDoor((int)direction, true);
         Object obj = Resources.Load("Walls/"+GetWallType(rooms[roomNumber-1].roomUp,rooms[roomNumber-1].roomDown,rooms[roomNumber-1].roomLeft,rooms[roomNumber-1].roomRight));
-        Instantiate(obj, genratorPoint.position, Quaternion.identity);
+        Instantiate(obj, genratorPoint.position, Quaternion.identity,rooms[roomNumber-1].transform);
         SetupRoom(longwayRoom.GetComponent<Room>(), longwayRoom.transform.position);
     }
 
