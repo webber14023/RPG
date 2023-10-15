@@ -88,6 +88,8 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                     TargetLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID] = orgLocation.itemList[currentItemID];
                     orgLocation.itemList[currentItemID] = null;
                 }
+                if(TargetLocation == Equipment)
+                    EquipmentManager.UpdateEquipmentStats();
 
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 return;

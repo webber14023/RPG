@@ -12,5 +12,4 @@ public class Item : ScriptableObject
     public int ItemHeld;
     [TextArea]
     public string ItemInfo;
-    
 }

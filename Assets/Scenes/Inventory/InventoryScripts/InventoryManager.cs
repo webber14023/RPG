@@ -9,12 +9,14 @@ public class InventoryManager : MonoBehaviour
     static InventoryManager intance;
     
     public Inventory myBag;
+    public Inventory equipment;
     public GameObject slotGrid;
     // public Slot slotPrefab;
     public GameObject emptySlot;
     public Text itemInformation;
 
-    public List<GameObject> slots = new List<GameObject>();
+    public List<GameObject> myBagSlots = new List<GameObject>();
+    public List<GameObject> equipmentSlots = new List<GameObject>();
 
     void Awake() {
         if(intance != null)
@@ -30,28 +32,27 @@ public class InventoryManager : MonoBehaviour
         intance.itemInformation.text = itemDiscription;
     }
 
-    /*public static void CreateNewItem(Item item) {
-        Slot newItem = Instantiate(intance.slotPrefab,intance.transform.position,Quaternion.identity);
-        newItem.gameObject.transform.SetParent(intance.slotGrid.transform);
-        newItem.slotItem = item;
-        newItem.slotImage.sprite = item.ItemImage;
-        newItem.slotNum.text = item.ItemHeld.ToString();
-    }*/
 
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
         for(int i = 0; i < intance.slotGrid.transform.childCount; i++) {
             Destroy(intance.slotGrid.transform.GetChild(i).gameObject);
-            intance.slots.Clear();
+            intance.myBagSlots.Clear();
         }
         //重新生成對應myBag裡面物品的slot
         for(int i = 0; i < intance.myBag.itemList.Count; i++) {
-            //CreateNewItem(intance.myBag.itemList[i]);
-            intance.slots.Add(Instantiate(intance.emptySlot));
-            intance.slots[i].transform.SetParent(intance.slotGrid.transform);
-            intance.slots[i].transform.localScale = new Vector3(1,1,1);
-            intance.slots[i].GetComponent<Slot>().slotID = i;
-            intance.slots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i]);
+            intance.myBagSlots.Add(Instantiate(intance.emptySlot));
+            intance.myBagSlots[i].transform.SetParent(intance.slotGrid.transform);
+            intance.myBagSlots[i].transform.localScale = new Vector3(1,1,1);
+            intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
+            intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i]);
+        }
+        for(int i = 0; i < intance.equipment.itemList.Count; i++) {
+            if (intance.equipment.itemList[i] != null) {
+                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i]);
+                intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(true);
+            }
+            
         }
     }
 }
