@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 0
+  ItemDisciptionPrefab: {fileID: 4875009732150243563, guid: 085dc80d381f4a9489a9ff7f6b042585, type: 3}
   slotItem: {fileID: 0}
   slotImage: {fileID: 8261209066677883549}
   slotNum: {fileID: 738189289205336198}

@@ -48,8 +48,8 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i]);
         }
         for(int i = 0; i < intance.equipment.itemList.Count; i++) {
+            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i]);
             if (intance.equipment.itemList[i] != null) {
-                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i]);
                 intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(true);
             }
             

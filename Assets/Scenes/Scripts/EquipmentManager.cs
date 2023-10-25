@@ -26,7 +26,6 @@ public class EquipmentManager : MonoBehaviour
         for(int i = 0; i < intance.Equipments.itemList.Count; i++) {
             if(intance.Equipments.itemList[i] != null){
                 Equipment equipment = (Equipment)intance.Equipments.itemList[i];
-                Debug.Log(equipment.equipmentAttackDamage);
                 intance.Stats.ChangeStats(equipment.equipmentHp, equipment.equipmentAttackDamage, equipment.equipmentSpeed);
             }
             

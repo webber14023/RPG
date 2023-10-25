@@ -2,19 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {   
     public int slotID;//空格ID 等於 物品ID
+    public GameObject ItemDisciptionPrefab;
     public Item slotItem;
     public Image slotImage;
     public Text slotNum; 
     public string slotInfo;
+    GameObject ItemPanel;
 
     public GameObject itemInSlot;
 
+
     public void ItemOnClick() {
         InventoryManager.UpdateItemInfo(slotInfo);
+    }
+
+
+    public void OnPointerEnter(PointerEventData data)
+    {
+        if(!Input.GetKey(KeyCode.Mouse0)) {
+            if (slotItem != null && ItemPanel == null) {
+            ItemPanel = Instantiate(ItemDisciptionPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.transform);
+            ItemInfoPanel Info = ItemPanel.GetComponent<ItemInfoPanel>();
+            Info.UpdateItemInfo(slotItem.ItemName, slotItem.ItemInfo);
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData data)
+    {
+        if (slotItem != null)
+            Destroy(ItemPanel);
     }
 
     public void SetupSlot(Item item) {
@@ -23,9 +46,10 @@ public class Slot : MonoBehaviour
             return;
         }
         slotImage.sprite = item.ItemImage;
+        slotItem = item;
         if(item.isStackable)
             slotNum.text = item.ItemHeld.ToString();
-        else
+        else if(slotNum != null)
             slotNum.gameObject.SetActive(false);
         slotInfo = item.ItemInfo;
     }
