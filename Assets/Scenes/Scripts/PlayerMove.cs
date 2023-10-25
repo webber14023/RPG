@@ -48,12 +48,15 @@ public class PlayerMove : MonoBehaviour
         else {
             animator.SetBool("isMoving", false);
         }
-        if(mouseDerection.x > 0) {
-            Sprite.flipX = false;
+        if(canControl) {
+            if(mouseDerection.x > 0) {
+                Sprite.flipX = false;
+            }
+            else {
+                Sprite.flipX = true;
+            }
         }
-        else {
-            Sprite.flipX = true;
-        }
+
     }
 
     public static Vector2 GetMouseDerection()

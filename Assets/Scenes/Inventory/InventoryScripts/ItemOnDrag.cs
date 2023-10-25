@@ -15,12 +15,17 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+    
         FindLocation(transform.parent.parent.name, 0);
         originalParent = transform.parent;
         currentItemID = originalParent.GetComponent<Slot>().slotID;
-        transform.SetParent(transform.parent.parent.parent);
+        transform.SetParent(transform.parent.parent.parent.parent);
         transform.position = eventData.position;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        
     }
 
     public void FindLocation(string locationName, int num) {
@@ -55,16 +60,24 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
         transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
-        Debug.Log(eventData.pointerCurrentRaycast.gameObject.name == "slot(Clone)");
-        Debug.Log(eventData.pointerCurrentRaycast.gameObject.name == orgLocation.itemList[currentItemID].type);
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+        Debug.Log(eventData.pointerCurrentRaycast.gameObject);
 
-        if(eventData.pointerCurrentRaycast.gameObject != null) {
+        if(eventData.pointerCurrentRaycast.gameObject != null && eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")) {
+            FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject.name == "slot(Clone)");
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject.name == orgLocation.itemList[currentItemID].type);
+
+
             if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage" && TargetLocation == orgLocation) {//判斷下面物體名字是 ItemImage 那麼互換位置
                 //itemList的物品存取位置改變
                 var temp = orgLocation.itemList[currentItemID];
@@ -100,4 +113,11 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
         transform.position = originalParent.position;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
+
+    public void stopDrag() {
+        transform.SetParent(originalParent);
+        transform.position = originalParent.position;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
 }

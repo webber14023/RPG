@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   abilityID: 99
-  skillSprite: {fileID: 0}
   abilityName: 
   AbilityLevel: 0
   abilityDes: 
   isUnlocked: 0
   preskills: []
   cooldownTime: 0
-  activeTime: 0.4
-  dashForse: 7
+  activeTime: 0.35
+  dashForse: 10

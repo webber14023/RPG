@@ -12,6 +12,7 @@ public class MoveBag : MonoBehaviour,IDragHandler
     {
         currentRect.anchoredPosition += eventData.delta;
     }
+    
     void Awake() {
         currentRect = GetComponent<RectTransform>();
     }
