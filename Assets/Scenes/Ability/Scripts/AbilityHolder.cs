@@ -3,8 +3,8 @@ using UnityEngine;
 public class AbilityHolder : MonoBehaviour
 {
     public Ability ability;
-    float cooldownTime;
-    float activeTime;
+    public float cooldownTime;
+    public float activeTime;
     public KeyCode key;
     AbilityManager manager;
 
@@ -30,8 +30,10 @@ public class AbilityHolder : MonoBehaviour
                 }
             break;
             case AbilityState.active:
-                if(activeTime >= 0) {
+                if(activeTime > 0) {
                     activeTime -= Time.deltaTime;
+                    if (activeTime < 0)
+                        activeTime = 0;
                 }
                 else {
                     ability.BeginCooldown(gameObject);
@@ -41,14 +43,15 @@ public class AbilityHolder : MonoBehaviour
                 }
             break;
             case AbilityState.cooldown:
-                if(cooldownTime >= 0) {
+                if(cooldownTime > 0) {
                     cooldownTime -= Time.deltaTime;
+                    if (cooldownTime < 0)
+                        cooldownTime = 0;
                 }
                 else {
                     state = AbilityState.ready;
                 }
             break;
         }
-        
     }
 }

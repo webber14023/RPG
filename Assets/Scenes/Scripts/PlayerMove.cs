@@ -14,7 +14,8 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer Sprite;
     private float inputX, inputY;
     private Vector2 mouseDerection;
-
+    AbilityManager manager;
+    CharacterStats stats;
 
     void Awake() {
         if(intance != null)
@@ -26,6 +27,8 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Sprite = GetComponent<SpriteRenderer>();
+        manager = GetComponent<AbilityManager>();
+        stats = GetComponent<CharacterStats>();
     }
 
     void Update()
@@ -41,7 +44,7 @@ public class PlayerMove : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
         inputY = Input.GetAxisRaw("Vertical");
         input = new Vector2(inputX, inputY).normalized;
-        rb.velocity = input * speed;
+        rb.velocity = input * (speed + stats.speed);
         if(input != Vector2.zero) {
             animator.SetBool("isMoving", true);
         }

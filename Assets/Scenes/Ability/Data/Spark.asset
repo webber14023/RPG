@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityID: 1
   abilityName: Spark
+  abilityImage: {fileID: -446385667, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 0
   abilityDes: 
   isUnlocked: 0
   preskills: []
-  cooldownTime: 0.97
-  activeTime: 0.1
+  cooldownTime: 10
+  activeTime: 0.2
   attackRange: 1
   AttackEffectPrefab: {fileID: 3562804448289436880, guid: e5333331031b2c14186dea445f0a3486, type: 3}

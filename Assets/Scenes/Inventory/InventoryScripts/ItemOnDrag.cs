@@ -75,10 +75,11 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
             //&& eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")
         if(eventData.pointerCurrentRaycast.gameObject != null) {
-            FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
-            Debug.Log(TargetLocation);
-            Debug.Log(orgLocation);
-
+            if(eventData.pointerCurrentRaycast.gameObject.name != "ItemImage")
+                FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
+            else
+                FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.parent.name, 1);
+            
             if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage" && TargetLocation == orgLocation) {//判斷下面物體名字是 ItemImage 那麼互換位置
                 //itemList的物品存取位置改變
                 Debug.Log("交換位置");

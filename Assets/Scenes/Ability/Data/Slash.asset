@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityID: 0
   abilityName: Slash
+  abilityImage: {fileID: -511868982, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 0
   abilityDes: Slash
   isUnlocked: 0
   preskills: []
-  cooldownTime: 0.97
+  cooldownTime: 0.3
   activeTime: 0.1
   attackRange: 1
   AttackEffectPrefab: {fileID: 8057289851498912510, guid: 83bafe945f6dc6e48b3f55871c87a687, type: 3}

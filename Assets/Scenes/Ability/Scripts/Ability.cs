@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ability : ScriptableObject
 {
     public int abilityID;
     public string abilityName;
+    public Sprite abilityImage;
     public int AbilityLevel;
     [TextArea]
     public string abilityDes;
