@@ -12,11 +12,15 @@ public class MissileAttackClass : MonoBehaviour
     Vector2 mouseDerection;
     Rigidbody2D rb;
     Animator anim;
+    AbilityStats stats;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        mouseDerection = PlayerMove.GetMouseDerection();
+        stats = transform.GetComponent<AbilityStats>();
+        //mouseDerection = PlayerMove.GetMouseDerection();
+        mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         float angle = Mathf.Atan2(mouseDerection.y, mouseDerection.x) * Mathf.Rad2Deg;
         StartCoroutine(DestoryTimer());
         
@@ -38,7 +42,7 @@ public class MissileAttackClass : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             anim.SetBool("Hit",true);
-            int currentDamage = (int)(damage*Random.Range(0.9f,1.1f));
+            int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
             Enemy enemy = other.GetComponent<Enemy>();
             Vector2 attackDerection = enemy.transform.position - transform.parent.position;
             enemy.ShowDamageText(other.gameObject, currentDamage);

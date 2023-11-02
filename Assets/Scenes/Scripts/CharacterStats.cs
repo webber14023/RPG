@@ -8,10 +8,11 @@ public class CharacterStats : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
     public float speed;
-    public float attackDamage;
+    public int attackDamage;
+    public float knockBackPower;
     
 
-    public void ChangeStats(float addHp, float addDamage, float addSpeed) {
+    public void ChangeStats(float addHp, int addDamage, float addSpeed) {
         maxHealth += addHp;
         attackDamage += addDamage;
         speed += addSpeed;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AddStats : BuffStatus
 {
     [Header("stats")]
-    public float Attack;
+    public int Attack;
     public float Health;
     public float MoveSpeed;
     

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuffID: 1
   BuffName: Speedup
-  BuffImage: {fileID: 0}
+  BuffImage: {fileID: 21300000, guid: 06fb91dc44548ff4e908ffbbba5df7b4, type: 3}
   abilityDes: 
   activeTime: 5
   Attack: 2359

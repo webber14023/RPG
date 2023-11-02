@@ -19,6 +19,6 @@ MonoBehaviour:
   abilityDes: Add speed
   isUnlocked: 1
   preskills: []
-  cooldownTime: 0.1
-  activeTime: 0.1
+  cooldownTime: 10
+  activeTime: 0.2
   buff: {fileID: 11400000, guid: f53c9ec30e57d504295b7257b3c792db, type: 2}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 228ac8f0438a54840a984b2f044773b7, type: 3}
-  m_Name: Slash
+  m_Name: Ice
   m_EditorClassIdentifier: 
-  abilityID: 0
-  abilityName: Slash
-  abilityImage: {fileID: -511868982, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
-  AbilityLevel: 0
-  abilityDes: Slash
-  isUnlocked: 0
+  abilityID: 4
+  abilityName: ICe
+  abilityImage: {fileID: 21300000, guid: 7004782f29a83f4498add10e8e12f6c5, type: 3}
+  AbilityLevel: 1
+  abilityDes: py party
+  isUnlocked: 1
   preskills: []
-  cooldownTime: 0.2
-  activeTime: 0.25
+  cooldownTime: 0
+  activeTime: 0
   attackRange: 1
-  AttackEffectPrefab: {fileID: 8057289851498912510, guid: 83bafe945f6dc6e48b3f55871c87a687, type: 3}
+  AttackEffectPrefab: {fileID: 6959049934315051725, guid: ca3f35eff7da0dd4888243d8b6574a56, type: 3}

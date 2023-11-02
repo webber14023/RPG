@@ -8,5 +8,5 @@ public class Equipment : Item
     [Header("Equipment stats")]
     public float equipmentHp;
     public float equipmentSpeed;
-    public float equipmentAttackDamage;
+    public int equipmentAttackDamage;
 }
