@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject myBag;
-    public GameObject DungeonMap;
-    public GameObject AbilityTree;
-    public KeyCode OpenBag_Key;
-    public KeyCode OpenDungeonMap_key;
-    public KeyCode OpenAbilityTree_key;
+    public GameObject[] UIPanels;
+    public KeyCode[] Keys;
+    bool isOpenUI;
     AbilityManager manager;
 
     private void Start() {
@@ -18,30 +15,27 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        OpenMyBag();
-        OpenMap();
-        if(myBag.activeSelf || DungeonMap.activeSelf)
-            manager.isCasting = true;
-        else
-            manager.isCasting = false;
-    }
-    void ContralUI(GameObject UI, KeyCode key) {
-        if(Input.GetKeyDown(key))
-            UI.SetActive(UI.activeSelf);
+        for(int i=0; i<UIPanels.Length; i++) {
+            ContralUI(UIPanels[i], Keys[i]);
+        }
     }
 
-    void OpenMyBag()
-    {
-        if(Input.GetKeyDown(OpenBag_Key))
-        {
-            myBag.SetActive(!myBag.activeSelf);
-        }
+    void ContralUI(GameObject UI, KeyCode key) {
+        if(Input.GetKeyDown(key)) {
+            UI.SetActive(!UI.activeSelf);
+            manager.isCasting = true;
+            isOpenUI = false;
+            for(int i=0; i<UIPanels.Length; i++) {
+                if(UIPanels[i].activeSelf) {
+                    isOpenUI = true;
+                    break;
+                }
+            }
+            if(!isOpenUI)
+                manager.isCasting = false;
+            else
+                manager.isCasting = true;
+        }  
     }
-    void OpenMap()
-    {
-        if(Input.GetKeyDown(OpenDungeonMap_key))
-        {
-            DungeonMap.SetActive(!DungeonMap.activeSelf);
-        }
-    }
+
 }

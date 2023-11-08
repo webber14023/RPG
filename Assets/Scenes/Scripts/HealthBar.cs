@@ -10,8 +10,10 @@ public class HealthBar : MonoBehaviour
     public float EffectSpeed;
 
     private void Update() {
-        if(hpEffectImage.fillAmount > hpImage.fillAmount) {
+        if(hpEffectImage.fillAmount >= hpImage.fillAmount) {
             hpEffectImage.fillAmount -= EffectSpeed*Time.deltaTime;
+            if(hpEffectImage.fillAmount < hpImage.fillAmount)
+                hpEffectImage.fillAmount = hpImage.fillAmount;
         }
     }
     public void UpdateHealthBar(float hp) {

@@ -28,6 +28,10 @@ public class ItemOnWorld : MonoBehaviour
             for(int i = 0; i < playerInventory.itemList.Count; i++) {
                 if(playerInventory.itemList[i] == null) {
                     playerInventory.itemList[i] = ThisItem;
+                    var temp = playerInventory.itemListData[i];
+                    temp.itemLevel = Random.Range(1,10);
+                    temp.itemQuality = "優良";
+                    playerInventory.itemListData[i] = temp;
                     Destroy(gameObject);
                     break;
                 }

@@ -32,6 +32,7 @@ public class AbilityManager : MonoBehaviour
                 cooldownText[i].text = abilityHolders[i].cooldownTime.ToString("F1");
             }
             else {
+                cooldownEffect[i].fillAmount = 0;
                 cooldownText[i].text = null;
             }
 

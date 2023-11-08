@@ -97,7 +97,6 @@ public class RoomGenerator : MonoBehaviour
             if(!doorDeractions[i])
             {
                 direction = (Direction)i;
-                Debug.Log(i);
                 break;
             }
         }

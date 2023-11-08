@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7626987662932505232}
   - component: {fileID: 3261874398052899584}
   - component: {fileID: 3463802553480869618}
-  - component: {fileID: -4646412005795184234}
+  - component: {fileID: 3004856244998075470}
   m_Layer: 0
   m_Name: AttackEffect
   m_TagString: Untagged
@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 256577499
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300004, guid: a75445bb16444f14f96fdf9c734945cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1.5625, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &3261874398052899584
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
---- !u!114 &-4646412005795184234
+--- !u!114 &3004856244998075470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,8 +133,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7500805520195669496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc44f78e2e4d394418dcae1637ac1f8b, type: 3}
+  m_Script: {fileID: 11500000, guid: aa8e5f2103582ed46a93437bb12ac8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  knockBackPower: 1.57
+  damage: 0
+  knockBackPower: 0

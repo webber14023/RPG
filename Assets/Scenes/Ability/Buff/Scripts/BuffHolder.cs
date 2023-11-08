@@ -12,6 +12,8 @@ public class BuffHolder : MonoBehaviour
     public List<Text> SlotTime = new List<Text>();
     public List<float> timer = new List<float>();
 
+    public List<Animator> effectAnim;
+
     public void Update() {
         for(int i=0; i<buffs.Count; i++) {
             timer[i] -= Time.deltaTime;
@@ -19,21 +21,31 @@ public class BuffHolder : MonoBehaviour
             if(timer[i] <= 0) {
                 buffs[i].RemoveEffect(gameObject);
                 Destroy(buffsSlot[i]);
+                effectAnim[i].SetBool("Destory", true);
                 timer.RemoveAt(i);
                 buffs.RemoveAt(i);
                 SlotTime.RemoveAt(i);
                 buffsSlot.RemoveAt(i);
+                effectAnim.RemoveAt(i); 
                 i--;
             }
         }
     }
 
     public void addBuff(BuffStatus buff) {
-        buffs.Add(buff);
-        timer.Add(buff.activeTime);
-        buff.Effect(gameObject);
-        buffsSlot.Add(Instantiate(BuffSlotPrefeb, playerBuffsGrid.transform));
-        buffsSlot[buffsSlot.Count-1].transform.GetChild(0).GetComponent<Image>().sprite = buff.BuffImage;
-        SlotTime.Add(buffsSlot[buffsSlot.Count-1].transform.GetChild(1).GetComponent<Text>());
+        if(buffs.Contains(buff))
+        {
+            timer[buffs.IndexOf(buff)] = buff.activeTime;
+        }
+        else {
+            buffs.Add(buff);
+            timer.Add(buff.activeTime);
+            buff.Effect(gameObject);
+            buffsSlot.Add(Instantiate(BuffSlotPrefeb, playerBuffsGrid.transform));
+            buffsSlot[buffsSlot.Count-1].transform.GetChild(0).GetComponent<Image>().sprite = buff.BuffImage;
+            SlotTime.Add(buffsSlot[buffsSlot.Count-1].transform.GetChild(1).GetComponent<Text>());
+
+            effectAnim.Add(Instantiate(buff.effectPrefebs, transform.position, Quaternion.identity, transform).GetComponent<Animator>());
+        }
     }
 }

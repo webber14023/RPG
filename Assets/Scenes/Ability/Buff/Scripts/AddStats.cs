@@ -7,21 +7,22 @@ public class AddStats : BuffStatus
 {
     [Header("stats")]
     public int Attack;
-    public float Health;
+    public int Health;
     public float MoveSpeed;
     
     public override void Effect(GameObject parent) {
         CharacterStats stats = parent.GetComponent<CharacterStats>();
-        stats.attackDamage += Attack;
-        stats.maxHealth += Health;
-        stats.speed += MoveSpeed;
+        stats.EquipAttackDamage += Attack;
+        stats.EquipHealth += Health;
+        stats.EquipSpeed += MoveSpeed;
+        stats.UpdateStats();
 
     }
     public override void RemoveEffect(GameObject parent) {
         CharacterStats stats = parent.GetComponent<CharacterStats>();
-        stats.attackDamage -= Attack;
-        stats.maxHealth -= Health;
-        stats.speed -= MoveSpeed;
-
+        stats.EquipAttackDamage -= Attack;
+        stats.EquipHealth -= Health;
+        stats.EquipSpeed -= MoveSpeed;
+        stats.UpdateStats();
     }
 }

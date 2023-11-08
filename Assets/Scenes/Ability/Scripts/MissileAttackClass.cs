@@ -6,49 +6,98 @@ public class MissileAttackClass : MonoBehaviour
 {
     public float speed;
     public int damage;
-    public float knockBackPower = 4f;
-    
+    public float knockBackPower;
     public float destroyTime;
+    public float delayTime;
+    [Header("附加效果")]
+    public BuffStatus[] Buffs;
+    
+    private string target;
+    Vector2 Derection;
+    float angle;
+    bool fire;
+    SpriteRenderer lineSp;
+
     Vector2 mouseDerection;
     Rigidbody2D rb;
     Animator anim;
     AbilityStats stats;
+    AudioSource audioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        stats = transform.GetComponent<AbilityStats>();
-        //mouseDerection = PlayerMove.GetMouseDerection();
-        mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-        float angle = Mathf.Atan2(mouseDerection.y, mouseDerection.x) * Mathf.Rad2Deg;
-        StartCoroutine(DestoryTimer());
+        stats = GetComponent<AbilityStats>();
+        audioSource = GetComponent<AudioSource>();
+        lineSp = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        target = transform.parent.CompareTag("Player")? "Enemy": "Player";
+        fire = false;
+        delayTime = stats.abilityDelayTime;
+
+        audioSource.pitch = Random.Range(0.9f,1.1f);
+
     }
 
     void FixedUpdate() {
-        if(!anim.GetBool("Hit"))
-            rb.AddForce(mouseDerection.normalized * speed);
-        else
-            rb.velocity = new Vector2(0, 0);
+        if(delayTime > 0f) {
+            if(target == "Enemy")
+                Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            else if(target == "Player") {
+                Enemy controller = transform.parent.GetComponent<Enemy>();
+                Derection = (controller.target.position - transform.position).normalized;
+            }
 
+            angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            lineSp.color = new Color(255, 255, 255, (1f - (delayTime/stats.abilityDelayTime))/2f);
+
+            delayTime -= Time.deltaTime;
+        }
+        else if (!fire) {
+            /*if(target == "Enemy")
+                Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            else if(target == "Player") {
+                Enemy controller = transform.parent.GetComponent<Enemy>();
+                Derection = (controller.target.position - transform.position).normalized;
+            }
+
+            angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));*/
+            Destroy(transform.GetChild(0).gameObject);
+            fire = true;
+            StartCoroutine(DestoryTimer());
+            rb.AddForce(Derection.normalized * speed);
+        }
+        
+        if(anim.GetBool("Hit"))
+            rb.velocity = new Vector2(0, 0);
     }
     
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Wall"))
+        if(other.CompareTag("Wall")) {
             anim.SetBool("Hit",true);
+            audioSource.Play();
+        }
+           
 
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(target))
         {
-            anim.SetBool("Hit",true);
-            int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
-            Enemy enemy = other.GetComponent<Enemy>();
-            Vector2 attackDerection = enemy.transform.position - transform.parent.position;
-            enemy.ShowDamageText(other.gameObject, currentDamage);
-            if (enemy != null)
-            {
-                enemy.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
+            CharacterStats characterStats = other.GetComponent<CharacterStats>();
+            BuffHolder BuffHolder = other.GetComponent<BuffHolder>();
+            if(characterStats.canDamage) {
+                anim.SetBool("Hit",true);
+                audioSource.Play();
+
+                for(int i=0; i<Buffs.Length; i++) {
+                BuffHolder.addBuff(Buffs[i]);
+                }
+                int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
+                Vector2 attackDerection = other.transform.position - transform.parent.position;
+                characterStats.ShowDamageText(other.gameObject, currentDamage);
+                characterStats.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
+
             }
         }
     }

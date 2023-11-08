@@ -9,6 +9,7 @@ public class BuffStatus : ScriptableObject
     public Sprite BuffImage;
     public string abilityDes;    
     public float activeTime;
+    public GameObject effectPrefebs;
     public virtual void Effect(GameObject parent) {}
     public virtual void RemoveEffect(GameObject parent) {}
 }

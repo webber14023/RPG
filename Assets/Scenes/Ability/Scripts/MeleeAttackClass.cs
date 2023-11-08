@@ -6,30 +6,31 @@ public class MeleeAttackClass : MonoBehaviour
 {   
     public int damage;
     public float knockBackPower;
-    Vector2 mouseDerection;
+    private string target;
+    public AudioClip[] Audios;
+    Vector2 Derection;
     Animator anim;
     AbilityStats stats;
+    AudioSource audioSource;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-        mouseDerection = PlayerMove.GetMouseDerection();
         stats = transform.GetComponent<AbilityStats>();
-        float angle = Mathf.Atan2(mouseDerection.y, mouseDerection.x) * Mathf.Rad2Deg;
-        
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = Audios[Random.Range(0,Audios.Length-1)];
+        target = transform.parent.CompareTag("Player")? "Enemy": "Player";
+        audioSource.Play();
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Enemy"))
-        {
-            int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
-            Enemy enemy = other.GetComponent<Enemy>();
-            Vector2 attackDerection = enemy.transform.position - transform.parent.position;
-            enemy.ShowDamageText(other.gameObject, currentDamage);
-            if (enemy != null)
-            {
-                enemy.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
+        if (other.CompareTag(target)) {
+            CharacterStats character = other.GetComponent<CharacterStats>();
+            if(character.canDamage) {
+                int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
+                Vector2 attackDerection = other.transform.position - transform.parent.position;
+                character.ShowDamageText(other.gameObject, currentDamage);
+                character.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
             }
         }
     

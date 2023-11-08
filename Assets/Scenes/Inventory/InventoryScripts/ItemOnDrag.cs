@@ -40,8 +40,6 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 case "Equipment":
                     orgLocation = Equipment;
                     break;
-                default:
-                    break;
             }
         }
         else {
@@ -53,11 +51,8 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 case "Equipment":
                     TargetLocation = Equipment;
                     break;
-                default:
-                    break;
             }
         }
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -82,10 +77,12 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
             
             if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage" && TargetLocation == orgLocation) {//判斷下面物體名字是 ItemImage 那麼互換位置
                 //itemList的物品存取位置改變
-                Debug.Log("交換位置");
                 var temp = orgLocation.itemList[currentItemID];
+                var tempData = orgLocation.itemListData[currentItemID];
                 orgLocation.itemList[currentItemID] = orgLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID];
                 orgLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID] = temp;
+                orgLocation.itemListData[currentItemID] = orgLocation.itemListData[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID];
+                orgLocation.itemListData[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID] = tempData;
 
                 transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent);
                 transform.position = eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.position;
@@ -98,13 +95,14 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
             if(eventData.pointerCurrentRaycast.gameObject.name == "slot(Clone)" || eventData.pointerCurrentRaycast.gameObject.name == orgLocation.itemList[currentItemID].type) {
                 //否則直接掛在檢測到的Slot下面
-                Debug.Log("移動位置");
                 transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform);
                 transform.position = eventData.pointerCurrentRaycast.gameObject.transform.position;
                 //itemList的物品存取位置改變
                 if(eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID != currentItemID){
                     TargetLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID] = orgLocation.itemList[currentItemID];
                     orgLocation.itemList[currentItemID] = null;
+                    TargetLocation.itemListData[eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID] = orgLocation.itemListData[currentItemID];
+                    orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
                     InventoryManager.RefreshItem();
                 }
                 if(TargetLocation == Equipment)
@@ -125,5 +123,4 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
         transform.position = originalParent.position;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
-
 }

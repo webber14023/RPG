@@ -10,27 +10,32 @@ public class BasicAttack : Ability
     Vector2 mouseDerection;
     
     public override void Activate(GameObject parent) {
-        Rigidbody2D rb = parent.GetComponent<Rigidbody2D>();
         Animator animator = parent.GetComponent<Animator>();
         PlayerMove move = parent.GetComponent<PlayerMove>();
         CharacterStats characterStats = parent.GetComponent<CharacterStats>();
+        SpriteRenderer sprite = parent.GetComponent<SpriteRenderer>();
         
-        animator.SetTrigger("Attacking");
+        animator.SetTrigger("Attack" + move.Combo);
+        Debug.Log(move.Combo);
+        move.comboTimer = 1.5f;
+        move.Combo++;
+        if(move.Combo > 2)
+            move.Combo = 0;
         mouseDerection = PlayerMove.GetMouseDerection();
         move.canControl = false;
+        sprite.flipX = mouseDerection.x >= 0? false: true;
 
-        for(int i=0; i<1000; i++) {
-            GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange + Random.insideUnitCircle, Quaternion.identity, parent.transform);
-            AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-            Stats.abilityDamage = characterStats.attackDamage;
-            Stats.abilityknockBackPower = characterStats.knockBackPower;
-        }
-        rb.velocity = Vector2.zero;
-
+        Vector2 Derection = PlayerMove.GetMouseDerection();
+        float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+        GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange , Quaternion.Euler(new Vector3(0, 0, angle)), parent.transform);
+        AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
+        Stats.abilityDamage = characterStats.attackDamage;
+        Stats.abilityknockBackPower = characterStats.knockBackPower;
+        Stats.abilityDelayTime = 0.5f;
+        Debug.Log(Derection);
     }
 
     public override void BeginCooldown(GameObject parent) {
-        Animator animator = parent.GetComponent<Animator>();
         PlayerMove move = parent.GetComponent<PlayerMove>();
 
         move.canControl = true;

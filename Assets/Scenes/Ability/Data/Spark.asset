@@ -19,7 +19,8 @@ MonoBehaviour:
   abilityDes: 
   isUnlocked: 0
   preskills: []
-  cooldownTime: 10
+  cooldownTime: 1
   activeTime: 0.2
+  canSkip: 0
   attackRange: 1
   AttackEffectPrefab: {fileID: 3562804448289436880, guid: e5333331031b2c14186dea445f0a3486, type: 3}

@@ -13,6 +13,7 @@ public class Ability : ScriptableObject
     public Ability[] preskills;
     public float cooldownTime;
     public float activeTime;
+    public bool canSkip;
 
     public virtual void Activate(GameObject parent) {}
     public virtual void BeginCooldown(GameObject parent) {}

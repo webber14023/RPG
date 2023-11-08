@@ -34,6 +34,8 @@ public class AbilityHolder : MonoBehaviour
                     activeTime -= Time.deltaTime;
                     if (activeTime < 0)
                         activeTime = 0;
+                    if(ability.canSkip && Input.GetKeyUp(key))
+                        activeTime = 0;
                 }
                 else {
                     ability.BeginCooldown(gameObject);

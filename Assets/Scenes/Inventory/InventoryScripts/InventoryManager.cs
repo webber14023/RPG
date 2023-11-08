@@ -45,10 +45,10 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].transform.SetParent(intance.slotGrid.transform);
             intance.myBagSlots[i].transform.localScale = new Vector3(1,1,1);
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
-            intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i]);
+            intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
         }
         for(int i = 0; i < intance.equipment.itemList.Count; i++) {
-            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i]);
+            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
             if (intance.equipment.itemList[i] != null) {
                 intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(true);
             }

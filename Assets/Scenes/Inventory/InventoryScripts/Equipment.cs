@@ -6,7 +6,7 @@ using UnityEngine;
 public class Equipment : Item
 {
     [Header("Equipment stats")]
-    public float equipmentHp;
+    public int equipmentHp;
     public float equipmentSpeed;
     public int equipmentAttackDamage;
 }

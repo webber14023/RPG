@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: MyBag
   m_EditorClassIdentifier: 
   itemList:
-  - {fileID: 11400000, guid: ae39ae3f3e8e885489d728b4f96ce0c7, type: 2}
-  - {fileID: 11400000, guid: 5c4a2eeea7a0ea141b55b4ed17488787, type: 2}
   - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
+  - {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -31,3 +30,41 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  itemListData:
+  - itemLevel: 4
+    itemQuality: "\u512A\u826F"
+  - itemLevel: 7
+    itemQuality: "\u512A\u826F"
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
