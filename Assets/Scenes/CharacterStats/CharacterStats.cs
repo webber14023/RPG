@@ -10,8 +10,10 @@ public class CharacterStats : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sp;
     private Animator animator;
+    private AudioSource audioSource;
     public GameObject hpBar;
     public GameObject damageTextPrefab;
+    public GameObject hitEffect;
     
     public int baseMaxHealth {
         get { if (c_Data != null) return c_Data.maxHealth; else return 0; }
@@ -71,6 +73,7 @@ public class CharacterStats : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         UpdateStats();
     }
 
@@ -87,8 +90,11 @@ public class CharacterStats : MonoBehaviour
     }
     
     public void TakeDamage(int damage, Vector2 knockBack) {
-        rb.AddForce(knockBack * 10, ForceMode2D.Impulse);
+        //rb.AddForce(knockBack * 10, ForceMode2D.Impulse);
         //transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3)knockBack, 1);
+        rb.MovePosition(transform.position + (Vector3)knockBack);
+        Instantiate(hitEffect, transform.transform.GetChild(0).position, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(knockBack.y, knockBack.x) * Mathf.Rad2Deg)), transform);
+        audioSource.Play();
         StartCoroutine(Hurt());
         currentHealth -= (int)(damage * (1f -DamageReduce));
         hpBar.GetComponent<HealthBar>().UpdateHealthBar((float)currentHealth/baseMaxHealth);

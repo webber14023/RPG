@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using NavMeshPlus.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoomGenerator : MonoBehaviour
 {
     public enum Direction{ up, down, left, right};
     public Direction direction;
+    public BakeMash bakemash;
 
     [Header("房間訊息")]
     public GameObject roomPrefab;
@@ -43,6 +46,7 @@ public class RoomGenerator : MonoBehaviour
         GenratorlongwayRoom();
         rooms[0].GetComponent<SpriteRenderer>().color = startColor;
         rooms[roomNumber - 1].GetComponent<SpriteRenderer>().color = endColor;
+        StartCoroutine(BakeDelay());
     }
 
     void Update()
@@ -136,5 +140,11 @@ public class RoomGenerator : MonoBehaviour
         if (wallRight)
             WallPrefabName+="R";
         return WallPrefabName;
+    }
+
+    IEnumerator BakeDelay()
+    {
+        yield return new WaitForSeconds(.05f);
+        bakemash.Bake();
     }
 }

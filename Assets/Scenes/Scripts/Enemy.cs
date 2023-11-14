@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.AI;
 
 public enum EnemyStates {GUARD, PATROL, CHASE, DEAD }
 
@@ -22,14 +23,20 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sp;
     private CharacterStats stats;
+    private NavMeshAgent agent;
 
     private void Start() {
+        agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
         stats = GetComponent<CharacterStats>();
         AbliltyHolder = GetComponent<EnemyAbilityHolder>();
-        target = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<Transform>();
+        //target = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         stats.currentHealth = stats.baseMaxHealth;
+        agent.speed = stats.speed;
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void Update() {
@@ -42,6 +49,8 @@ public class Enemy : MonoBehaviour
             if(FoundPlayer()) {
                 enemyStates = EnemyStates.CHASE;
             }
+            else
+                enemyStates = EnemyStates.PATROL;
         }
         else
             enemyStates = EnemyStates.DEAD;
@@ -68,6 +77,7 @@ public class Enemy : MonoBehaviour
         if(targetDistance > attackRange) {
 
             transform.position = Vector2.MoveTowards(transform.position, target.position, stats.speed* Time.deltaTime);
+            //agent.SetDestination(target.position);
             animator.SetBool("Moving", true);
             if(transform.position.x > target.position.x) {
 

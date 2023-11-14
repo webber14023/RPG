@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1556704007345713214}
   - component: {fileID: 1010586638539142627}
   - component: {fileID: 5011074363213505626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,8 @@ GameObject:
   - component: {fileID: 992437420593485503}
   - component: {fileID: 2572616776800750864}
   - component: {fileID: 2866836171096032358}
-  m_Layer: 0
+  - component: {fileID: 6886174946371582639}
+  m_Layer: 7
   m_Name: Tilemap
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2237,7 +2238,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1052333295
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2617,6 +2618,22 @@ CompositeCollider2D:
       - {x: 2.0625107, y: -7}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &6886174946371582639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794573929425720442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8741444298106233715
 GameObject:
   m_ObjectHideFlags: 0
