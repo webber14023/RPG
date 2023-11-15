@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -11,9 +13,11 @@ public class CharacterStats : MonoBehaviour
     private SpriteRenderer sp;
     private Animator animator;
     private AudioSource audioSource;
+    private NavMeshAgent agent;
     public GameObject hpBar;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
+    
     
     public int baseMaxHealth {
         get { if (c_Data != null) return c_Data.maxHealth; else return 0; }
@@ -74,6 +78,7 @@ public class CharacterStats : MonoBehaviour
         animator = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        agent = GetComponent<NavMeshAgent>();
         UpdateStats();
     }
 
@@ -112,11 +117,18 @@ public class CharacterStats : MonoBehaviour
     IEnumerator Hurt()
     {
         sp.material.SetFloat("_FlashAmount", 1);
-        
-        canDamage = false;
+        if(agent != null) {
+            agent.enabled = false;
+        }
+        //canDamage = false;
         canControl = false;
+
         yield return new WaitForSeconds(.05f);
+
         sp.material.SetFloat("_FlashAmount", 0);
+        if(agent != null) {
+            agent.enabled = true;
+        }
         canDamage = true;
         canControl = true;
     }

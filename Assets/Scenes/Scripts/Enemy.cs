@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
         agent.speed = stats.speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        //agent.isStopped = true;
     }
 
     private void Update() {
@@ -75,18 +76,21 @@ public class Enemy : MonoBehaviour
             return;
         }
         if(targetDistance > attackRange) {
-
-            transform.position = Vector2.MoveTowards(transform.position, target.position, stats.speed* Time.deltaTime);
-            //agent.SetDestination(target.position);
+            //transform.position = Vector2.MoveTowards(transform.position, target.position, stats.speed* Time.deltaTime);
+            agent.isStopped = false;
+            agent.SetDestination(target.position);
             animator.SetBool("Moving", true);
             if(transform.position.x > target.position.x) {
 
             }
             AbliltyHolder.activeAbility = false;
+            
             sp.flipX = transform.position.x > target.position.x ? true : false;
         }
         else {
             AbliltyHolder.activeAbility = true;
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
             animator.SetBool("Moving", false);
         }
     }

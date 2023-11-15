@@ -37,42 +37,50 @@ public class MissileAttackClass : MonoBehaviour
         delayTime = stats.abilityDelayTime;
 
         audioSource.pitch = Random.Range(0.9f,1.1f);
-
     }
 
     void FixedUpdate() {
-        if(delayTime > 0f) {
-            if(target == "Enemy")
-                Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-            else if(target == "Player") {
-                Enemy controller = transform.parent.GetComponent<Enemy>();
-                Derection = (controller.target.position - transform.position).normalized;
+        if(!anim.GetBool("Hit")) {
+            if(delayTime > 0f) {
+                if(target == "Enemy")
+                    Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                else if(target == "Player") {
+                    Enemy controller = transform.parent.GetComponent<Enemy>();
+                    Derection = (controller.target.position - transform.position).normalized;
+                }
+                angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                /*
+                rb.velocity = new Vector2(0, 0);
+                rb.AddForce(Derection.normalized * speed * 0.5f);*/
+                lineSp.color = new Color(255, 255, 255, (1f - (delayTime/stats.abilityDelayTime))/2f);
+                delayTime -= Time.deltaTime;
             }
-
-            angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            lineSp.color = new Color(255, 255, 255, (1f - (delayTime/stats.abilityDelayTime))/2f);
-
-            delayTime -= Time.deltaTime;
-        }
-        else if (!fire) {
-            /*if(target == "Enemy")
-                Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-            else if(target == "Player") {
-                Enemy controller = transform.parent.GetComponent<Enemy>();
-                Derection = (controller.target.position - transform.position).normalized;
+            else if (!fire) {
+                /*if(target == "Enemy")
+                    Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                else if(target == "Player") {
+                    Enemy controller = transform.parent.GetComponent<Enemy>();
+                    Derection = (controller.target.position - transform.position).normalized;
+                }*/
+                Debug.Log("fire");
+                angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                Destroy(transform.GetChild(0).gameObject);
+                fire = true;
+                StartCoroutine(DestoryTimer());
+                rb.AddForce(Derection.normalized * speed);
             }
-
-            angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));*/
-            Destroy(transform.GetChild(0).gameObject);
-            fire = true;
-            StartCoroutine(DestoryTimer());
-            rb.AddForce(Derection.normalized * speed);
         }
-        
-        if(anim.GetBool("Hit"))
+        else {
+            Debug.Log(fire);
+            if(!fire) {
+                fire = true;
+                Destroy(transform.GetChild(0).gameObject);
+            }
             rb.velocity = new Vector2(0, 0);
+
+        }
     }
     
     void OnTriggerEnter2D(Collider2D other) {
@@ -94,7 +102,7 @@ public class MissileAttackClass : MonoBehaviour
                 BuffHolder.addBuff(Buffs[i]);
                 }
                 int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
-                Vector2 attackDerection = other.transform.position - transform.parent.position;
+                Vector2 attackDerection = other.transform.GetChild(0).position - transform.position;
                 characterStats.ShowDamageText(other.gameObject, currentDamage);
                 characterStats.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
 

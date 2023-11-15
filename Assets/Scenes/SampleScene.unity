@@ -646,8 +646,8 @@ MonoBehaviour:
   startColor: {r: 0.036716342, g: 1, b: 0, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
   genratorPoint: {fileID: 903307723}
-  xOffset: 18
-  yOffset: 11
+  xOffset: 38
+  yOffset: 25
   roomLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1036,7 +1036,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  target: {fileID: 0}
+  target: {fileID: 519420032}
 --- !u!1 &543361259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3660775837355951486, guid: e31ad768dab4cce4880962f228a6928e, type: 3}
@@ -1188,7 +1188,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 565402654}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2.34375
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 400
   avoidancePriority: 50
@@ -1197,8 +1197,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 6.28125
-  m_BaseOffset: 3.140625
+  m_Height: 1.05
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
 --- !u!1 &582424758
@@ -6201,7 +6201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756756266515007930, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2756756266515007930, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
       propertyPath: sightRadius
@@ -6213,7 +6213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756756266515007931, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.01
+      value: 5.29
       objectReference: {fileID: 0}
     - target: {fileID: 2756756266515007931, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
       propertyPath: m_LocalPosition.y

@@ -249,7 +249,7 @@ MonoBehaviour:
   damage: 200
   knockBackPower: 0.8
   destroyTime: 2
-  delayTime: 1
+  delayTime: 5
   Buffs: []
 --- !u!114 &4320803520893402356
 MonoBehaviour:

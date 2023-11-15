@@ -31,7 +31,7 @@ public class BasicAttack : Ability
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
         Stats.abilityDamage = characterStats.attackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
-        Stats.abilityDelayTime = 0.5f;
+        Stats.abilityDelayTime = 20f;
         Debug.Log(Derection);
     }
 
