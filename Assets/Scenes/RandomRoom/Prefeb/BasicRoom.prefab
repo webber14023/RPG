@@ -83,8 +83,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056460869056594356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.65, y: -2.4, z: 0}
-  m_LocalScale: {x: 3.50625, y: 3.6975, z: 1.7}
+  m_LocalPosition: {x: -12.65, y: -1.37, z: 0}
+  m_LocalScale: {x: 3.50625, y: 2.495813, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5694371228293687394}
@@ -167,8 +167,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2586991190350845536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.87, z: 0}
-  m_LocalScale: {x: 3.1266718, y: 2.6137502, z: 1.7}
+  m_LocalPosition: {x: 0, y: -6.42, z: 0}
+  m_LocalScale: {x: 1.758753, y: 2.025656, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5694371228293687394}
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorLeft: {fileID: 2056460869056594356}
   doorRight: {fileID: 3916792395553199067}
-  doorUp: {fileID: 0}
+  doorUp: {fileID: 5534531086775153579}
   doorDown: {fileID: 2586991190350845536}
   roomLeft: 0
   roomRight: 0
@@ -384,8 +384,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916792395553199067}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.335, y: -2.3981, z: 0}
-  m_LocalScale: {x: 3.5062501, y: 3.6975, z: 1.7}
+  m_LocalPosition: {x: 12.335, y: -1.37, z: 0}
+  m_LocalScale: {x: 3.5062501, y: 2.4958127, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5694371228293687394}
@@ -468,8 +468,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5534531086775153579}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.303, z: 0}
-  m_LocalScale: {x: 3.1266718, y: 2.6137502, z: 1.7}
+  m_LocalPosition: {x: 0, y: 7.043, z: 0}
+  m_LocalScale: {x: 1.7587528, y: 2.0256565, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5694371228293687394}

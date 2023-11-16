@@ -41,6 +41,8 @@ public class MissileAttackClass : MonoBehaviour
 
     void FixedUpdate() {
         if(!anim.GetBool("Hit")) {
+            if(Input.GetKey(KeyCode.F))
+                delayTime = 0;
             if(delayTime > 0f) {
                 if(target == "Enemy")
                     Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;

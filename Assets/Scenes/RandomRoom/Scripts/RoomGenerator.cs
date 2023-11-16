@@ -53,7 +53,8 @@ public class RoomGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            bakemash.Bake();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
