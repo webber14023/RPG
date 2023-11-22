@@ -9,20 +9,40 @@ public class Room : MonoBehaviour
 
     public GameObject doorLeft, doorRight, doorUp, doorDown;
 
-    public bool roomLeft, roomRight, roomUp, roomDown;
+    public bool roomLeft, roomRight, roomUp, roomDown, EnterRoom;
+    public List<GameObject> Enemys = new List<GameObject>();
+    public GameObject enemyPrefeb;
+    public int enemyCount;
+
+    RoomGenerator genrator;
     
     void Start()
     {
-        doorLeft.SetActive(roomLeft);
+        /*doorLeft.SetActive(roomLeft);
         doorRight.SetActive(roomRight);
         doorUp.SetActive(roomUp);
-        doorDown.SetActive(roomDown);
+        doorDown.SetActive(roomDown);*/
+        EnterRoom = false;
     }
 
 
     void Update()
     {
-        
+        if(EnterRoom == true) {
+            for(int i=0; i<Enemys.Count; i++) {
+                if(Enemys[i] == null) {
+                    Enemys.RemoveAt(i);
+                    i--;
+                }
+            }
+            if(Enemys.Count == 0) {
+                doorLeft.SetActive(false);
+                doorRight.SetActive(false);
+                doorUp.SetActive(false);
+                doorDown.SetActive(false);
+                EnterRoom = false;
+            }
+        }
     }
 
     public void SetDoor(int longwayRoomDirection, bool Flip)
@@ -50,7 +70,24 @@ public class Room : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player"))
         {
+            EnterRoom = true;
+            doorLeft.SetActive(roomLeft);
+            doorRight.SetActive(roomRight);
+            doorUp.SetActive(roomUp);
+            doorDown.SetActive(roomDown);
+            spawnEnemy();
+            transform.Find("RoomArea").gameObject.SetActive(false);
+            
             //CameraMove.instance.ChangeTarget(transform);
+        }
+    }
+
+    private void spawnEnemy() { 
+        genrator = transform.parent.GetComponent<RoomGenerator>();
+        Transform spawnPoints = transform.GetChild(6).Find("EnemySpawners");
+        for(int i=0; i<enemyCount; i++){
+            GameObject enemy = genrator.Data.dungeonEnemy[Random.Range(0, genrator.Data.dungeonEnemy.Length)];
+            Enemys.Add(Instantiate(enemy, spawnPoints.GetChild(Random.Range(0,spawnPoints.childCount)).position, Quaternion.identity, transform));
         }
     }
 }

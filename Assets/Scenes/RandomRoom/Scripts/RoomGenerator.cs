@@ -10,10 +10,12 @@ public class RoomGenerator : MonoBehaviour
     public enum Direction{ up, down, left, right};
     public Direction direction;
     public BakeMash bakemash;
+    public GameObject door;
 
     [Header("房間訊息")]
     public GameObject roomPrefab;
     public int roomNumber;
+    public DungeonData Data;
     public Color startColor, endColor;
     private GameObject longwayRoom;
 
@@ -24,11 +26,16 @@ public class RoomGenerator : MonoBehaviour
     public LayerMask roomLayer;
 
     public List<Room> rooms = new List<Room>();
+    private Object[] RoomSets;
     void Start()
     {
+        RoomSets = Resources.LoadAll("Rooms");
         for (int i = 0; i < roomNumber-1; i++)
         {
             rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity,gameObject.transform).GetComponent<Room>());
+            if(i != 0) {
+                Instantiate((GameObject)RoomSets[Random.Range(0,RoomSets.Length)], genratorPoint.position, Quaternion.identity, rooms[i].transform);
+            }
 
             //改變Point位置
             ChangePointPos();
@@ -44,8 +51,10 @@ public class RoomGenerator : MonoBehaviour
             SetupRoom(room, room.transform.position);
         }
         GenratorlongwayRoom();
-        rooms[0].GetComponent<SpriteRenderer>().color = startColor;
-        rooms[roomNumber - 1].GetComponent<SpriteRenderer>().color = endColor;
+        rooms[0].transform.Find("RoomArea").gameObject.SetActive(false);
+        rooms[roomNumber - 1].transform.Find("RoomArea").gameObject.SetActive(false);
+        //rooms[0].GetComponent<SpriteRenderer>().color = startColor;
+        //rooms[roomNumber - 1].GetComponent<SpriteRenderer>().color = endColor;
         StartCoroutine(BakeDelay());
     }
 
@@ -54,7 +63,7 @@ public class RoomGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             bakemash.Bake();
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -127,6 +136,7 @@ public class RoomGenerator : MonoBehaviour
         Object obj = Resources.Load("Walls/"+GetWallType(rooms[roomNumber-1].roomUp,rooms[roomNumber-1].roomDown,rooms[roomNumber-1].roomLeft,rooms[roomNumber-1].roomRight));
         Instantiate(obj, genratorPoint.position, Quaternion.identity,rooms[roomNumber-1].transform);
         SetupRoom(longwayRoom.GetComponent<Room>(), longwayRoom.transform.position);
+        Instantiate(door, genratorPoint.position, Quaternion.identity, transform);
     }
 
     public string GetWallType(bool wallUp, bool wallDown, bool wallLeft, bool wallRight)    //獲取牆壁類型的名稱

@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
-  m_Name: Goblin
+  m_Script: {fileID: 11500000, guid: 46e3e8ce096e24149a752a08d1a12222, type: 3}
+  m_Name: DungeonData
   m_EditorClassIdentifier: 
-  maxHealth: 450
-  currentHealth: 450
-  attackDamage: 115
-  speed: 4
-  knockBackPower: 1
-  EquipHealth: 0
-  EquipAttackDamage: 0
-  EquipSpeed: 0
+  dungeonName: 
+  floor: 1
+  maxFloor: 20
+  historyFloor: 0
+  dungeonEnemy:
+  - {fileID: 2756756266515007926, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}

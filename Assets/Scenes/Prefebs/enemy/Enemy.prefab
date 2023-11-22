@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 8622497806149756048}
   - component: {fileID: 565402672}
   - component: {fileID: 565402664}
+  - component: {fileID: 565402673}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -194,7 +195,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2756756266515007926}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -220,7 +221,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.027135462, y: 0.516218}
+  m_Offset: {x: 0.027135462, y: 0.54011106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.33}
@@ -231,7 +232,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85207695, y: 1.0428914}
+  m_Size: {x: 0.85207695, y: 1.0906775}
   m_EdgeRadius: 0
 --- !u!95 &2756756266515007929
 Animator:
@@ -267,8 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  sightRadius: 6
-  attackRange: 1
+  sightRadius: 5
+  attackRange: 1.5
   canControl: 0
   hpBar: {fileID: 1904673765400647645}
   damageTextPrefab: {fileID: 4719213298264859033, guid: 9d2ccacb955fadc459e557f617ffd30b, type: 3}
@@ -430,6 +431,28 @@ MonoBehaviour:
   cooldownTime: 0
   activeTime: 0
   activeAbility: 0
+--- !u!195 &565402673
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756756266515007926}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.67
+  m_Speed: 3.5
+  m_Acceleration: 400
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.42
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &3525489900829418562
 PrefabInstance:
   m_ObjectHideFlags: 0

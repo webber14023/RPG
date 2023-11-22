@@ -41,8 +41,6 @@ public class MissileAttackClass : MonoBehaviour
 
     void FixedUpdate() {
         if(!anim.GetBool("Hit")) {
-            if(Input.GetKey(KeyCode.F))
-                delayTime = 0;
             if(delayTime > 0f) {
                 if(target == "Enemy")
                     Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
@@ -52,9 +50,9 @@ public class MissileAttackClass : MonoBehaviour
                 }
                 angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-                /*
+                
                 rb.velocity = new Vector2(0, 0);
-                rb.AddForce(Derection.normalized * speed * 0.5f);*/
+                rb.AddForce(Derection.normalized * speed * 0.05f);
                 lineSp.color = new Color(255, 255, 255, (1f - (delayTime/stats.abilityDelayTime))/2f);
                 delayTime -= Time.deltaTime;
             }
@@ -75,7 +73,6 @@ public class MissileAttackClass : MonoBehaviour
             }
         }
         else {
-            Debug.Log(fire);
             if(!fire) {
                 fire = true;
                 Destroy(transform.GetChild(0).gameObject);

@@ -8,9 +8,12 @@ public class UIManager : MonoBehaviour
     public KeyCode[] Keys;
     bool isOpenUI;
     AbilityManager manager;
+    PlayerMove move;
 
     private void Start() {
         manager = GetComponent<AbilityManager>();
+        move = GetComponent<PlayerMove>();
+        
     }
 
     void Update()
@@ -31,10 +34,15 @@ public class UIManager : MonoBehaviour
                     break;
                 }
             }
-            if(!isOpenUI)
+            if(!isOpenUI) {
                 manager.isCasting = false;
-            else
+                move.canControl = true;
+
+            }
+            else {
                 manager.isCasting = true;
+                move.canControl = false;
+            }
         }  
     }
 

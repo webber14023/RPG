@@ -34,9 +34,9 @@ public class Enemy : MonoBehaviour
         //target = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<Transform>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         stats.currentHealth = stats.baseMaxHealth;
-        agent.speed = stats.speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        agent.speed = stats.speed;
         //agent.isStopped = true;
     }
 
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
                 enemyStates = EnemyStates.CHASE;
             }
             else
-                enemyStates = EnemyStates.PATROL;
+                enemyStates = EnemyStates.GUARD;
         }
         else
             enemyStates = EnemyStates.DEAD;
@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
         switch (enemyStates)
         {
             case EnemyStates.GUARD:
+                Guard();
                 break;
             case EnemyStates.PATROL:
                 break;
@@ -73,12 +74,14 @@ public class Enemy : MonoBehaviour
 
     void ChaseTarget() {
         if(!stats.canControl) {
+            //agent.isStopped = true;
             return;
         }
         if(targetDistance > attackRange) {
             //transform.position = Vector2.MoveTowards(transform.position, target.position, stats.speed* Time.deltaTime);
             agent.isStopped = false;
             agent.SetDestination(target.position);
+            agent.speed = stats.speed;
             animator.SetBool("Moving", true);
             if(transform.position.x > target.position.x) {
 
@@ -93,6 +96,13 @@ public class Enemy : MonoBehaviour
             agent.velocity = Vector3.zero;
             animator.SetBool("Moving", false);
         }
+    }
+
+    void Guard() {
+        animator.SetBool("Moving", false);
+        agent.velocity = Vector3.zero;
+        //agent.isStopped = true;
+
     }
 
     bool FoundPlayer() {
