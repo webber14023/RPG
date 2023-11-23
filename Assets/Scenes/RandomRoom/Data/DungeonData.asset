@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: DungeonData
   m_EditorClassIdentifier: 
   dungeonName: 
-  floor: 1
+  floor: 6
   maxFloor: 20
   historyFloor: 0
+  enemyCount: 5
   dungeonEnemy:
   - {fileID: 2756756266515007926, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}

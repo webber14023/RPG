@@ -84,10 +84,12 @@ public class Room : MonoBehaviour
 
     private void spawnEnemy() { 
         genrator = transform.parent.GetComponent<RoomGenerator>();
+        enemyCount = genrator.Data.enemyCount;
         Transform spawnPoints = transform.GetChild(6).Find("EnemySpawners");
         for(int i=0; i<enemyCount; i++){
             GameObject enemy = genrator.Data.dungeonEnemy[Random.Range(0, genrator.Data.dungeonEnemy.Length)];
-            Enemys.Add(Instantiate(enemy, spawnPoints.GetChild(Random.Range(0,spawnPoints.childCount)).position, Quaternion.identity, transform));
+
+            Enemys.Add(Instantiate(enemy, spawnPoints.GetChild(Random.Range(0,spawnPoints.childCount)).position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity, transform));
         }
     }
 }
