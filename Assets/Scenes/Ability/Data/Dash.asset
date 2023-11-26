@@ -22,4 +22,4 @@ MonoBehaviour:
   cooldownTime: 0.1
   activeTime: 0.3
   canSkip: 0
-  dashForse: 10
+  dashForse: 15

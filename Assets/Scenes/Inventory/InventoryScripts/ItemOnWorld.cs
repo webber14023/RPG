@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class ItemOnWorld : MonoBehaviour
 {
-    public Item ThisItem;
     public Inventory playerInventory;
-    public bool bagfull;
+    [SerializeField]AudioClip dropSound;
+    [SerializeField]AudioClip pickSound;
+    Item ThisItem;
+    bool bagfull;
+
+    SpriteRenderer sp;
+    AudioSource Audio;
+
+    private void Start() {
+        sp = GetComponent<SpriteRenderer>();
+        Audio = GetComponent<AudioSource>();
+        Audio.clip = dropSound;
+        Audio.Play();
+        sp.sprite = ThisItem.ItemImage;
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player"){
+            Audio.clip = pickSound;
+            Audio.Play();
             AddNewItem();
         }
     }
@@ -32,7 +47,9 @@ public class ItemOnWorld : MonoBehaviour
                     temp.itemLevel = Random.Range(1,10);
                     temp.itemQuality = "優良";
                     playerInventory.itemListData[i] = temp;
-                    Destroy(gameObject);
+                    sp.enabled = false;
+                    GetComponent<BoxCollider2D>().enabled = false;
+                    Destroy(gameObject,0.5f);
                     break;
                 }
             }
@@ -42,5 +59,8 @@ public class ItemOnWorld : MonoBehaviour
             Destroy(gameObject);
         }
         InventoryManager.RefreshItem();
+    }
+    public void setItemData(Item itemData) {
+        ThisItem = itemData;
     }
 }

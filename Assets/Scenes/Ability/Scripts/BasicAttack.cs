@@ -7,6 +7,7 @@ public class BasicAttack : Ability
 {
     public float attackRange;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
+    public float damagePercentage;
     Vector2 mouseDerection;
     
     public override void Activate(GameObject parent) {
@@ -29,10 +30,10 @@ public class BasicAttack : Ability
         float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
         GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange , Quaternion.Euler(new Vector3(0, 0, angle)), parent.transform);
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-        Stats.abilityDamage = characterStats.attackDamage;
+        Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage);
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = 0.2f;
-        Debug.Log(Derection);
+        Debug.Log(angle);
     }
 
     public override void BeginCooldown(GameObject parent) {

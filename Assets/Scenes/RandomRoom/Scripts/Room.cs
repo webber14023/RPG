@@ -11,17 +11,12 @@ public class Room : MonoBehaviour
 
     public bool roomLeft, roomRight, roomUp, roomDown, EnterRoom;
     public List<GameObject> Enemys = new List<GameObject>();
-    public GameObject enemyPrefeb;
-    public int enemyCount;
+    int enemyCount;
 
     RoomGenerator genrator;
     
     void Start()
     {
-        /*doorLeft.SetActive(roomLeft);
-        doorRight.SetActive(roomRight);
-        doorUp.SetActive(roomUp);
-        doorDown.SetActive(roomDown);*/
         EnterRoom = false;
     }
 

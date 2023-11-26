@@ -15,8 +15,18 @@ public class CharacterData : ScriptableObject
     public int EquipAttackDamage;
     public float EquipSpeed;
 
+    public float AttackCooldown;
+
     /*public float attackMultiply;
     public float healthMultiply;
     public float moveSpeedMultiply;*/
+
+    public dropItem[] dropItems;
+
+    [System.Serializable]public struct dropItem {
+        public Item item;
+        public int Count;
+        public float dropPercent;
+    }
 
 }

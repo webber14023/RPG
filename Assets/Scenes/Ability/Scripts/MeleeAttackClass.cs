@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeleeAttackClass : MonoBehaviour
 {   
-    public int damage;
     public float knockBackPower;
     private string target;
     public AudioClip[] Audios;
@@ -18,6 +17,7 @@ public class MeleeAttackClass : MonoBehaviour
         anim = GetComponent<Animator>();
         stats = transform.GetComponent<AbilityStats>();
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = stats.ActvateSound;
         audioSource.clip = Audios[Random.Range(0,Audios.Length-1)];
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";
         audioSource.Play();
@@ -27,14 +27,12 @@ public class MeleeAttackClass : MonoBehaviour
         if (other.CompareTag(target)) {
             CharacterStats character = other.GetComponent<CharacterStats>();
             if(character.canDamage) {
-                int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
+                int currentDamage = (int)(stats.abilityDamage * Random.Range(0.9f,1.1f));
                 Vector2 attackDerection = other.transform.position - transform.parent.position;
                 character.ShowDamageText(other.gameObject, currentDamage);
                 character.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
             }
         }
-    
-
     }
     private void Die() {
         Destroy(gameObject);

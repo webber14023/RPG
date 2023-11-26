@@ -10,5 +10,7 @@ public class DungeonData : ScriptableObject
     public int maxFloor;
     public int historyFloor;
     public int enemyCount;
+    public int roomCount;
     public GameObject[] dungeonEnemy;
+    public GameObject[] dungeonBoss;
 }

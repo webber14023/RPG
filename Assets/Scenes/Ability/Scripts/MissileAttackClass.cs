@@ -35,7 +35,7 @@ public class MissileAttackClass : MonoBehaviour
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";
         fire = false;
         delayTime = stats.abilityDelayTime;
-
+        Derection = stats.Derection;
         audioSource.pitch = Random.Range(0.9f,1.1f);
     }
 
@@ -46,7 +46,7 @@ public class MissileAttackClass : MonoBehaviour
                     Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
                 else if(target == "Player") {
                     Enemy controller = transform.parent.GetComponent<Enemy>();
-                    Derection = (controller.target.position - transform.position).normalized;
+                    Derection = (controller.target.GetChild(0).position - transform.position).normalized;
                 }
                 angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -63,13 +63,15 @@ public class MissileAttackClass : MonoBehaviour
                     Enemy controller = transform.parent.GetComponent<Enemy>();
                     Derection = (controller.target.position - transform.position).normalized;
                 }*/
-                Debug.Log("fire");
                 angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 Destroy(transform.GetChild(0).gameObject);
                 fire = true;
                 StartCoroutine(DestoryTimer());
                 rb.AddForce(Derection.normalized * speed);
+                
+                audioSource.clip = stats.ActvateSound;
+                audioSource.Play();
             }
         }
         else {
@@ -85,6 +87,7 @@ public class MissileAttackClass : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Wall")) {
             anim.SetBool("Hit",true);
+            audioSource.clip = stats.HitSound;
             audioSource.Play();
         }
            
@@ -95,6 +98,7 @@ public class MissileAttackClass : MonoBehaviour
             BuffHolder BuffHolder = other.GetComponent<BuffHolder>();
             if(characterStats.canDamage) {
                 anim.SetBool("Hit",true);
+                audioSource.clip = stats.HitSound;
                 audioSource.Play();
 
                 for(int i=0; i<Buffs.Length; i++) {

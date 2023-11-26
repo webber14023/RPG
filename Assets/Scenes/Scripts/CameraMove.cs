@@ -8,10 +8,6 @@ public class CameraMove : MonoBehaviour
     public float speed;
     public Transform target;
 
-    private void Awake() {
-        instance = this;
-    }
-
     void Update()
     {
         if(target != null)

@@ -24,3 +24,4 @@ MonoBehaviour:
   canSkip: 0
   attackRange: 1
   AttackEffectPrefab: {fileID: 3562804448289436880, guid: e5333331031b2c14186dea445f0a3486, type: 3}
+  damagePercentage: 1.75

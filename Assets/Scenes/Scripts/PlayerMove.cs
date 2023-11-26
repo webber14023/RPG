@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -10,12 +11,13 @@ public class PlayerMove : MonoBehaviour
     public Vector2 input;
     public float comboTimer;
     public int Combo;
+    public GameObject DeathInterface;
+    public GameObject HurtEffect;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
     private float inputX, inputY;
     private AbilityManager ability;
-    //private Vector2 mouseDerection;
     CharacterStats stats;
 
     void Awake() {
@@ -32,6 +34,7 @@ public class PlayerMove : MonoBehaviour
         Sprite = GetComponent<SpriteRenderer>();
         stats = GetComponent<CharacterStats>();
         ability = GetComponent<AbilityManager>();
+        stats.currentHealth = stats.baseCurrentHealth;
     }
 
     void Update()
@@ -67,7 +70,23 @@ public class PlayerMove : MonoBehaviour
         else if(inputX < 0) {
             Sprite.flipX = true;
         }
+    }
 
+    public void PlayerHurt() {
+        HurtEffect.GetComponent<Hurt>().HurtEffect();
+    }
+
+    public void Dead() {
+        canControl = true;
+        ability.isCasting = true;
+        GetComponent<BoxCollider2D>().enabled = false;
+        DeathInterface.SetActive(true);
+    }
+
+    public void Respawn() {
+        transform.GetComponent<CharacterStats>().ResetStats();
+        GameObject.FindGameObjectWithTag("RoomGenerator").GetComponent<RoomGenerator>().SaveDungeonData();
+        SceneManager.LoadScene("Vallage");
     }
 
     public static Vector2 GetMouseDerection()

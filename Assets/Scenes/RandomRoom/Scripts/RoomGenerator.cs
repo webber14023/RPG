@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NavMeshPlus.Extensions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +15,8 @@ public class RoomGenerator : MonoBehaviour
 
     [Header("房間訊息")]
     public GameObject roomPrefab;
-    public int roomNumber;
+    public GameObject bossRoomPrefab;
+    
     public DungeonData Data;
     public Color startColor, endColor;
     private GameObject longwayRoom;
@@ -27,9 +29,26 @@ public class RoomGenerator : MonoBehaviour
 
     public List<Room> rooms = new List<Room>();
     private Object[] RoomSets;
+    int roomNumber;
+
     void Start()
     {
+        Data = GetDungeonData(PlayerPrefs.GetString("dungeonName"));
+        if (Data.floor % 5 == 0) {
+            Instantiate(bossRoomPrefab, genratorPoint.position, Quaternion.identity, transform);
+        }
+        else {
+            roomNumber = Data.roomCount;
+            GenerateRoom();
+        }
+
+        StartCoroutine(BakeDelay());
+        Debug.Log("Dungeon_Floor = " + Data.floor);
+    }
+
+    void GenerateRoom() {
         RoomSets = Resources.LoadAll("Rooms");
+
         for (int i = 0; i < roomNumber-1; i++)
         {
             rooms.Add(Instantiate(roomPrefab, genratorPoint.position, Quaternion.identity,gameObject.transform).GetComponent<Room>());
@@ -53,9 +72,6 @@ public class RoomGenerator : MonoBehaviour
         GenratorlongwayRoom();
         rooms[0].transform.Find("RoomArea").gameObject.SetActive(false);
         rooms[roomNumber - 1].transform.Find("RoomArea").gameObject.SetActive(false);
-        //rooms[0].GetComponent<SpriteRenderer>().color = startColor;
-        //rooms[roomNumber - 1].GetComponent<SpriteRenderer>().color = endColor;
-        StartCoroutine(BakeDelay());
     }
 
     void Update()
@@ -151,6 +167,16 @@ public class RoomGenerator : MonoBehaviour
         if (wallRight)
             WallPrefabName+="R";
         return WallPrefabName;
+    }
+
+    public DungeonData GetDungeonData(string dungeonName) {
+        var data = Resources.Load("Datas/"+ dungeonName);
+
+        return (DungeonData)data;
+    }
+
+    public void SaveDungeonData() {
+        Data.historyFloor = Data.floor;
     }
 
     IEnumerator BakeDelay()

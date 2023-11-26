@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7971417978157644412
 Transform:
   m_ObjectHideFlags: 0
@@ -285,6 +285,8 @@ MonoBehaviour:
   abilityDamage: 0
   abilityknockBackPower: 0
   abilityDelayTime: 0
+  ActvateSound: {fileID: 8300000, guid: 865b9880549f55840929898828928c3a, type: 3}
+  HitSound: {fileID: 8300000, guid: e19244fe5177178459b99041fe2a383d, type: 3}
   Derection: {x: 0, y: 0}
 --- !u!82 &3086714229062545884
 AudioSource:
@@ -296,7 +298,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e19244fe5177178459b99041fe2a383d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.291
   m_Pitch: 1

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1815923739805922420
 Transform:
   m_ObjectHideFlags: 0
@@ -266,6 +266,8 @@ MonoBehaviour:
   abilityDamage: 0
   abilityknockBackPower: 0
   abilityDelayTime: 0
+  ActvateSound: {fileID: 8300000, guid: 5c859e50b4f93c7478e639dd99642159, type: 3}
+  HitSound: {fileID: 8300000, guid: 307a3fee89e693d44b300f29ae28805f, type: 3}
   Derection: {x: 0, y: 0}
 --- !u!82 &-6146329403515756009
 AudioSource:

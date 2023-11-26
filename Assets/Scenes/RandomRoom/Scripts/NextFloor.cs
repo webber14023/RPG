@@ -13,8 +13,9 @@ public class NextFloor : interactivityObject
     }
 
     public override void Interact() {
-        Debug.Log(genrator.Data.floor);
         genrator.Data.floor += 1;
+        CharacterStats playerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
+        playerStats.baseCurrentHealth = playerStats.currentHealth;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }

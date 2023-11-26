@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
@@ -14,6 +11,7 @@ public class CharacterStats : MonoBehaviour
     private Animator animator;
     private AudioSource audioSource;
     private NavMeshAgent agent;
+    private PlayerMove playerMove;
     public GameObject hpBar;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
@@ -71,7 +69,6 @@ public class CharacterStats : MonoBehaviour
         healthMultiply = 1f;
         moveSpeedMultiply = 1f;
         DamageReduce = 0f;
-        currentHealth = baseMaxHealth;
         canDamage = true;
         canControl = true;
         rb = GetComponent<Rigidbody2D>();
@@ -79,7 +76,9 @@ public class CharacterStats : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
+        playerMove = GetComponent<PlayerMove>();
         UpdateStats();
+        UpdateUI();
     }
 
     public void ChangeStats(int addHp, int addDamage, float addSpeed) {
@@ -95,17 +94,17 @@ public class CharacterStats : MonoBehaviour
     }
     
     public void TakeDamage(int damage, Vector2 knockBack) {
-        //rb.AddForce(knockBack * 10, ForceMode2D.Impulse);
-        //transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3)knockBack, 1);
         rb.MovePosition(transform.position + (Vector3)knockBack);
         Instantiate(hitEffect, transform.transform.GetChild(0).position, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(knockBack.y, knockBack.x) * Mathf.Rad2Deg)), transform);
         audioSource.Play();
         StartCoroutine(Hurt());
         currentHealth -= (int)(damage * (1f -DamageReduce));
         hpBar.GetComponent<HealthBar>().UpdateHealthBar((float)currentHealth/baseMaxHealth);
+        playerMove?.PlayerHurt();
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
         }
+
     }
 
     public void ShowDamageText(GameObject target, int damage) {
@@ -114,21 +113,27 @@ public class CharacterStats : MonoBehaviour
         damageText.SetDamageText((int)(damage * (1f -DamageReduce)));
     }
 
+    public void ResetStats() {
+        baseCurrentHealth = baseMaxHealth;
+    }
+
+    public void UpdateUI() {
+        hpBar.GetComponent<HealthBar>().SetHealthBar((float)currentHealth/baseMaxHealth);
+    }
+
     IEnumerator Hurt()
     {
         sp.material.SetFloat("_FlashAmount", 1);
         if(agent != null) {
-            agent.enabled = false;
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
         }
         //canDamage = false;
         canControl = false;
 
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.1f);
 
         sp.material.SetFloat("_FlashAmount", 0);
-        if(agent != null) {
-            agent.enabled = true;
-        }
         canDamage = true;
         canControl = true;
     }
