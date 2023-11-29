@@ -34,7 +34,6 @@ public class PlayerMove : MonoBehaviour
         Sprite = GetComponent<SpriteRenderer>();
         stats = GetComponent<CharacterStats>();
         ability = GetComponent<AbilityManager>();
-        stats.currentHealth = stats.baseCurrentHealth;
     }
 
     void Update()
@@ -50,6 +49,9 @@ public class PlayerMove : MonoBehaviour
             Move();
         else if (!canControl)
             rb.velocity = Vector2.zero;
+        if(Input.GetKeyDown(KeyCode.U)) {
+            stats.AddExp(10);
+        }
     }
 
     void Move() {

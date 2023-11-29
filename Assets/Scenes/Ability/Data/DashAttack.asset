@@ -20,7 +20,7 @@ MonoBehaviour:
   isUnlocked: 0
   preskills: []
   cooldownTime: 0
-  activeTime: 0.1
+  activeTime: 0.01
   canSkip: 0
   Dashdistance: 6
   damagePercentage: 1

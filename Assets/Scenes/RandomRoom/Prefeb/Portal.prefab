@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 2529104373159889580, guid: f87517604d09b6a4cb35526011972885, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7057638216747103497, guid: f87517604d09b6a4cb35526011972885, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

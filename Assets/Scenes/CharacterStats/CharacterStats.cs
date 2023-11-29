@@ -12,7 +12,9 @@ public class CharacterStats : MonoBehaviour
     private AudioSource audioSource;
     private NavMeshAgent agent;
     private PlayerMove playerMove;
+    private HealthBar healthBar;
     public GameObject hpBar;
+    public GameObject expBar;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
     
@@ -49,6 +51,19 @@ public class CharacterStats : MonoBehaviour
         get { if (c_Data != null) return c_Data.EquipSpeed; else return 0; }
         set { c_Data.EquipSpeed = value; }
     }
+    public int baseExp {
+        get { if (c_Data != null) return c_Data.maxExp; else return 0; }
+        set { c_Data.maxExp = value; }
+    }
+    public int CurrentExp {
+        get { if (c_Data != null) return c_Data.currentExp; else return 0; }
+        set { c_Data.currentExp = value; }
+    }
+    public int level {
+        get { if (c_Data != null) return c_Data.level; else return 0; }
+        set { c_Data.level = value; }
+    }
+
 
     public int maxHealth;
     public int currentHealth;
@@ -64,6 +79,10 @@ public class CharacterStats : MonoBehaviour
     public bool canDamage;
     public bool canControl;
 
+    int maxExp;
+
+    public int enemyLevel;
+
     private void Start() {
         attackMultiply = 1f;
         healthMultiply = 1f;
@@ -77,7 +96,13 @@ public class CharacterStats : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         playerMove = GetComponent<PlayerMove>();
-        UpdateStats();
+        healthBar = hpBar.GetComponent<HealthBar>();
+        if(enemyLevel == 0) {
+            UpdateStats();
+            currentHealth = baseCurrentHealth;
+        }
+        else
+            enemySetLevel(enemyLevel);
         UpdateUI();
     }
 
@@ -88,9 +113,22 @@ public class CharacterStats : MonoBehaviour
     }
 
     public void UpdateStats() {
-        maxHealth = (int)((float)((baseMaxHealth + EquipHealth) * healthMultiply));
-        speed = (baseSpeed + EquipSpeed) * moveSpeedMultiply;
-        attackDamage = (int)((float)((baseAttackDamage + EquipAttackDamage) * attackMultiply));
+        /*maxHealth = (int)((float)((baseMaxHealth + EquipHealth + c_Data.HpPerLv * level) * healthMultiply));
+        speed = (baseSpeed + EquipSpeed + c_Data.SpeedPerLv * level) * moveSpeedMultiply;
+        attackDamage = (int)((float)((baseAttackDamage + EquipAttackDamage + c_Data.DamagePerLv * level) * attackMultiply));*/
+
+        maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, level) + EquipHealth) * healthMultiply));
+        speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
+        attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
+        maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+    }
+
+    public void enemySetLevel(int lv) {
+        maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, lv) + EquipHealth) * healthMultiply));
+        speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, lv) + EquipSpeed) * moveSpeedMultiply;
+        attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, lv) + EquipAttackDamage) * attackMultiply));
+        maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, lv));
+        currentHealth = maxHealth;
     }
     
     public void TakeDamage(int damage, Vector2 knockBack) {
@@ -99,7 +137,7 @@ public class CharacterStats : MonoBehaviour
         audioSource.Play();
         StartCoroutine(Hurt());
         currentHealth -= (int)(damage * (1f -DamageReduce));
-        hpBar.GetComponent<HealthBar>().UpdateHealthBar((float)currentHealth/baseMaxHealth);
+        healthBar.UpdateHealthBar((float)currentHealth/maxHealth);
         playerMove?.PlayerHurt();
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
@@ -114,11 +152,32 @@ public class CharacterStats : MonoBehaviour
     }
 
     public void ResetStats() {
-        baseCurrentHealth = baseMaxHealth;
+        baseCurrentHealth = maxHealth;
     }
 
     public void UpdateUI() {
-        hpBar.GetComponent<HealthBar>().SetHealthBar((float)currentHealth/baseMaxHealth);
+        healthBar.SetHealthBar((float)currentHealth/maxHealth);
+        if(expBar != null)
+            expBar.GetComponent<ExpBar>().UpdateExpBar((float)CurrentExp/maxExp);
+    }
+
+    public void Upgrade() {
+        UpdateStats();
+        currentHealth = maxHealth;
+        UpdateUI();
+    }
+
+    public void AddExp(int exp) {
+        CurrentExp += exp;
+        if(CurrentExp >= maxExp) {
+            while(CurrentExp >= maxExp) {
+                CurrentExp -= maxExp;
+                level++;
+                maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+            }
+            Upgrade();
+        }
+        expBar.GetComponent<ExpBar>().UpdateExpBar((float)CurrentExp/maxExp);
     }
 
     IEnumerator Hurt()

@@ -17,6 +17,15 @@ public class CharacterData : ScriptableObject
 
     public float AttackCooldown;
 
+    [Header("Level")]
+    public int level;
+    public int maxExp;
+    public int currentExp;
+    public float HpPerLv;
+    public float DamagePerLv;
+    public float SpeedPerLv;
+    public float ExpPerLv;
+
     /*public float attackMultiply;
     public float healthMultiply;
     public float moveSpeedMultiply;*/

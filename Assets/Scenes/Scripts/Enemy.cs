@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = stats.speed;
-        stats.currentHealth = stats.baseMaxHealth;
         //agent.isStopped = true;
     }
 
@@ -163,14 +162,13 @@ public class Enemy : MonoBehaviour
 
                 }
             }
-
         }
-        
     }
 
+
     private void Die() {
+        targetStats.AddExp(stats.c_Data.maxExp);
         DropItem();
         Destroy(gameObject);
     }
-
 }

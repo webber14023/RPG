@@ -13,10 +13,19 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   maxHealth: 2500
-  currentHealth: 2500
+  currentHealth: 18575
   attackDamage: 100
   speed: 5
   knockBackPower: 1
-  EquipHealth: 140
+  EquipHealth: 0
   EquipAttackDamage: 70
   EquipSpeed: 0
+  AttackCooldown: 0
+  level: 11
+  maxExp: 100
+  currentExp: 540
+  HpPerLv: 1.2
+  DamagePerLv: 1.2
+  SpeedPerLv: 1
+  ExpPerLv: 1.2
+  dropItems: []
