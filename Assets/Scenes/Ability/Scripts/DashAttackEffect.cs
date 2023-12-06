@@ -8,6 +8,7 @@ public class DashAttackEffect : MonoBehaviour
     private string target;
     public float timer;
     float MaxTimer;
+    public Color effectColor;
     
     AbilityStats stats;
     SpriteRenderer sp;
@@ -25,7 +26,7 @@ public class DashAttackEffect : MonoBehaviour
 
     private void Update() {
         timer -= Time.deltaTime;
-        sp.color = new Color(0.5f, 0.9f, 1f, timer / MaxTimer);
+        sp.color = new Color(effectColor.r, effectColor.g, effectColor.b, timer / MaxTimer);
         if(timer <= 0f)
             Destroy(gameObject);
 

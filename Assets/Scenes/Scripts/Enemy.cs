@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = stats.speed;
+        canControl = true;
         //agent.isStopped = true;
     }
 
@@ -82,7 +83,7 @@ public class Enemy : MonoBehaviour
     }
 
     void ChaseTarget() {
-        if(!stats.canControl) {
+        if(!canControl) {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
             return;

@@ -37,6 +37,5 @@ public class EnemyMutiAttack : Ability
             Stats.Derection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin (angle * Mathf.Deg2Rad));
             angle += area;
         }
-        characterStats.canControl = true;
     }
 }

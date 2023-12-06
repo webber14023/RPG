@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class EnemyAbilityHolder : MonoBehaviour
 {
@@ -38,6 +40,7 @@ public class EnemyAbilityHolder : MonoBehaviour
                     cooldownTime = ability.cooldownTime;
                     activeAbility = false;
                     transform.GetComponent<Enemy>().RandomAbility();
+                    StartCoroutine(StopMoveing(0.5f));
                 }
             break;
             case AbilityState.cooldown:
@@ -51,6 +54,12 @@ public class EnemyAbilityHolder : MonoBehaviour
                 }
             break;
         }
+    }
+    IEnumerator StopMoveing(float time)
+    {
+        yield return new WaitForSeconds(.1f);
+        Enemy controller = transform.GetComponent<Enemy>();
+        controller.canControl = true;
     }
 
 }

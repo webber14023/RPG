@@ -19,9 +19,12 @@ MonoBehaviour:
   abilityDes: 
   isUnlocked: 0
   preskills: []
-  cooldownTime: 0
-  activeTime: 0.01
+  cooldownTime: 1
+  activeTime: 0
   canSkip: 0
   Dashdistance: 6
   damagePercentage: 1
   AttackPrefeb: {fileID: 4381066553821232053, guid: 3238299c213127a45bfba2084a8571a4, type: 3}
+  layerMark:
+    serializedVersion: 2
+    m_Bits: 128

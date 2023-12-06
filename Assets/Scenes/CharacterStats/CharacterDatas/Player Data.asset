@@ -21,7 +21,7 @@ MonoBehaviour:
   EquipAttackDamage: 70
   EquipSpeed: 0
   AttackCooldown: 0
-  level: 11
+  level: 1
   maxExp: 100
   currentExp: 540
   HpPerLv: 1.2

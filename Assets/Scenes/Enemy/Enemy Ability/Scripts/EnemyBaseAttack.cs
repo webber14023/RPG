@@ -30,6 +30,5 @@ public class EnemyBaseAttack : Ability
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = DelayTime;
         Stats.Derection = Derection;
-        characterStats.canControl = true;
     }
 }

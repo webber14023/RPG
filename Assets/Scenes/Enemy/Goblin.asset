@@ -15,12 +15,12 @@ MonoBehaviour:
   maxHealth: 450
   currentHealth: 450
   attackDamage: 115
-  speed: 4
+  speed: 6
   knockBackPower: 1
   EquipHealth: 0
   EquipAttackDamage: 0
   EquipSpeed: 0
-  AttackCooldown: 2
+  AttackCooldown: 1.2
   level: 0
   maxExp: 10
   currentExp: 0

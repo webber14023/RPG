@@ -9,8 +9,12 @@ public class DashAttack : Ability
     public float Dashdistance;
     public float damagePercentage;
     public GameObject AttackPrefeb;
+    public LayerMask layerMark;
+    
+    RaycastHit2D hit;
     
     Vector2 orgPosition;
+    Vector2 currentPosition;
     BoxCollider2D playerCollider;
     
     public override void Activate(GameObject parent)
@@ -20,13 +24,15 @@ public class DashAttack : Ability
         Vector3 mouseDerection = PlayerMove.GetMouseDerection().normalized;
         orgPosition = parent.transform.GetChild(0).position;
         playerCollider.enabled = false;
+        hit = Physics2D.Raycast(parent.transform.GetChild(0).position, parent.transform.TransformDirection(mouseDerection), Dashdistance, layerMark);
+        currentPosition = hit.collider? hit.point: orgPosition + (Vector2)mouseDerection * Dashdistance;
         rb.MovePosition(parent.transform.position + mouseDerection * Dashdistance);
     }
 
         
     public override void BeginCooldown(GameObject parent)
     {
-        Vector2 dashPosition = (Vector2)parent.transform.GetChild(0).position - orgPosition;
+        Vector2 dashPosition = currentPosition - orgPosition;
         CharacterStats characterStats = parent.GetComponent<CharacterStats>();
 
         playerCollider.enabled = true;

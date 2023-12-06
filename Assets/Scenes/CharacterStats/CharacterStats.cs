@@ -121,6 +121,7 @@ public class CharacterStats : MonoBehaviour
         speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
         maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+        Debug.Log(maxExp);
     }
 
     public void enemySetLevel(int lv) {
@@ -171,6 +172,7 @@ public class CharacterStats : MonoBehaviour
         CurrentExp += exp;
         if(CurrentExp >= maxExp) {
             while(CurrentExp >= maxExp) {
+                Debug.Log(CurrentExp >= maxExp);
                 CurrentExp -= maxExp;
                 level++;
                 maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));

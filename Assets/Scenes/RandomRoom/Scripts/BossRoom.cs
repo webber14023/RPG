@@ -17,6 +17,7 @@ public class BossRoom : MonoBehaviour
     {
         EnterRoom = false;
         genrator = transform.parent.GetComponent<RoomGenerator>();
+        Portal.SetActive(false);
     }
     void Update()
     {
@@ -28,19 +29,18 @@ public class BossRoom : MonoBehaviour
                 }
             }
             if(Enemys.Count == 0) {
-                Instantiate(Portal, spawnPoint.position, Quaternion.identity, transform.parent);
+                Portal.SetActive(true);
                 transform.Find("RoomArea").gameObject.SetActive(false);
-                EnterRoom = false;
+                //EnterRoom = false;
 
             }
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Player"))
+        if(!EnterRoom && other.CompareTag("Player"))
         {
             EnterRoom = true;
             door.SetActive(true);
-            Debug.Log(genrator.Data.dungeonBoss);
             GameObject enemy = genrator.Data.dungeonBoss[Random.Range(0, genrator.Data.dungeonBoss.Length)];
             Enemys.Add(Instantiate(enemy, spawnPoint.position, Quaternion.identity, transform));
             transform.Find("RoomArea").gameObject.SetActive(false);

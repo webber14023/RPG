@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8622497806149756048}
   - component: {fileID: 565402672}
   - component: {fileID: 565402664}
+  - component: {fileID: 2996036072694261186}
   - component: {fileID: 565402673}
   m_Layer: 9
   m_Name: Goblin
@@ -66,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 2756756266515007926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.45, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1351534506}
@@ -113,7 +114,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 256577499
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: b39c0c309b1ece04e85c5370e5ce21ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,9 +208,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  sightRadius: 5
-  attackRange: 1.5
+  sightRadius: 12
+  attackRange: 2
   canControl: 0
+  AttackCooldown: 0
+  timer: 0
   hpBar: {fileID: 1904673765400647645}
   damageTextPrefab: {fileID: 4719213298264859033, guid: 9d2ccacb955fadc459e557f617ffd30b, type: 3}
 --- !u!114 &8622497806149756049
@@ -226,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   c_Data: {fileID: 11400000, guid: a9da11b3ac4b33f43b6acde979e4dbaf, type: 2}
   hpBar: {fileID: 1904673765400647645}
+  expBar: {fileID: 0}
   damageTextPrefab: {fileID: 4719213298264859033, guid: 9d2ccacb955fadc459e557f617ffd30b, type: 3}
   hitEffect: {fileID: 3764579976803197859, guid: 95c50a2e955c16844922669d07c34a8f, type: 3}
   maxHealth: 0
@@ -239,6 +243,7 @@ MonoBehaviour:
   DamageReduce: 0
   canDamage: 0
   canControl: 0
+  enemyLevel: 0
 --- !u!114 &8622497806149756048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +372,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 037ddb904bf5ee54ab3a0987460f91a3, type: 2}
+  cooldownTime: 0
+  activeTime: 0
+  activeAbility: 0
+--- !u!114 &2996036072694261186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756756266515007926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aab264c626cb6f4ab4e95783f78435d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 840bdf7ff6e9cdf41b044799ec62c058, type: 2}
   cooldownTime: 0
   activeTime: 0
   activeAbility: 0
