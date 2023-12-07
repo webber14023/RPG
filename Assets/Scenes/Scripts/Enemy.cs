@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-public enum EnemyStates {GUARD, PATROL, CHASE, DEAD }
+public enum EnemyStates {GUARD, PATROL, CHASE, DEAD}
 
 public class Enemy : MonoBehaviour
 {
@@ -29,14 +29,14 @@ public class Enemy : MonoBehaviour
     private CharacterStats stats;
     private CharacterStats targetStats;
     private NavMeshAgent agent;
-
+    
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
         stats = GetComponent<CharacterStats>();
         AbilityHolders = GetComponents<EnemyAbilityHolder>();
-        AbilityHolder = AbilityHolders[Random.Range(0,AbilityHolders.Length)];
+        RandomAbility();
         //target = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<Transform>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         targetStats = target.GetComponent<CharacterStats>();
@@ -48,12 +48,17 @@ public class Enemy : MonoBehaviour
         agent.speed = stats.speed;
         canControl = true;
         //agent.isStopped = true;
+        UpdateUI();
     }
 
     private void Update() {
         SwitchStates();
     }
     
+    void UpdateUI() {
+        hpBar.transform.Find("Name").GetComponent<Text>().text = stats.c_Data.name + "   Lv." + stats.enemyLevel;
+    }
+
     void SwitchStates() {
         if(!animator.GetBool("isDeath")) {
             targetDistance = Vector2.Distance(transform.position, target.position);
@@ -80,6 +85,7 @@ public class Enemy : MonoBehaviour
                 break;
             
         }
+        timer -= Time.deltaTime;
     }
 
     void ChaseTarget() {
@@ -100,7 +106,7 @@ public class Enemy : MonoBehaviour
         }
         else {
             PrepareAttack();
-            currentAttackRange = attackRange + 0.5f;
+            currentAttackRange = attackRange + 0.7f;
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
             animator.SetBool("Moving", false);
@@ -130,16 +136,16 @@ public class Enemy : MonoBehaviour
                     AbilityHolder = AbilityHolders[i];
             }
         }
+        attackRange = AbilityHolder.ability.attackDistance;
     }
 
     void PrepareAttack() {
         if(timer <= 0){
             AbilityHolder.activeAbility = true;
+            canControl = false;
             timer = AttackCooldown;
         }
-        else {
-            timer -= Time.deltaTime;
-        }
+
     }
 
     void Attack() {
@@ -165,7 +171,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
 
     private void Die() {
         targetStats.AddExp(stats.c_Data.maxExp);

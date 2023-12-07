@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
@@ -15,6 +16,7 @@ public class CharacterStats : MonoBehaviour
     private HealthBar healthBar;
     public GameObject hpBar;
     public GameObject expBar;
+    public Text levelText;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
     
@@ -160,11 +162,14 @@ public class CharacterStats : MonoBehaviour
         healthBar.SetHealthBar((float)currentHealth/maxHealth);
         if(expBar != null)
             expBar.GetComponent<ExpBar>().UpdateExpBar((float)CurrentExp/maxExp);
+        if(levelText != null)
+            levelText.text = "Lv." + c_Data.level;
+            
     }
 
     public void Upgrade() {
         UpdateStats();
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         UpdateUI();
     }
 

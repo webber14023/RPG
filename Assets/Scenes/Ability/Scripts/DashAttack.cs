@@ -8,6 +8,7 @@ public class DashAttack : Ability
 {
     public float Dashdistance;
     public float damagePercentage;
+    public Color effectColor;
     public GameObject AttackPrefeb;
     public LayerMask layerMark;
     
@@ -32,7 +33,7 @@ public class DashAttack : Ability
         
     public override void BeginCooldown(GameObject parent)
     {
-        Vector2 dashPosition = currentPosition - orgPosition;
+        Vector2 dashPosition = (Vector2)parent.transform.GetChild(0).position - orgPosition;
         CharacterStats characterStats = parent.GetComponent<CharacterStats>();
 
         playerCollider.enabled = true;
@@ -42,6 +43,7 @@ public class DashAttack : Ability
         Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage);
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = 0.2f;
+        attackEffect.GetComponent<DashAttackEffect>().effectColor = effectColor;
 
     }
 }

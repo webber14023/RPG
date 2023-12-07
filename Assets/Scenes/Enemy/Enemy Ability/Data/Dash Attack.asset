@@ -22,8 +22,10 @@ MonoBehaviour:
   cooldownTime: 12
   activeTime: 3
   canSkip: 0
-  Dashdistance: 6
+  attackDistance: 4
+  Dashdistance: 7
   AttackPrefeb: {fileID: 4381066553821232053, guid: 3238299c213127a45bfba2084a8571a4, type: 3}
   layerMark:
     serializedVersion: 2
     m_Bits: 128
+  effectColor: {r: 1, g: 0.1462264, b: 0.1462264, a: 0}

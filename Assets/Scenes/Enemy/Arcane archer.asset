@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
   m_Name: Arcane archer
   m_EditorClassIdentifier: 
+  name: "\u7BAD"
   maxHealth: 2000
   currentHealth: 2000
   attackDamage: 250
@@ -22,12 +23,12 @@ MonoBehaviour:
   EquipSpeed: 0
   AttackCooldown: 3
   level: 0
-  maxExp: 1000
+  maxExp: 170
   currentExp: 0
   HpPerLv: 1.2
-  DamagePerLv: 1.15
+  DamagePerLv: 1.2
   SpeedPerLv: 1
-  ExpPerLv: 1.15
+  ExpPerLv: 1.1
   dropItems:
   - item: {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
     Count: 1

@@ -15,6 +15,7 @@ public class Ability : ScriptableObject
     public float activeTime;
 
     public bool canSkip;
+    public float attackDistance;
 
     public virtual void Activate(GameObject parent) {}
     public virtual void BeginCooldown(GameObject parent) {}

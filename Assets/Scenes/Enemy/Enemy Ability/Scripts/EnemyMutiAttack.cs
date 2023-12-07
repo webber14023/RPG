@@ -16,9 +16,6 @@ public class EnemyMutiAttack : Ability
     
     public override void Activate(GameObject parent) {
         Animator animator = parent.GetComponent<Animator>();
-        CharacterStats characterStats = parent.GetComponent<CharacterStats>();
-
-        characterStats.canControl = false;
         animator.SetTrigger(isSpecialAttack?"SpecialAttack":"Attacking");
     }
     public override void BeginCooldown(GameObject parent) {

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
+  name: 
   maxHealth: 2500
-  currentHealth: 18575
+  currentHealth: 3000
   attackDamage: 100
   speed: 5
   knockBackPower: 1
@@ -22,8 +23,8 @@ MonoBehaviour:
   EquipSpeed: 0
   AttackCooldown: 0
   level: 1
-  maxExp: 100
-  currentExp: 540
+  maxExp: 250
+  currentExp: 40
   HpPerLv: 1.2
   DamagePerLv: 1.2
   SpeedPerLv: 1

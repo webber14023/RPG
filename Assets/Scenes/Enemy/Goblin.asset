@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
+  name: "\u54E5\u5E03\u6797"
   maxHealth: 450
   currentHealth: 450
   attackDamage: 115
@@ -22,7 +23,7 @@ MonoBehaviour:
   EquipSpeed: 0
   AttackCooldown: 1.2
   level: 0
-  maxExp: 10
+  maxExp: 8
   currentExp: 0
   HpPerLv: 1.2
   DamagePerLv: 1.2

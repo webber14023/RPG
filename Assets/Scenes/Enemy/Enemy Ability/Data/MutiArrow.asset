@@ -22,6 +22,7 @@ MonoBehaviour:
   cooldownTime: 7
   activeTime: 3
   canSkip: 0
+  attackDistance: 12
   attackRange: 0
   DelayTime: 0.2
   areaAngle: 0

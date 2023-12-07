@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0.2
-  effectColor: {r: 1, g: 0.3079968, b: 0.2028302, a: 1}
+  effectColor: {r: 1, g: 0.2712999, b: 0.2235294, a: 1}
 --- !u!50 &-2975974520307486324
 Rigidbody2D:
   serializedVersion: 4

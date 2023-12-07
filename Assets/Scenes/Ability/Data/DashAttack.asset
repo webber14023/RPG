@@ -20,10 +20,12 @@ MonoBehaviour:
   isUnlocked: 0
   preskills: []
   cooldownTime: 1
-  activeTime: 0
+  activeTime: 0.05
   canSkip: 0
+  attackDistance: 0
   Dashdistance: 6
   damagePercentage: 1
+  effectColor: {r: 0.14509803, g: 0.5923473, b: 1, a: 0}
   AttackPrefeb: {fileID: 4381066553821232053, guid: 3238299c213127a45bfba2084a8571a4, type: 3}
   layerMark:
     serializedVersion: 2

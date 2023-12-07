@@ -22,6 +22,7 @@ MonoBehaviour:
   cooldownTime: 0
   activeTime: 3
   canSkip: 0
+  attackDistance: 13
   attackRange: 0
   DelayTime: 0
   AttackEffectPrefab: {fileID: 2659696928498274092, guid: 5df353d62b451a44ba724a40d2b6397c, type: 3}

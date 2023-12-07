@@ -21,6 +21,7 @@ public class DashAttackEffect : MonoBehaviour
         sp = transform.GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";
+        
         audioSource.Play();
     }
 
