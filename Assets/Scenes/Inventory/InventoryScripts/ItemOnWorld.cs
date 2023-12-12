@@ -9,6 +9,7 @@ public class ItemOnWorld : MonoBehaviour
     [SerializeField]AudioClip pickSound;
     Item ThisItem;
     bool bagfull;
+    int itemLevel;
 
     SpriteRenderer sp;
     AudioSource Audio;
@@ -44,7 +45,7 @@ public class ItemOnWorld : MonoBehaviour
                 if(playerInventory.itemList[i] == null) {
                     playerInventory.itemList[i] = ThisItem;
                     var temp = playerInventory.itemListData[i];
-                    temp.itemLevel = Random.Range(1,10);
+                    temp.itemLevel = itemLevel;
                     temp.itemQuality = "優良";
                     playerInventory.itemListData[i] = temp;
                     sp.enabled = false;
@@ -60,7 +61,8 @@ public class ItemOnWorld : MonoBehaviour
         }
         InventoryManager.RefreshItem();
     }
-    public void setItemData(Item itemData) {
+    public void setItemData(Item itemData, int level) {
         ThisItem = itemData;
+        itemLevel = level;
     }
 }

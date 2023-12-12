@@ -28,6 +28,7 @@ public class EquipmentManager : MonoBehaviour
     }
 
     public static void UpdateEquipmentStats() {
+        Debug.Log("Update Equipment");
         intance.Stats.EquipHealth = 0;
         intance.Stats.EquipAttackDamage = 0;
         intance.Stats.EquipSpeed = 0;

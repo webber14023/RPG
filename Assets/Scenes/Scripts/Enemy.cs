@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
@@ -125,8 +123,6 @@ public class Enemy : MonoBehaviour
             if(AbilityHolders[i].cooldownTime <= 0)
                 readyAbility.Add(AbilityHolders[i]);
         }
-        Debug.Log(readyAbility);
-        Debug.Log(readyAbility.Count);
         if(readyAbility.Count != 0)
             AbilityHolder = readyAbility[Random.Range(0,readyAbility.Count - 1)];
         else {
@@ -149,7 +145,6 @@ public class Enemy : MonoBehaviour
     }
 
     void Attack() {
-        Debug.Log("attack");
         AbilityHolder.activeTime = 0;
     }
 
@@ -164,16 +159,26 @@ public class Enemy : MonoBehaviour
         for(int i=0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
                 for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
-                    Debug.Log("DropItem");
-                    Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item);
+                    Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel);
 
                 }
             }
         }
     }
 
+    void StopAttack() {
+        for(int i=0; i<AbilityHolders.Length; i++)
+            AbilityHolders[i].enabled = false;
+    }
+
     private void Die() {
-        targetStats.AddExp(stats.c_Data.maxExp);
+        int levelGap = targetStats.level - stats.enemyLevel;
+        //float levelReduce = (levelGap >= -5 && levelGap <= 7)? levelGap > 0? (float)Mathf.Pow(1.15f, -levelGap) 
+                                                             //: 1 + (float)(Mathf.Pow(1.05f ,-levelGap) % 1 / 2) :levelGap > 0? 0.3f: 1.2f;
+
+        float levelReduce = (levelGap >= -5 && levelGap <= 7)? levelGap > 0? (float)Mathf.Pow(1.15f, -levelGap) 
+                                                             : 1 + (float)(Mathf.Pow(1.05f ,-levelGap) % 1 / 2) :levelGap > 0? 0.3f: 1.2f;
+        targetStats.AddExp((int)(stats.c_Data.maxExp * levelReduce));
         DropItem();
         Destroy(gameObject);
     }

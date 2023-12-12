@@ -10,23 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
-  m_Name: Player Data
+  m_Name: Arcane archer
   m_EditorClassIdentifier: 
-  name: 
-  maxHealth: 2500
-  currentHealth: 3000
-  attackDamage: 100
-  speed: 5
+  CharacterName: Arcane archer
+  maxHealth: 2000
+  currentHealth: 2000
+  attackDamage: 250
+  speed: 2
   knockBackPower: 1
   EquipHealth: 0
-  EquipAttackDamage: 70
+  EquipAttackDamage: 0
   EquipSpeed: 0
-  AttackCooldown: 0
-  level: 1
-  maxExp: 250
-  currentExp: 40
+  AttackCooldown: 3
+  level: 0
+  maxExp: 170
+  currentExp: 0
   HpPerLv: 1.2
   DamagePerLv: 1.2
   SpeedPerLv: 1
-  ExpPerLv: 1.2
-  dropItems: []
+  ExpPerLv: 1.1
+  dropItems:
+  - item: {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
+    Count: 1
+    dropPercent: 50

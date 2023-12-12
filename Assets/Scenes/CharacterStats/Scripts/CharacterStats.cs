@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -123,7 +124,6 @@ public class CharacterStats : MonoBehaviour
         speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
         maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
-        Debug.Log(maxExp);
     }
 
     public void enemySetLevel(int lv) {
@@ -134,14 +134,21 @@ public class CharacterStats : MonoBehaviour
         currentHealth = maxHealth;
     }
     
-    public void TakeDamage(int damage, Vector2 knockBack) {
+    public void TakeDamage(int damage, CharacterStats attacker, Vector2 knockBack) {
         rb.MovePosition(transform.position + (Vector3)knockBack);
         Instantiate(hitEffect, transform.transform.GetChild(0).position, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(knockBack.y, knockBack.x) * Mathf.Rad2Deg)), transform);
         audioSource.Play();
         StartCoroutine(Hurt());
-        currentHealth -= (int)(damage * (1f -DamageReduce));
+
+        int levelGap = (level == 0? enemyLevel: level) - (attacker.level == 0? attacker.enemyLevel: attacker.level);
+        float levelReduce = (levelGap >= -5 && levelGap <= 7)? levelGap > 0? (float)Mathf.Pow(1.05f, -levelGap) : 1 + (float)(Mathf.Pow(1.1f ,-levelGap) % 1 / 2) :
+                                                                             levelGap > 0? 0.55f: 1.4f;
+        int finalDamage = (int)(damage * (1f -DamageReduce) * levelReduce);
+        ShowDamageText(gameObject, finalDamage);
+        currentHealth -= finalDamage;
         healthBar.UpdateHealthBar((float)currentHealth/maxHealth);
         playerMove?.PlayerHurt();
+
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
         }
@@ -177,7 +184,6 @@ public class CharacterStats : MonoBehaviour
         CurrentExp += exp;
         if(CurrentExp >= maxExp) {
             while(CurrentExp >= maxExp) {
-                Debug.Log(CurrentExp >= maxExp);
                 CurrentExp -= maxExp;
                 level++;
                 maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));

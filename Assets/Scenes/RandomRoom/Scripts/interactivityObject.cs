@@ -7,11 +7,13 @@ using UnityEngine.UI;
 public class interactivityObject : MonoBehaviour
 {
     public KeyCode key;
+    public string hintText;
     GameObject Hintkey;
 
     public virtual void Start() {
         Hintkey = transform.GetChild(0).gameObject;
         Hintkey.transform.GetChild(1).GetComponent<Text>().text = key.ToString();
+        Hintkey.transform.GetChild(2).GetComponent<Text>().text = hintText;
         Hintkey.SetActive(false);
     }
 
@@ -21,7 +23,7 @@ public class interactivityObject : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.CompareTag("Player")) {
-            if (Input.GetKey(key)) {
+            if (Input.GetKeyDown(key)) {
                 Interact();
             }
         }

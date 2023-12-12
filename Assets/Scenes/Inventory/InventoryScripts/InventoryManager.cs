@@ -48,13 +48,20 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
         }
         for(int i = 0; i < intance.equipment.itemList.Count; i++) {
-            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
+            Debug.Log(intance.equipment.itemList[i]);
             if (intance.equipment.itemList[i] != null) {
+                Debug.Log("Add data");
                 intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(true);
+                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
+            }
+            else if(intance.equipmentSlots[i].GetComponent<Slot>().slotItem != null) {
+                Debug.Log("clear data");
+                intance.equipmentSlots[i].GetComponent<Slot>().clearItemData();
+                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(null, 0, null);
+                intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(false);
+                
             }
             
         }
     }
 }
-
-//可以给每个物品一个id,碰撞物体的时候遍历背包里物体的id如果有，就直接在物品的数量上加一，可以提高游戏性能

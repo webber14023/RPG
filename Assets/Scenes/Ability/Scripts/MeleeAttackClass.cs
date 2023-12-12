@@ -29,8 +29,7 @@ public class MeleeAttackClass : MonoBehaviour
             if(character.canDamage) {
                 int currentDamage = (int)(stats.abilityDamage * Random.Range(0.9f,1.1f));
                 Vector2 attackDerection = other.transform.position - transform.parent.position;
-                character.ShowDamageText(other.gameObject, currentDamage);
-                character.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
+                character.TakeDamage(currentDamage, transform.parent.GetComponent<CharacterStats>(), attackDerection.normalized * knockBackPower);
             }
         }
     }

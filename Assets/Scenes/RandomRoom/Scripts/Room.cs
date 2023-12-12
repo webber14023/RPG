@@ -85,7 +85,8 @@ public class Room : MonoBehaviour
             GameObject enemy = genrator.Data.dungeonEnemy[Random.Range(0, genrator.Data.dungeonEnemy.Length)];
 
             Enemys.Add(Instantiate(enemy, spawnPoints.GetChild(Random.Range(0,spawnPoints.childCount)).position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity, transform));
-            Enemys[i].GetComponent<CharacterStats>().enemyLevel = genrator.Data.floor + Random.Range(-1,1);
+            int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor ) * genrator.Data.floor;
+            Enemys[i].GetComponent<CharacterStats>().enemyLevel = level + level % 10 + Random.Range(-level % 10, 0);
         }
     }
 }

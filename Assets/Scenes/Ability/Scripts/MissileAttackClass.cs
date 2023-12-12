@@ -106,8 +106,7 @@ public class MissileAttackClass : MonoBehaviour
                 }
                 int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
                 Vector2 attackDerection = other.transform.GetChild(0).position - transform.position;
-                characterStats.ShowDamageText(other.gameObject, currentDamage);
-                characterStats.TakeDamage(currentDamage,attackDerection.normalized * knockBackPower);
+                characterStats.TakeDamage(currentDamage, transform.parent.GetComponent<CharacterStats>(), attackDerection.normalized * knockBackPower);
 
             }
         }

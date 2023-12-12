@@ -5,7 +5,8 @@ using UnityEngine;
 public class BossRoom : MonoBehaviour
 {
     public GameObject door;
-    public GameObject Portal;
+    [SerializeField] GameObject Portal;
+    [SerializeField] GameObject ExitPortal;
     public Transform spawnPoint;
     public List<GameObject> Enemys = new List<GameObject>();
     RoomGenerator genrator;
@@ -17,7 +18,7 @@ public class BossRoom : MonoBehaviour
     {
         EnterRoom = false;
         genrator = transform.parent.GetComponent<RoomGenerator>();
-        Portal.SetActive(false);
+        genrator.Data.maxFloor = genrator.Data.floor;
     }
     void Update()
     {
@@ -29,7 +30,10 @@ public class BossRoom : MonoBehaviour
                 }
             }
             if(Enemys.Count == 0) {
-                Portal.SetActive(true);
+                if(genrator.Data.maxFloor == genrator.Data.floor)
+                    Portal.SetActive(true);
+                
+                ExitPortal.SetActive(true);
                 transform.Find("RoomArea").gameObject.SetActive(false);
                 //EnterRoom = false;
 
@@ -41,9 +45,12 @@ public class BossRoom : MonoBehaviour
         {
             EnterRoom = true;
             door.SetActive(true);
+            transform.Find("RoomArea").gameObject.SetActive(false);
+
             GameObject enemy = genrator.Data.dungeonBoss[Random.Range(0, genrator.Data.dungeonBoss.Length)];
             Enemys.Add(Instantiate(enemy, spawnPoint.position, Quaternion.identity, transform));
-            transform.Find("RoomArea").gameObject.SetActive(false);
+            int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor ) * genrator.Data.floor;
+            enemy.GetComponent<CharacterStats>().enemyLevel = level + level % 10 + Random.Range(-level % 10, 0);
             
             //CameraMove.instance.ChangeTarget(transform);
         }

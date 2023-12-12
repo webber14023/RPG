@@ -57,5 +57,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             slotNum.gameObject.SetActive(false);
         slotInfo = item.ItemInfo;
     }
+
+    public void clearItemData() {
+        slotItem = null;
+        Level = 0;
+        Quality = null;
+
+    }
 }
 

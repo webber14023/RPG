@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
 public class CharacterData : ScriptableObject
 {
-    public string name;
+    public string CharacterName;
     public int maxHealth;
     public int currentHealth;
     public int attackDamage;
