@@ -11,12 +11,17 @@ public class InventoryManager : MonoBehaviour
     public Inventory myBag;
     public Inventory equipment;
     public GameObject slotGrid;
+    public GameObject equipmentSlotGrid;
     // public Slot slotPrefab;
     public GameObject emptySlot;
+    public GameObject emptyEquipmentSlot;
     public Text itemInformation;
 
     public List<GameObject> myBagSlots = new List<GameObject>();
     public List<GameObject> equipmentSlots = new List<GameObject>();
+
+    string[] equipTypes = {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
+    public Sprite[] equipmentBg;
 
     void Awake() {
         if(intance != null)
@@ -47,20 +52,19 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
         }
+        for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {
+            Destroy(intance.equipmentSlotGrid.transform.GetChild(i).gameObject);
+            intance.equipmentSlots.Clear();
+        }
+
         for(int i = 0; i < intance.equipment.itemList.Count; i++) {
-            Debug.Log(intance.equipment.itemList[i]);
-            if (intance.equipment.itemList[i] != null) {
-                Debug.Log("Add data");
-                intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(true);
-                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
-            }
-            else if(intance.equipmentSlots[i].GetComponent<Slot>().slotItem != null) {
-                Debug.Log("clear data");
-                intance.equipmentSlots[i].GetComponent<Slot>().clearItemData();
-                intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(null, 0, null);
-                intance.equipmentSlots[i].transform.GetChild(1).gameObject.SetActive(false);
-                
-            }
+            intance.equipmentSlots.Add(Instantiate(intance.emptyEquipmentSlot));
+            intance.equipmentSlots[i].transform.SetParent(intance.equipmentSlotGrid.transform);
+            intance.equipmentSlots[i].transform.localScale = new Vector3(1,1,1);
+            intance.equipmentSlots[i].GetComponent<Slot>().slotID = i;
+            intance.equipmentSlots[i].gameObject.name = intance.equipTypes[i];
+            intance.equipmentSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = intance.equipmentBg[i];
+            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
             
         }
     }

@@ -80,6 +80,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Dead() {
         canControl = true;
+        rb.velocity = Vector2.zero;
         ability.isCasting = true;
         GetComponent<BoxCollider2D>().enabled = false;
         DeathInterface.SetActive(true);

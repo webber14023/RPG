@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  name: "\u54E5\u5E03\u6797"
+  CharacterName: 
   maxHealth: 450
   currentHealth: 450
   attackDamage: 115
@@ -32,4 +32,4 @@ MonoBehaviour:
   dropItems:
   - item: {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
     Count: 1
-    dropPercent: 5
+    dropPercent: 100

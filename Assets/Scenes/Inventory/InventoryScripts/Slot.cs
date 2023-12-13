@@ -45,12 +45,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void SetupSlot(Item item, int itemLevel, string itemQuality) {
         if(item == null) {
             itemInSlot.SetActive(false);
+            GetComponent<Image>().raycastTarget = true;
             return;
         }
+        GetComponent<Image>().raycastTarget = false;
         slotImage.sprite = item.ItemImage;
         slotItem = item;
         Level = itemLevel;
         Quality = itemQuality;
+        itemInSlot.SetActive(true);
         if(item.isStackable)
             slotNum.text = item.ItemHeld.ToString();
         else if(slotNum != null)
