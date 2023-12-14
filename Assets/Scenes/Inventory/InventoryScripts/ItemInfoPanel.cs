@@ -18,10 +18,19 @@ public class ItemInfoPanel : MonoBehaviour
         }
     }
 
-    public void UpdateItemInfo(string Name, string Info, int Level, string Quality) {
-        itemName.text = Name;
+    public void UpdateItemInfo(Item item, Transform slot, int Level, string Quality) {
+        string Information = item.ItemInfo + "\n\n";
+        if(item.type != null) {
+            Equipment equipment = (Equipment)item;
+            EquipmentStats stats = slot.GetComponent<EquipmentStats>();
+            if(equipment.equipmentHp != 0) Information += "最大生命 : " + stats.equipmentHp + "\n";
+            if(equipment.equipmentSpeed != 0) Information += "移動速度 : " + stats.equipmentSpeed + "\n";
+            if(equipment.equipmentAttackDamage != 0) Information +="攻擊傷害 : " +  stats.equipmentAttackDamage + "\n";
+        }
+
+        itemName.text = item.ItemName;
         itemLevel.text = "道具等級 : " + Level.ToString();
         itemQuality.text = Quality;
-        itemInfo.text = Info;
+        itemInfo.text = Information;
     }
 }

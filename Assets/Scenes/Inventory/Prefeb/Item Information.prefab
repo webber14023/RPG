@@ -467,16 +467,16 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c7a3ca320e493914e8f8c1c72de5f3aa, type: 3}
     m_FontSize: 75
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 100
+    m_BestFit: 1
+    m_MinSize: 30
+    m_MaxSize: 75
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Item Info
+  m_Text: 
 --- !u!1 &4875009732150243563
 GameObject:
   m_ObjectHideFlags: 0

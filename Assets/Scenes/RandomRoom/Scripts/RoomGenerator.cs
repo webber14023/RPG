@@ -76,11 +76,6 @@ public class RoomGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            bakemash.Bake();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
     public void ChangePointPos()    //切換房間生成點

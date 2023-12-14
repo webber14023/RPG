@@ -9,4 +9,8 @@ public class Equipment : Item
     public int equipmentHp;
     public float equipmentSpeed;
     public int equipmentAttackDamage;
+
+    public float equipmentHpPerLv;
+    public float equipmentSpeedPerLv;
+    public float equipmentAttackDamagePerLv;
 }

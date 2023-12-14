@@ -7,14 +7,16 @@ public class EquipmentManager : MonoBehaviour
 {
     static EquipmentManager intance;
     
-    public Inventory Equipments;
-    public PlayerMove player;
+    public Transform Equipments;
+    public InventoryManager Inventory;
     public CharacterStats Stats;
 
     public int maxHealth;
     public int attackDamage;
     public float speed;
     public float knockBackPower;
+
+    EquipmentStats Equipmentstats;
 
     void Awake() {  
         if(intance != null)
@@ -32,15 +34,22 @@ public class EquipmentManager : MonoBehaviour
         intance.Stats.EquipHealth = 0;
         intance.Stats.EquipAttackDamage = 0;
         intance.Stats.EquipSpeed = 0;
-        for(int i = 0; i < intance.Equipments.itemList.Count; i++) {
-            if(intance.Equipments.itemList[i] != null){
-                Equipment equipment = (Equipment)intance.Equipments.itemList[i];
-                intance.Stats.EquipHealth += equipment.equipmentHp;
-                intance.Stats.EquipAttackDamage += equipment.equipmentAttackDamage;
-                intance.Stats.EquipSpeed += equipment.equipmentSpeed;
+        for(int i = 0; i < intance.Inventory.equipmentSlots.Count; i++) {
+            intance.Equipmentstats = intance.Inventory.equipmentSlots[i].GetComponent<EquipmentStats>();
+            if(intance.Equipmentstats != null){
+                Debug.Log(intance.Equipments.GetChild(i).name + " " + i + " " + intance.Equipments.childCount);
+                intance.Stats.EquipHealth += intance.Equipmentstats.equipmentHp;
+                intance.Stats.EquipAttackDamage += intance.Equipmentstats.equipmentAttackDamage;
+                intance.Stats.EquipSpeed += intance.Equipmentstats.equipmentSpeed;
             }
             
         }
+        float hpPersent = (float)intance.Stats.currentHealth / intance.Stats.maxHealth;
+        Debug.Log(hpPersent);
+        intance.Stats.UpdateStats();
+        intance.Stats.currentHealth = (int)(intance.Stats.maxHealth * hpPersent);
+        intance.Stats.UpdateUI();
+        intance.Equipmentstats = null;
     }
 
 }

@@ -18,7 +18,7 @@ public class BossRoom : MonoBehaviour
     {
         EnterRoom = false;
         genrator = transform.parent.GetComponent<RoomGenerator>();
-        genrator.Data.maxFloor = genrator.Data.floor;
+        //genrator.Data.maxFloor = genrator.Data.floor;
     }
     void Update()
     {
@@ -49,7 +49,9 @@ public class BossRoom : MonoBehaviour
 
             GameObject enemy = genrator.Data.dungeonBoss[Random.Range(0, genrator.Data.dungeonBoss.Length)];
             Enemys.Add(Instantiate(enemy, spawnPoint.position, Quaternion.identity, transform));
-            int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor ) * genrator.Data.floor;
+            int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor * genrator.Data.floor);
+            Debug.Log(level);
+            Debug.Log((int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor  * genrator.Data.floor));
             enemy.GetComponent<CharacterStats>().enemyLevel = level + level % 10 + Random.Range(-level % 10, 0);
             
             //CameraMove.instance.ChangeTarget(transform);

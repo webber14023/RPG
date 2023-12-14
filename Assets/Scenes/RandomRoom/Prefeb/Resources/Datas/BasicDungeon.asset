@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: BasicDungeon
   m_EditorClassIdentifier: 
   dungeonName: BasicDungeon
-  floor: 1
-  maxFloor: 5
+  floor: 5
+  maxFloor: 100
   historyFloor: 1
   enemyCount: 4
   minLevel: 1
-  maxLevel: 10
-  roomCount: 5
+  maxLevel: 100
+  roomCount: 3
   dungeonEnemy:
   - {fileID: 2756756266515007926, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
   dungeonBoss:

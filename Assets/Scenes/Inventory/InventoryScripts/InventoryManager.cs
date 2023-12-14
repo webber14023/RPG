@@ -40,6 +40,24 @@ public class InventoryManager : MonoBehaviour
 
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
+        for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {
+            Debug.Log("DeleteGrid childCount " + intance.equipmentSlotGrid.transform.childCount);
+            Destroy(intance.equipmentSlotGrid.transform.GetChild(i).gameObject);
+            Debug.Log("childname " + intance.equipmentSlotGrid.transform.GetChild(i).name);
+            intance.equipmentSlots.Clear();
+        }
+
+        for(int i = 0; i < intance.equipment.itemList.Count; i++) {
+            Debug.Log("Add Equipment Grid" + i + "  childCount " + intance.equipmentSlotGrid.transform.childCount);
+            intance.equipmentSlots.Add(Instantiate(intance.emptyEquipmentSlot));
+            intance.equipmentSlots[i].transform.SetParent(intance.equipmentSlotGrid.transform);
+            intance.equipmentSlots[i].transform.localScale = new Vector3(1,1,1);
+            intance.equipmentSlots[i].GetComponent<Slot>().slotID = i;
+            intance.equipmentSlots[i].gameObject.name = intance.equipTypes[i];
+            intance.equipmentSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = intance.equipmentBg[i];
+            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
+        }
+        
         for(int i = 0; i < intance.slotGrid.transform.childCount; i++) {
             Destroy(intance.slotGrid.transform.GetChild(i).gameObject);
             intance.myBagSlots.Clear();
@@ -52,20 +70,7 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
         }
-        for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {
-            Destroy(intance.equipmentSlotGrid.transform.GetChild(i).gameObject);
-            intance.equipmentSlots.Clear();
-        }
 
-        for(int i = 0; i < intance.equipment.itemList.Count; i++) {
-            intance.equipmentSlots.Add(Instantiate(intance.emptyEquipmentSlot));
-            intance.equipmentSlots[i].transform.SetParent(intance.equipmentSlotGrid.transform);
-            intance.equipmentSlots[i].transform.localScale = new Vector3(1,1,1);
-            intance.equipmentSlots[i].GetComponent<Slot>().slotID = i;
-            intance.equipmentSlots[i].gameObject.name = intance.equipTypes[i];
-            intance.equipmentSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = intance.equipmentBg[i];
-            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
-            
-        }
+        EquipmentManager.UpdateEquipmentStats();
     }
 }

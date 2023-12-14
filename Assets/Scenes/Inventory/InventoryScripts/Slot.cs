@@ -31,7 +31,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (slotItem != null && ItemPanel == null) {
             ItemPanel = Instantiate(ItemDisciptionPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.transform);
             ItemInfoPanel Info = ItemPanel.GetComponent<ItemInfoPanel>();
-            Info.UpdateItemInfo(slotItem.ItemName, slotItem.ItemInfo, Level, Quality);
+            Info.UpdateItemInfo(slotItem, transform, Level, Quality);
             }
         }
     }
@@ -47,6 +47,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             itemInSlot.SetActive(false);
             GetComponent<Image>().raycastTarget = true;
             return;
+        }
+        if(item.type != null) {
+            EquipmentStats stats = gameObject.AddComponent(typeof(EquipmentStats)) as EquipmentStats;
+            stats.SetEquipmentStats((Equipment)item, itemLevel);
         }
         GetComponent<Image>().raycastTarget = false;
         slotImage.sprite = item.ItemImage;

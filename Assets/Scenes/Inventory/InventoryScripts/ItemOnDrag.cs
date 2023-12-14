@@ -105,7 +105,6 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                     orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
                     InventoryManager.RefreshItem();
                 }
-                EquipmentManager.UpdateEquipmentStats();
 
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 return;
