@@ -119,14 +119,22 @@ public class CharacterStats : MonoBehaviour
         /*maxHealth = (int)((float)((baseMaxHealth + EquipHealth + c_Data.HpPerLv * level) * healthMultiply));
         speed = (baseSpeed + EquipSpeed + c_Data.SpeedPerLv * level) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage + EquipAttackDamage + c_Data.DamagePerLv * level) * attackMultiply));*/
-
-        maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, level) + EquipHealth) * healthMultiply));
-        speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
-        attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
-        maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+        if(enemyLevel == 0) {
+            maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, level) + EquipHealth) * healthMultiply));
+            speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
+            attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
+            maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+        }
+        else {
+            maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, enemyLevel) + EquipHealth) * healthMultiply));
+            speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, enemyLevel) + EquipSpeed) * moveSpeedMultiply;
+            attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, enemyLevel) + EquipAttackDamage) * attackMultiply));
+            maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, enemyLevel));
+        }
     }
 
     public void enemySetLevel(int lv) {
+        enemyLevel = lv;
         maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, lv) + EquipHealth) * healthMultiply));
         speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, lv) + EquipSpeed) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, lv) + EquipAttackDamage) * attackMultiply));

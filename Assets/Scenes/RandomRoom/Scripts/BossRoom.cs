@@ -9,7 +9,7 @@ public class BossRoom : MonoBehaviour
     [SerializeField] GameObject ExitPortal;
     public Transform spawnPoint;
     public List<GameObject> Enemys = new List<GameObject>();
-    RoomGenerator genrator;
+    public RoomGenerator genrator;
     
     bool EnterRoom;
 
@@ -52,7 +52,7 @@ public class BossRoom : MonoBehaviour
             int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor * genrator.Data.floor);
             Debug.Log(level);
             Debug.Log((int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor  * genrator.Data.floor));
-            enemy.GetComponent<CharacterStats>().enemyLevel = level + level % 10 + Random.Range(-level % 10, 0);
+            Enemys[0].GetComponent<CharacterStats>().enemyLevel = level + Random.Range(0, 2);
             
             //CameraMove.instance.ChangeTarget(transform);
         }

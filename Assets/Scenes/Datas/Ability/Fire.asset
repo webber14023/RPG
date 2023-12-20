@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c93ff9e8f2f7b345bcc667c616cceba, type: 3}
+  m_Name: Fire
+  m_EditorClassIdentifier: 
+  abilityID: 41
+  abilityName: Fire
+  abilityImage: {fileID: -1181100440, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
+  AbilityLevel: 1
+  abilityDes: 
+  isUnlocked: 0
+  preskills: []
+  cooldownTime: 0.1
+  activeTime: 0
+  canSkip: 0
+  attackDistance: 0
+  attackRange: 0
+  AttackEffectPrefab: {fileID: 1321424609052944426, guid: 295c9e3703dd7fc4288020c5c558e022, type: 3}
+  damagePercentage: 0.9

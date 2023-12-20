@@ -33,7 +33,6 @@ public class BasicAttack : Ability
         Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage);
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = 0.2f;
-        Debug.Log(angle);
     }
 
     public override void BeginCooldown(GameObject parent) {

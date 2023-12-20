@@ -5,7 +5,6 @@ using UnityEngine;
 public class MissileAttackClass : MonoBehaviour
 {
     public float speed;
-    public int damage;
     public float knockBackPower;
     public float destroyTime;
     public float delayTime;
@@ -104,7 +103,7 @@ public class MissileAttackClass : MonoBehaviour
                 for(int i=0; i<Buffs.Length; i++) {
                 BuffHolder.addBuff(Buffs[i]);
                 }
-                int currentDamage = (int)((damage+stats.abilityDamage)*Random.Range(0.9f,1.1f));
+                int currentDamage = (int)(stats.abilityDamage*Random.Range(0.9f,1.1f));
                 Vector2 attackDerection = other.transform.GetChild(0).position - transform.position;
                 characterStats.TakeDamage(currentDamage, transform.parent.GetComponent<CharacterStats>(), attackDerection.normalized * knockBackPower);
 

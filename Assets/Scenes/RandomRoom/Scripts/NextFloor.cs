@@ -10,6 +10,8 @@ public class NextFloor : interactivityObject
     public override void Start() {
         base.Start();
         genrator = transform.parent.GetComponent<RoomGenerator>();
+        if(genrator == null)
+            genrator = transform.parent.GetComponent<BossRoom>().genrator;
     }
 
     public override void Interact() {

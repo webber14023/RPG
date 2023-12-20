@@ -928,7 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17dd0157bc9dbb4486facb74e78df8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 46b80a9f0d252d549909ec500ddd1ce0, type: 2}
+  ability: {fileID: 11400000, guid: 3da03cbeea3861941ab411f1ecc1d4b6, type: 2}
   cooldownTime: 0
   activeTime: 0
   key: 51

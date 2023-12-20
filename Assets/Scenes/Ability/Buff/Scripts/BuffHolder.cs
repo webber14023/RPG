@@ -17,17 +17,26 @@ public class BuffHolder : MonoBehaviour
     public void Update() {
         for(int i=0; i<buffs.Count; i++) {
             timer[i] -= Time.deltaTime;
-            SlotTime[i].text = timer[i].ToString("F1");
+            if(buffs[i].isDisplay)
+                SlotTime[i].text = timer[i].ToString("F1");
+            
             if(timer[i] <= 0) {
-                buffs[i].RemoveEffect(gameObject);
-                Destroy(buffsSlot[i]);
-                effectAnim[i].SetBool("Destory", true);
-                timer.RemoveAt(i);
-                buffs.RemoveAt(i);
-                SlotTime.RemoveAt(i);
-                buffsSlot.RemoveAt(i);
-                effectAnim.RemoveAt(i); 
-                i--;
+                if(buffs[i].isDisplay) {
+                    buffs[i].RemoveEffect(gameObject);
+                    Destroy(buffsSlot[i]);
+                    effectAnim[i].SetBool("Destory", true);
+                    timer.RemoveAt(i);
+                    buffs.RemoveAt(i);
+                    SlotTime.RemoveAt(i);
+                    buffsSlot.RemoveAt(i);
+                    effectAnim.RemoveAt(i); 
+                    i--;
+                }
+                else {
+                    timer.RemoveAt(i);
+                    buffs.RemoveAt(i);
+                    i--;
+                }
             }
         }
     }
@@ -38,14 +47,21 @@ public class BuffHolder : MonoBehaviour
             timer[buffs.IndexOf(buff)] = buff.activeTime;
         }
         else {
-            buffs.Add(buff);
-            timer.Add(buff.activeTime);
-            buff.Effect(gameObject);
-            buffsSlot.Add(Instantiate(BuffSlotPrefeb, playerBuffsGrid.transform));
-            buffsSlot[buffsSlot.Count-1].transform.GetChild(0).GetComponent<Image>().sprite = buff.BuffImage;
-            SlotTime.Add(buffsSlot[buffsSlot.Count-1].transform.GetChild(1).GetComponent<Text>());
-
-            effectAnim.Add(Instantiate(buff.effectPrefebs, transform.position, Quaternion.identity, transform).GetComponent<Animator>());
+            if(buff.isDisplay) {
+                buffs.Add(buff);
+                timer.Add(buff.activeTime);
+                buff.Effect(gameObject);
+                buffsSlot.Add(Instantiate(BuffSlotPrefeb, playerBuffsGrid.transform));
+                buffsSlot[buffsSlot.Count-1].transform.GetChild(0).GetComponent<Image>().sprite = buff.BuffImage;
+                SlotTime.Add(buffsSlot[buffsSlot.Count-1].transform.GetChild(1).GetComponent<Text>());
+                if(buff.effectPrefebs != null)
+                    effectAnim.Add(Instantiate(buff.effectPrefebs, transform.position, Quaternion.identity, transform).GetComponent<Animator>());
+            }
+            else {
+                buffs.Add(buff);
+                timer.Add(buff.activeTime);
+            }
         }
+
     }
 }

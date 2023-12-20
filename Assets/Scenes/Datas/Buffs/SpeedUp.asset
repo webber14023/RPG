@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3380fef10b6f4ac4da6611c4d89cabba, type: 3}
-  m_Name: Speedup
+  m_Name: SpeedUp
   m_EditorClassIdentifier: 
   BuffID: 1
   BuffName: "\u52A0\u901F"
@@ -18,6 +18,7 @@ MonoBehaviour:
   abilityDes: 
   activeTime: 4
   effectPrefebs: {fileID: 9213636451901080627, guid: 058d83086a3895d43a24ee20c6ff6298, type: 3}
+  isDisplay: 1
   AttackMultiply: 0
   HealthMultiply: 0
   MoveSpeedMultiply: 0.5

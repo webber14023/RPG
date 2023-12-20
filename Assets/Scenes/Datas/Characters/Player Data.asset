@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: 
   maxHealth: 2500
-  currentHealth: 109352
+  currentHealth: 5184
   attackDamage: 100
   speed: 5
   knockBackPower: 1
   EquipHealth: 0
-  EquipAttackDamage: 0
+  EquipAttackDamage: 70
   EquipSpeed: 0
   AttackCooldown: 0
-  level: 7
+  level: 4
   maxExp: 250
-  currentExp: 415
+  currentExp: 187
   HpPerLv: 1.2
   DamagePerLv: 1.2
   SpeedPerLv: 1

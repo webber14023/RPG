@@ -32842,6 +32842,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 8326037036148962560, guid: 83f6e8ce3664b2b4a9fd8568b6c2928f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8326037036148962567, guid: 83f6e8ce3664b2b4a9fd8568b6c2928f, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -32915,7 +32919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3652043948892714353, guid: 3c52756ad3b240b40b63cc8563fdf146, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3652043948892714358, guid: 3c52756ad3b240b40b63cc8563fdf146, type: 3}
       propertyPath: m_RootOrder

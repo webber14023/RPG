@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Arcane archer
   m_EditorClassIdentifier: 
   CharacterName: Arcane archer
-  maxHealth: 2000
-  currentHealth: 2000
+  maxHealth: 4500
+  currentHealth: 4500
   attackDamage: 250
   speed: 2
   knockBackPower: 1
