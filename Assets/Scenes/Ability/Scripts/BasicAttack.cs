@@ -17,7 +17,6 @@ public class BasicAttack : Ability
         SpriteRenderer sprite = parent.GetComponent<SpriteRenderer>();
         
         animator.SetTrigger("Attack" + move.Combo);
-        Debug.Log(move.Combo);
         move.comboTimer = 1.5f;
         move.Combo++;
         if(move.Combo > 2)

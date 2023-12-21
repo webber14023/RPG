@@ -41,14 +41,11 @@ public class InventoryManager : MonoBehaviour
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
         for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {
-            Debug.Log("DeleteGrid childCount " + intance.equipmentSlotGrid.transform.childCount);
             Destroy(intance.equipmentSlotGrid.transform.GetChild(i).gameObject);
-            Debug.Log("childname " + intance.equipmentSlotGrid.transform.GetChild(i).name);
             intance.equipmentSlots.Clear();
         }
 
         for(int i = 0; i < intance.equipment.itemList.Count; i++) {
-            Debug.Log("Add Equipment Grid" + i + "  childCount " + intance.equipmentSlotGrid.transform.childCount);
             intance.equipmentSlots.Add(Instantiate(intance.emptyEquipmentSlot));
             intance.equipmentSlots[i].transform.SetParent(intance.equipmentSlotGrid.transform);
             intance.equipmentSlots[i].transform.localScale = new Vector3(1,1,1);

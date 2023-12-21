@@ -159,7 +159,7 @@ public class Enemy : MonoBehaviour
         for(int i=0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
                 for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
-                    Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel);
+                    Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel);
 
                 }
             }

@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d372bf71300b24db1d8a6af6d0519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 0.65
+  delayTime: 0.25
   attackDelay: 1
   destroyTime: 0
   Hitbox: {fileID: 1321424608636880595}

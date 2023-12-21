@@ -11,6 +11,9 @@ public class interactivityObject : MonoBehaviour
     GameObject Hintkey;
 
     public virtual void Start() {
+        if(key == KeyCode.None)
+            key = KeyCode.F;
+
         Hintkey = transform.GetChild(0).gameObject;
         Hintkey.transform.GetChild(1).GetComponent<Text>().text = key.ToString();
         Hintkey.transform.GetChild(2).GetComponent<Text>().text = hintText;

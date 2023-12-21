@@ -70,6 +70,7 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
             //&& eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")
         if(eventData.pointerCurrentRaycast.gameObject != null) {
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
             if(eventData.pointerCurrentRaycast.gameObject.name != "ItemImage")
                 FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
             else
@@ -107,6 +108,16 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 }
 
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
+                return;
+            }
+            else if(eventData.pointerCurrentRaycast.gameObject.name == "DropArea") {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity).GetComponent<ItemOnWorld>();
+                dropitemData.setItemData(orgLocation.itemList[currentItemID], orgLocation.itemListData[currentItemID].itemLevel);
+                orgLocation.itemList[currentItemID] = null;
+                orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
+                GetComponent<CanvasGroup>().blocksRaycasts = true;
+                Destroy(gameObject);
                 return;
             }
         }

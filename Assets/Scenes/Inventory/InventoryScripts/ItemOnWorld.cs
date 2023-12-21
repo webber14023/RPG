@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemOnWorld : MonoBehaviour
+public class ItemOnWorld : interactivityObject
 {
     public Inventory playerInventory;
     [SerializeField]AudioClip dropSound;
@@ -14,6 +14,23 @@ public class ItemOnWorld : MonoBehaviour
     SpriteRenderer sp;
     AudioSource Audio;
 
+    public override void Start() {
+        base.Start();
+
+        sp = GetComponent<SpriteRenderer>();
+        Audio = GetComponent<AudioSource>();
+        Audio.clip = dropSound;
+        Audio.Play();
+        sp.sprite = ThisItem.ItemImage;
+    }
+
+    public override void Interact() {
+        Audio.clip = pickSound;
+        Audio.Play();
+        AddNewItem();
+
+    }
+    /*
     private void Start() {
         sp = GetComponent<SpriteRenderer>();
         Audio = GetComponent<AudioSource>();
@@ -28,7 +45,8 @@ public class ItemOnWorld : MonoBehaviour
             Audio.Play();
             AddNewItem();
         }
-    }
+    }*/
+
     public void AddNewItem() {
         bagfull = true;
         for(int i=0; i < playerInventory.itemList.Count; i++){

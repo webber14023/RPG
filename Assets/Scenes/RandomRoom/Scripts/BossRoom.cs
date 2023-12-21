@@ -30,7 +30,7 @@ public class BossRoom : MonoBehaviour
                 }
             }
             if(Enemys.Count == 0) {
-                if(genrator.Data.maxFloor == genrator.Data.floor)
+                if(genrator.Data.maxFloor != genrator.Data.floor)
                     Portal.SetActive(true);
                 
                 ExitPortal.SetActive(true);
