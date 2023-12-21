@@ -19,8 +19,8 @@ MonoBehaviour:
   abilityDes: 
   isUnlocked: 0
   preskills: []
-  cooldownTime: 0.1
-  activeTime: 0
+  cooldownTime: 5.5
+  activeTime: 0.12
   canSkip: 0
   attackDistance: 0
   attackRange: 0

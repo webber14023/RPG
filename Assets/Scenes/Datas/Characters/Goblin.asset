@@ -36,3 +36,9 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 40d1e2d3df8840e4c9db3bbb30f246b4, type: 2}
     Count: 1
     dropPercent: 8
+  - item: {fileID: 11400000, guid: bd83f243664f7e74b8bb473bd14c5ce3, type: 2}
+    Count: 1
+    dropPercent: 50
+  - item: {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
+    Count: 1
+    dropPercent: 55
