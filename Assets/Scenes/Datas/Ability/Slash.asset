@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slash
   m_EditorClassIdentifier: 
   abilityID: 0
-  abilityName: Slash
+  abilityName: "\u63EE\u780D"
   abilityImage: {fileID: -511868982, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 0
   abilityDes: Slash
@@ -22,6 +22,7 @@ MonoBehaviour:
   cooldownTime: 0.2
   activeTime: 0.18
   canSkip: 0
+  attackDistance: 0
   attackRange: 1
   AttackEffectPrefab: {fileID: 8057289851498912510, guid: 83bafe945f6dc6e48b3f55871c87a687, type: 3}
   damagePercentage: 1

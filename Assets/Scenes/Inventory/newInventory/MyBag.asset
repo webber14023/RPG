@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemList:
   - {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
-  - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
   - {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
   - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
-  - {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
+  - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
   - {fileID: 11400000, guid: bd83f243664f7e74b8bb473bd14c5ce3, type: 2}
-  - {fileID: 11400000, guid: bd83f243664f7e74b8bb473bd14c5ce3, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -32,20 +38,32 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   itemListData:
+  - itemLevel: 1
+    itemQuality: "\u512A\u826F"
   - itemLevel: 2
     itemQuality: "\u512A\u826F"
   - itemLevel: 0
     itemQuality: "\u512A\u826F"
-  - itemLevel: 1
+  - itemLevel: 0
     itemQuality: "\u512A\u826F"
   - itemLevel: 2
     itemQuality: "\u512A\u826F"
-  - itemLevel: 1
-    itemQuality: "\u512A\u826F"
-  - itemLevel: 2
-    itemQuality: "\u512A\u826F"
-  - itemLevel: 2
-    itemQuality: "\u512A\u826F"
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
+  - itemLevel: 0
+    itemQuality: 
   - itemLevel: 0
     itemQuality: 
   - itemLevel: 0

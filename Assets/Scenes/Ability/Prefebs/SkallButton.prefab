@@ -165,10 +165,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4710582222030716935}
+  - component: {fileID: 4710582222030716928}
   - component: {fileID: 4710582222030716931}
   - component: {fileID: 4710582222030716930}
   - component: {fileID: 4710582222030716929}
-  - component: {fileID: 4710582222030716928}
   m_Layer: 5
   m_Name: SkallButton
   m_TagString: Untagged
@@ -198,6 +198,20 @@ RectTransform:
   m_AnchoredPosition: {x: -340.4, y: 44.70001}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4710582222030716928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710582222030716934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d305d440bede74483a80ff00058f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityData: {fileID: 11400000, guid: 21d70eb981483904f974e4da83694aef, type: 2}
+  LevelText: {fileID: 3152611414484638546}
 --- !u!222 &4710582222030716931
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -280,20 +294,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4710582222030716928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4710582222030716934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d305d440bede74483a80ff00058f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityData: {fileID: 11400000, guid: 21d70eb981483904f974e4da83694aef, type: 2}
-  LevelText: {fileID: 3152611414484638546}
 --- !u!1 &8407638581972527268
 GameObject:
   m_ObjectHideFlags: 0

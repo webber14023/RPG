@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,12 @@ public class AbilityTreeManager : MonoBehaviour
 {
     public static AbilityTreeManager instance;
     public Ability activeAbility;
-    public int AbilityPoint;
-
+    public GameObject activeButton;
+    public Transform EquipAbilityPanel;
+    public AbilityPanel abilityPanel;
+    public CharacterStats C_stats;
     public AbilityTreeButton[] AbilityButtons;
+
     [Header("UI")]
     public Text AbilityNameText; 
     public Text AbilityLvText, AbilityDesText, AbilityPointText;
@@ -25,6 +29,7 @@ public class AbilityTreeManager : MonoBehaviour
     }
 
     private void Start() {
+        abilityPanel = EquipAbilityPanel.GetComponent<AbilityPanel>();
         UpdatePointUI();
         DisplayAbilityLevel();
     }
@@ -34,7 +39,7 @@ public class AbilityTreeManager : MonoBehaviour
             return;
         }
 
-        if(AbilityPoint > 0 && activeAbility.preskills.Length == 0) {
+        if(C_stats.abilityPoint > 0 && activeAbility.preskills.Length == 0) {
             if(activeAbility.preskills.Length == 0)
                 UpdateAbility();
             else {
@@ -45,12 +50,22 @@ public class AbilityTreeManager : MonoBehaviour
                 
         }
     }
+
+    public void EquipButton() {
+        if(activeAbility == null) {
+            return;
+        }
+        EquipAbilityPanel.parent.gameObject.SetActive(true);
+        abilityPanel.selectAbility = activeAbility;
+        abilityPanel.SetAbilitySlots();
+    }
+
     public void UpdateAbility() {
         activeAbility.AbilityLevel++;
-        AbilityPoint--;
+        C_stats.abilityPoint--;
         activeAbility.isUnlocked = true;
-        AbilityButtons[activeAbility.abilityID].gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
-        AbilityButtons[activeAbility.abilityID].LevelText.text = activeAbility.AbilityLevel.ToString();
+        activeButton.gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
+        activeButton.GetComponent<AbilityTreeButton>().LevelText.text = activeAbility.AbilityLevel.ToString();
         DisplayAbilityInfo();
         UpdatePointUI();
     }
@@ -61,7 +76,7 @@ public class AbilityTreeManager : MonoBehaviour
     }
 
     public void UpdatePointUI() {
-        AbilityPointText.text = "Skill Point : " + AbilityPoint;
+        AbilityPointText.text = "Skill Point : " + C_stats.abilityPoint.ToString();
     }
 
     public void DisplayAbilityLevel() {

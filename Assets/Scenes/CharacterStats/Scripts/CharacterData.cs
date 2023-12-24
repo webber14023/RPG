@@ -11,6 +11,7 @@ public class CharacterData : ScriptableObject
     public int attackDamage;
     public float speed;
     public float knockBackPower;
+    public int abilityPoint;
 
     public int EquipHealth;
     public int EquipAttackDamage;
@@ -26,6 +27,7 @@ public class CharacterData : ScriptableObject
     public float DamagePerLv;
     public float SpeedPerLv;
     public float ExpPerLv;
+    public int abilityPointPerLv;
 
     /*public float attackMultiply;
     public float healthMultiply;

@@ -35,8 +35,10 @@ public class DashAttack : Ability
     {
         Vector2 dashPosition = (Vector2)parent.transform.GetChild(0).position - orgPosition;
         CharacterStats characterStats = parent.GetComponent<CharacterStats>();
+        Animator animator = parent.GetComponent<Animator>();
 
         playerCollider.enabled = true;
+        animator.SetTrigger("Attack1");
         GameObject attackEffect = Instantiate(AttackPrefeb, orgPosition, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(dashPosition.y, dashPosition.x) * Mathf.Rad2Deg)), parent.transform);
         attackEffect.transform.localScale += new Vector3(Vector2.Distance(Vector2.zero, dashPosition), 0, 0);
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();

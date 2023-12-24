@@ -9,8 +9,13 @@ public class AbilityTreeButton : MonoBehaviour, IPointerClickHandler
     public Ability AbilityData;
     public Text LevelText;
     
+    private void Start() {
+        transform.GetChild(0).GetComponent<Image>().sprite = AbilityData.abilityImage;
+    }
+
     public void OnPointerClick(PointerEventData eventData){
         AbilityTreeManager.instance.activeAbility = AbilityData;
+        AbilityTreeManager.instance.activeButton = gameObject;
         AbilityTreeManager.instance.DisplayAbilityInfo();
     }
 }

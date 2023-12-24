@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Speedupup
   m_EditorClassIdentifier: 
   abilityID: 3
-  abilityName: Speedupup
+  abilityName: "\u8FC5\u5F71\u4E4B\u6B65"
   abilityImage: {fileID: 21300000, guid: 06fb91dc44548ff4e908ffbbba5df7b4, type: 3}
   AbilityLevel: 1
   abilityDes: Add speed
@@ -21,4 +21,6 @@ MonoBehaviour:
   preskills: []
   cooldownTime: 0
   activeTime: 0.2
+  canSkip: 0
+  attackDistance: 0
   buff: {fileID: 11400000, guid: 2aebefae23603ff41bce9f579b405ad8, type: 2}

@@ -26,13 +26,11 @@ public class EquipmentManager : MonoBehaviour
 
     void Start() {
         Stats = GetComponent<CharacterStats>();
-        UpdateEquipmentStats();
     }
 
     public static void UpdateEquipmentStats() {
-        intance.Stats.EquipHealth = 0;
-        intance.Stats.EquipAttackDamage = 0;
-        intance.Stats.EquipSpeed = 0;
+        Debug.Log(intance.Stats.EquipHealth);
+        intance.Stats.ResetEquipmentsStats();
         for(int i = 0; i < intance.Inventory.equipmentSlots.Count; i++) {
             intance.Equipmentstats = intance.Inventory.equipmentSlots[i].GetComponent<EquipmentStats>();
             if(intance.Equipmentstats != null){

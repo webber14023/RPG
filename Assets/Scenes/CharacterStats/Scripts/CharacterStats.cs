@@ -7,7 +7,7 @@ using System;
 public class CharacterStats : MonoBehaviour
 {
     public CharacterData c_Data;
-    
+
     private Rigidbody2D rb;
     private SpriteRenderer sp;
     private Animator animator;
@@ -66,6 +66,10 @@ public class CharacterStats : MonoBehaviour
         get { if (c_Data != null) return c_Data.level; else return 0; }
         set { c_Data.level = value; }
     }
+    public int abilityPoint {
+        get { if (c_Data != null) return c_Data.abilityPoint; else return 0; }
+        set { c_Data.abilityPoint = value; }
+    }
 
 
     public int maxHealth;
@@ -102,6 +106,7 @@ public class CharacterStats : MonoBehaviour
         healthBar = hpBar.GetComponent<HealthBar>();
         if(enemyLevel == 0) {
             UpdateStats();
+            EquipmentManager.UpdateEquipmentStats();
             currentHealth = baseCurrentHealth;
         }
         else
@@ -173,6 +178,12 @@ public class CharacterStats : MonoBehaviour
         baseCurrentHealth = maxHealth;
     }
 
+    public void ResetEquipmentsStats() {
+        EquipHealth = 0;
+        EquipAttackDamage = 0;
+        EquipSpeed = 0f;
+    }
+
     public void UpdateUI() {
         healthBar.SetHealthBar((float)currentHealth/maxHealth);
         if(expBar != null)
@@ -183,8 +194,8 @@ public class CharacterStats : MonoBehaviour
     }
 
     public void Upgrade() {
+        abilityPoint += c_Data.abilityPointPerLv;
         UpdateStats();
-        //currentHealth = maxHealth;
         UpdateUI();
     }
 

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   abilityID: 41
-  abilityName: Fire
+  abilityName: "\u70C8\u7130\u7206\u7834"
   abilityImage: {fileID: -1181100440, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 1
-  abilityDes: 
+  abilityDes: "\u5F15\u7206\u6240\u6307\u5340\u57DF\uFF0C\u6BCF0.15\u79D2\u9020\u6210\u4E00\u6B21\u50B7\u5BB3\u3002"
   isUnlocked: 0
   preskills: []
   cooldownTime: 5.5

@@ -19,12 +19,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public GameObject itemInSlot;
 
-
-    public void ItemOnClick() {
-        InventoryManager.UpdateItemInfo(slotInfo);
-    }
-
-
     public void OnPointerEnter(PointerEventData data)
     {
         if(!Input.GetKey(KeyCode.Mouse0)) {

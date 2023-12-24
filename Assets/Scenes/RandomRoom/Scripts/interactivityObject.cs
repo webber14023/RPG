@@ -10,6 +10,8 @@ public class interactivityObject : MonoBehaviour
     public string hintText;
     GameObject Hintkey;
 
+    bool canInteract;
+
     public virtual void Start() {
         if(key == KeyCode.None)
             key = KeyCode.F;
@@ -19,21 +21,24 @@ public class interactivityObject : MonoBehaviour
         Hintkey.transform.GetChild(2).GetComponent<Text>().text = hintText;
         Hintkey.SetActive(false);
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        Hintkey.SetActive(true);
+    
+    private void Update() {
+        if(canInteract && Input.GetKeyDown(key))
+            Interact();
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")) {
-            if (Input.GetKeyDown(key)) {
-                Interact();
-            }
+            canInteract = true;
+            Hintkey.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        Hintkey.SetActive(false);
+        if(other.CompareTag("Player")) {
+            canInteract = false;
+            Hintkey.SetActive(false);
+        }
     }
 
     public virtual void Interact() {}

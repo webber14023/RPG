@@ -30,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     }
     private void OnEnable() {
         RefreshItem();
-        intance.itemInformation.text = "";
     }
 
     public static void UpdateItemInfo(string itemDiscription) {
@@ -68,6 +67,5 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
         }
 
-        EquipmentManager.UpdateEquipmentStats();
     }
 }
