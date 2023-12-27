@@ -11,11 +11,6 @@ public class EquipmentManager : MonoBehaviour
     public InventoryManager Inventory;
     public CharacterStats Stats;
 
-    public int maxHealth;
-    public int attackDamage;
-    public float speed;
-    public float knockBackPower;
-
     EquipmentStats Equipmentstats;
 
     void Awake() {  
@@ -36,10 +31,14 @@ public class EquipmentManager : MonoBehaviour
             if(intance.Equipmentstats != null){
                 intance.Stats.EquipHealth += intance.Equipmentstats.equipmentHp;
                 intance.Stats.EquipAttackDamage += intance.Equipmentstats.equipmentAttackDamage;
+                intance.Stats.EquipAbilityPower += intance.Equipmentstats.equipmentAbilityPower;
                 intance.Stats.EquipSpeed += intance.Equipmentstats.equipmentSpeed;
+                intance.Stats.EquipAttackArmor += intance.Equipmentstats.equipmentAttackArmor;
+                intance.Stats.EquipMagicArmor += intance.Equipmentstats.equipmentMagicArmor;
+                intance.Stats.EquipCriticalChance += intance.Equipmentstats.equipmentCriticalChance;
             }
-            
         }
+
         float hpPersent = (float)intance.Stats.currentHealth / intance.Stats.maxHealth;
         intance.Stats.UpdateStats();
         intance.Stats.currentHealth = (int)(intance.Stats.maxHealth * hpPersent);

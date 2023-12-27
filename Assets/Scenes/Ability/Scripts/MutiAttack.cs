@@ -8,7 +8,6 @@ public class MutiAttack : Ability
     public float attackRange;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     public int attackCount;
-    public float damagePercentage;
     Vector2 mouseDerection;
     
     public override void Activate(GameObject parent) {
@@ -29,7 +28,8 @@ public class MutiAttack : Ability
         for(int i=0; i<attackCount; i++) {
             GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + Random.insideUnitCircle * attackRange, Quaternion.identity, parent.transform);
             AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-            Stats.abilityDamage = Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage) / attackCount;
+            Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
+            Stats.isAttackDamage = isAttackDamage;
             Stats.abilityknockBackPower = characterStats.knockBackPower;
             Stats.abilityDelayTime = (float)(i+1) / 10;
         }

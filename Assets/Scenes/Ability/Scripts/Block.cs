@@ -11,7 +11,7 @@ public class Block : Ability
         PlayerMove move = parent.GetComponent<PlayerMove>();
         SpriteRenderer sprite = parent.GetComponent<SpriteRenderer>();
         Vector2 mouseDerection = PlayerMove.GetMouseDerection();
-        characterStats.DamageReduce = 0.99f;
+        characterStats.AD_Reduce = 0.99f;
         animator.SetBool("Block", true);
         move.canControl = false;
         sprite.flipX = mouseDerection.x >= 0? false: true;
@@ -21,7 +21,7 @@ public class Block : Ability
         Animator animator = parent.GetComponent<Animator>();
         CharacterStats characterStats = parent.GetComponent<CharacterStats>();
         PlayerMove move = parent.GetComponent<PlayerMove>();
-        characterStats.DamageReduce = 0f;
+        characterStats.AD_Reduce = 0f;
         animator.SetBool("Block", false);
         move.canControl = true;
 

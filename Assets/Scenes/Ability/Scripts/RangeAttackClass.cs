@@ -66,7 +66,7 @@ public class RangeAttackClass : MonoBehaviour
             }
             if(canAttack) {
                 int currentDamage = (int)(stats.abilityDamage*Random.Range(0.9f,1.1f));
-                other.GetComponent<CharacterStats>().TakeDamage(currentDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
+                other.GetComponent<CharacterStats>().TakeDamage(currentDamage, stats.isAttackDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
                 otherBuffHolder.addBuff(attackDelayBuff);
             }
         }

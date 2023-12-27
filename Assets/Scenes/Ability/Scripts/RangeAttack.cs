@@ -7,7 +7,6 @@ public class RangeAttack : Ability
 {
     public float attackRange;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
-    public float damagePercentage;
     Vector2 mouseDerection;
 
     public override void Activate(GameObject parent) {
@@ -28,7 +27,8 @@ public class RangeAttack : Ability
 
         GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, parent.transform);
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-        Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage);
+        Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
+        Stats.isAttackDamage = isAttackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = 0.2f;
     }

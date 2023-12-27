@@ -21,6 +21,12 @@ MonoBehaviour:
   equipmentHp: 140
   equipmentSpeed: 0
   equipmentAttackDamage: 0
+  equipmentAbilityPower: 0
+  equipmentAttackArmor: 55
+  equipmentMagicArmor: 30
   equipmentHpPerLv: 1.16
   equipmentSpeedPerLv: 0
   equipmentAttackDamagePerLv: 0
+  equipmentAbilityPowerPerLv: 0
+  equipmentAttackArmorPerLv: 1.15
+  equipmentMagicArmorPerLv: 1.15

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityStats : MonoBehaviour
 {
+    public bool isAttackDamage;
     public int abilityDamage;
     public float abilityknockBackPower;
     public float abilityDelayTime;

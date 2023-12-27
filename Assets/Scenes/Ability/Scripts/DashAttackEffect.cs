@@ -39,7 +39,7 @@ public class DashAttackEffect : MonoBehaviour
             CharacterStats character = other.GetComponent<CharacterStats>();
             if(character.canDamage) {
                 int currentDamage = (int)(stats.abilityDamage*Random.Range(0.9f,1.1f));
-                character.TakeDamage(currentDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
+                character.TakeDamage(currentDamage, stats.isAttackDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
             }
         }
     }

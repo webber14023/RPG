@@ -7,7 +7,7 @@ public enum EnemyStates {GUARD, PATROL, CHASE, DEAD}
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyStates enemyStates;
+    [SerializeField]private EnemyStates enemyStates;
     private EnemyAbilityHolder[] AbilityHolders;
     private EnemyAbilityHolder AbilityHolder;
     public Transform target;
@@ -83,7 +83,8 @@ public class Enemy : MonoBehaviour
                 break;
             
         }
-        timer -= Time.deltaTime;
+        if(timer > 0f)
+            timer -= Time.deltaTime;
     }
 
     void ChaseTarget() {
@@ -156,11 +157,10 @@ public class Enemy : MonoBehaviour
     }
 
     void DropItem() {
-        for(int i=0; i < stats.c_Data.dropItems.Length; i++) {
+        for(int i = 0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
                 for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
                     Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel);
-
                 }
             }
         }
@@ -178,7 +178,7 @@ public class Enemy : MonoBehaviour
 
         float levelReduce = (levelGap >= -5 && levelGap <= 7)? levelGap > 0? (float)Mathf.Pow(1.15f, -levelGap) 
                                                              : 1 + (float)(Mathf.Pow(1.05f ,-levelGap) % 1 / 2) :levelGap > 0? 0.3f: 1.2f;
-        targetStats.AddExp((int)(stats.c_Data.maxExp * levelReduce));
+        targetStats.AddExp((int)(stats.maxExp * levelReduce));
         DropItem();
         Destroy(gameObject);
     }

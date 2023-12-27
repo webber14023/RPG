@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c61c61de7284c47a15b0aa01bf62a2, type: 3}
+  m_Name: MutiArrow
+  m_EditorClassIdentifier: 
+  abilityID: 0
+  abilityName: 
+  abilityImage: {fileID: 0}
+  AbilityLevel: 0
+  abilityDes: 
+  isUnlocked: 0
+  preskills: []
+  cooldownTime: 7
+  activeTime: 3
+  canSkip: 0
+  attackDistance: 12
+  isAttackDamage: 1
+  damagePercentage: 1.1
+  BaseDamagePercentage: 0
+  damagePerLevel: 0
+  attackRange: 0
+  DelayTime: 0.2
+  areaAngle: 0
+  attackCount: 3
+  AttackEffectPrefab: {fileID: 2659696928498274092, guid: 99c7187d882c2894a8b71f05c35f89b1, type: 3}
+  isSpecialAttack: 1

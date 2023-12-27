@@ -51,7 +51,8 @@ public class EnemyDashAttack : Ability
         attackEffect.transform.localScale += new Vector3(currentDistance, 0, 0);
         
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-        Stats.abilityDamage = (int)(characterStats.attackDamage);
+        Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
+        Stats.isAttackDamage = isAttackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         attackEffect.GetComponent<DashAttackEffect>().effectColor = effectColor;
     }

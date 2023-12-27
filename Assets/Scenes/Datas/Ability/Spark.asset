@@ -22,6 +22,9 @@ MonoBehaviour:
   cooldownTime: 5
   activeTime: 0.2
   canSkip: 0
+  attackDistance: 0
+  damagePercentage: 1.75
+  BaseDamagePercentage: 0.75
+  damagePerLevel: 0.15
   attackRange: 1
   AttackEffectPrefab: {fileID: 3562804448289436880, guid: e5333331031b2c14186dea445f0a3486, type: 3}
-  damagePercentage: 1.75

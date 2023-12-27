@@ -9,12 +9,20 @@ public class CharacterData : ScriptableObject
     public int maxHealth;
     public int currentHealth;
     public int attackDamage;
+    public int abilityPower;
+    public int attackArmor;
+    public int magicArmor;
     public float speed;
+    public float CriticalChance;
     public float knockBackPower;
     public int abilityPoint;
 
     public int EquipHealth;
     public int EquipAttackDamage;
+    public int EquipAbilityPower;
+    public int EquipAttackArmor;
+    public int EquipMagicArmor;
+    public float EquipCriticalChance;
     public float EquipSpeed;
 
     public float AttackCooldown;

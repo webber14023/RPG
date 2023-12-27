@@ -16,19 +16,27 @@ MonoBehaviour:
   maxHealth: 450
   currentHealth: 450
   attackDamage: 115
+  abilityPower: 0
+  attackArmor: 20
+  magicArmor: 20
   speed: 6
   knockBackPower: 1
+  abilityPoint: 0
   EquipHealth: 0
   EquipAttackDamage: 0
+  EquipAbilityPower: 0
+  EquipAttackArmor: 0
+  EquipMagicArmor: 0
   EquipSpeed: 0
   AttackCooldown: 1.2
   level: 0
   maxExp: 8
   currentExp: 0
-  HpPerLv: 1.2
-  DamagePerLv: 1.2
+  HpPerLv: 1.15
+  DamagePerLv: 1.15
   SpeedPerLv: 1
-  ExpPerLv: 1.1
+  ExpPerLv: 1.15
+  abilityPointPerLv: 0
   dropItems:
   - item: {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
     Count: 1
@@ -42,3 +50,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
     Count: 1
     dropPercent: 55
+  - item: {fileID: 11400000, guid: d928d7dc7696b6a4fa11d0d276c33b3c, type: 2}
+    Count: 1
+    dropPercent: 37

@@ -25,7 +25,11 @@ public class ItemInfoPanel : MonoBehaviour
             EquipmentStats stats = slot.GetComponent<EquipmentStats>();
             if(equipment.equipmentHp != 0) Information += "最大生命 : " + stats.equipmentHp + "\n";
             if(equipment.equipmentSpeed != 0) Information += "移動速度 : " + stats.equipmentSpeed + "\n";
-            if(equipment.equipmentAttackDamage != 0) Information +="攻擊傷害 : " +  stats.equipmentAttackDamage + "\n";
+            if(equipment.equipmentAttackDamage != 0) Information +="物理攻擊 : " +  stats.equipmentAttackDamage + "\n";
+            if(equipment.equipmentAbilityPower != 0) Information +="魔法攻擊 : " +  stats.equipmentAbilityPower + "\n";
+            if(equipment.equipmentAttackArmor != 0) Information +="物理防禦 : " +  stats.equipmentAttackArmor + "\n";
+            if(equipment.equipmentMagicArmor != 0) Information +="魔法防禦 : " +  stats.equipmentMagicArmor + "\n";
+            if(equipment.equipmentCriticalChance != 0) Information +="爆擊率 : " +  stats.equipmentCriticalChance * 100 + "%\n";
         }
 
         itemName.text = item.ItemName;

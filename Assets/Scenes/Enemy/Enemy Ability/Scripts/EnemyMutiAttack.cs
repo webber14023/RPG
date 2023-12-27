@@ -28,7 +28,8 @@ public class EnemyMutiAttack : Ability
         for(int i=0; i<attackCount; i++) {
             GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + Derection.normalized * attackRange , Quaternion.Euler(new Vector3(0, 0, angle)), parent.transform);
             AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-            Stats.abilityDamage = characterStats.attackDamage;
+            Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
+            Stats.isAttackDamage = isAttackDamage;
             Stats.abilityknockBackPower = characterStats.knockBackPower;
             Stats.abilityDelayTime = DelayTime * (i + 1);
             Stats.Derection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin (angle * Mathf.Deg2Rad));

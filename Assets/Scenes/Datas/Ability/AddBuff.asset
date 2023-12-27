@@ -16,9 +16,18 @@ MonoBehaviour:
   abilityName: 
   abilityImage: {fileID: 21300000, guid: 7004782f29a83f4498add10e8e12f6c5, type: 3}
   AbilityLevel: 0
+  AbilityMaxLevel: 0
   abilityDes: 
   isUnlocked: 0
   preskills: []
-  cooldownTime: 1
+  cooldownTime: 8
   activeTime: 0.2
+  canSkip: 0
+  attackDistance: 0
+  isAttackDamage: 0
+  damagePercentage: 0
+  BaseDamagePercentage: 0
+  BaseCooldownTime: -1
+  damagePerLevel: 0
+  cooldownTimePerLevel: 0
   buff: {fileID: 11400000, guid: c55d91d307aff6b48b010ca364748895, type: 2}

@@ -7,7 +7,6 @@ using UnityEngine;
 public class DashAttack : Ability
 {
     public float Dashdistance;
-    public float damagePercentage;
     public Color effectColor;
     public GameObject AttackPrefeb;
     public LayerMask layerMark;
@@ -42,7 +41,8 @@ public class DashAttack : Ability
         GameObject attackEffect = Instantiate(AttackPrefeb, orgPosition, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(dashPosition.y, dashPosition.x) * Mathf.Rad2Deg)), parent.transform);
         attackEffect.transform.localScale += new Vector3(Vector2.Distance(Vector2.zero, dashPosition), 0, 0);
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
-        Stats.abilityDamage = (int)(characterStats.attackDamage * damagePercentage);
+        Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
+        Stats.isAttackDamage = isAttackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDelayTime = 0.2f;
         attackEffect.GetComponent<DashAttackEffect>().effectColor = effectColor;
