@@ -15,19 +15,19 @@ MonoBehaviour:
   abilityID: 3
   abilityName: "\u8FC5\u5F71\u4E4B\u6B65"
   abilityImage: {fileID: 21300000, guid: 06fb91dc44548ff4e908ffbbba5df7b4, type: 3}
-  AbilityLevel: 1
-  AbilityMaxLevel: 0
+  AbilityLevel: 0
+  AbilityMaxLevel: 5
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown"
-  isUnlocked: 1
+  isUnlocked: 0
   preskills: []
-  cooldownTime: 0
+  cooldownTime: -1
   activeTime: 0.2
   canSkip: 0
   attackDistance: 0
   isAttackDamage: 0
-  damagePercentage: 0
-  BaseDamagePercentage: 0
-  BaseCooldownTime: 0
+  damagePercentage: 10
+  BaseDamagePercentage: 10
+  BaseCooldownTime: -1
   damagePerLevel: 0
   cooldownTimePerLevel: 0
   buff: {fileID: 11400000, guid: 2aebefae23603ff41bce9f579b405ad8, type: 2}

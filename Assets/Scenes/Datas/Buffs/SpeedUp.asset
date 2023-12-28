@@ -21,4 +21,4 @@ MonoBehaviour:
   isDisplay: 1
   AttackMultiply: 0
   HealthMultiply: 0
-  MoveSpeedMultiply: 0.5
+  MoveSpeedMultiply: 0.8

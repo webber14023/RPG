@@ -20,6 +20,8 @@ MonoBehaviour:
   attackArmor: 20
   magicArmor: 20
   speed: 6
+  criticalChance: 0.1
+  criticalMultiply: 2
   knockBackPower: 1
   abilityPoint: 0
   EquipHealth: 0
@@ -27,6 +29,8 @@ MonoBehaviour:
   EquipAbilityPower: 0
   EquipAttackArmor: 0
   EquipMagicArmor: 0
+  EquipCriticalChance: 0
+  EquipCriticalMultiply: 0
   EquipSpeed: 0
   AttackCooldown: 1.2
   level: 0
@@ -46,10 +50,10 @@ MonoBehaviour:
     dropPercent: 8
   - item: {fileID: 11400000, guid: bd83f243664f7e74b8bb473bd14c5ce3, type: 2}
     Count: 1
-    dropPercent: 50
+    dropPercent: 10
   - item: {fileID: 11400000, guid: 38cd9ff193d92f24c83a895de12949fd, type: 2}
     Count: 1
-    dropPercent: 55
+    dropPercent: 10
   - item: {fileID: 11400000, guid: d928d7dc7696b6a4fa11d0d276c33b3c, type: 2}
     Count: 1
-    dropPercent: 37
+    dropPercent: 10

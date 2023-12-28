@@ -16,7 +16,7 @@ public class DamageText : MonoBehaviour
         transform.position += new Vector3(0, speed * Time.deltaTime, 0);
     }
 
-    public void SetDamageText(int damage, bool isAttackDamage, bool isCritical) 
+    public void SetDamageText(int damage, bool isAttackDamage, bool isCritical)
     {
         if(isAttackDamage) {
             damageText.color = AD_DamageColor;
@@ -30,22 +30,17 @@ public class DamageText : MonoBehaviour
         else {
             damageText.text = KiloFormat(damage) + "!";
             transform.localScale *= 1.25f;
+            damageText.color += new Color(0.1f, 0.1f, 0.1f);
         }
     }
 
     public static string KiloFormat(int num)
     {
-        if (num >= 100000000)
-            return (num / 1000000).ToString("#,0M");
-
         if (num >= 10000000)
-            return (num / 1000000).ToString("0.#") + "M";
-
-        if (num >= 100000)
-            return (num / 1000).ToString("#,0K");
+            return (num / 1000000f).ToString("0.00") + "M";
 
         if (num >= 10000)
-            return (num / 1000).ToString("0.#") + "K";
+            return (num / 1000f).ToString("0.00") + "K";
 
         return num.ToString("#,0");
     } 

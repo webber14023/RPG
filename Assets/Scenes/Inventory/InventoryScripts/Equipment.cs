@@ -13,6 +13,7 @@ public class Equipment : Item
     public int equipmentAttackArmor;
     public int equipmentMagicArmor;
     public float equipmentCriticalChance;
+    public float equipmentCriticalMultiply;
 
     public float equipmentHpPerLv;
     public float equipmentSpeedPerLv;
@@ -21,4 +22,5 @@ public class Equipment : Item
     public float equipmentAttackArmorPerLv;
     public float equipmentMagicArmorPerLv;
     public float equipmentCriticalChancePerLv;
+    public float equipmentCriticalMultiplyPerLv;
 }

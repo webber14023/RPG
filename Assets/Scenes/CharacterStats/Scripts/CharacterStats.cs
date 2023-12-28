@@ -7,6 +7,7 @@ using System;
 public class CharacterStats : MonoBehaviour
 {
     public CharacterData c_Data;
+    public PlayerStatsPanel playerStatsPanel;
 
     private Rigidbody2D rb;
     private SpriteRenderer sp;
@@ -51,8 +52,12 @@ public class CharacterStats : MonoBehaviour
         set { c_Data.speed = value; }
     }
     public float baseCriticalChance {
-        get { if (c_Data != null) return c_Data.CriticalChance; else return 0; }
-        set { c_Data.CriticalChance = value; }
+        get { if (c_Data != null) return c_Data.criticalChance; else return 0; }
+        set { c_Data.criticalChance = value; }
+    }
+    public float baseCriticalMultiply {
+        get { if (c_Data != null) return c_Data.criticalMultiply; else return 0; }
+        set { c_Data.criticalMultiply = value; }
     }
     public float baseKnockBackPower {
         get { if (c_Data != null) return c_Data.knockBackPower; else return 0; }
@@ -85,6 +90,10 @@ public class CharacterStats : MonoBehaviour
     public float EquipCriticalChance {
         get { if (c_Data != null) return c_Data.EquipCriticalChance; else return 0; }
         set { c_Data.EquipCriticalChance = value; }
+    }
+    public float EquipCriticalMultiply {
+        get { if (c_Data != null) return c_Data.EquipCriticalMultiply; else return 0; }
+        set { c_Data.EquipCriticalMultiply = value; }
     }
     public int baseExp {
         get { if (c_Data != null) return c_Data.maxExp; else return 0; }
@@ -120,6 +129,7 @@ public class CharacterStats : MonoBehaviour
     public float AD_Reduce;
     public float AP_Reduce;
     public float criticalChance;
+    public float criticalMultiply;
     public bool canDamage;
     public bool canControl;
 
@@ -142,8 +152,8 @@ public class CharacterStats : MonoBehaviour
         healthBar = hpBar.GetComponent<HealthBar>();
         if(enemyLevel == 0) {
             UpdateStats();
-            EquipmentManager.UpdateEquipmentStats();
             currentHealth = baseCurrentHealth;
+            playerStatsPanel.UpdateStatsPanel();
         }
         else
             enemySetLevel(enemyLevel);
@@ -160,19 +170,22 @@ public class CharacterStats : MonoBehaviour
         /*maxHealth = (int)((float)((baseMaxHealth + EquipHealth + c_Data.HpPerLv * level) * healthMultiply));
         speed = (baseSpeed + EquipSpeed + c_Data.SpeedPerLv * level) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage + EquipAttackDamage + c_Data.DamagePerLv * level) * attackMultiply));*/
-        //if(enemyLevel == 0) {
-        maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, level) + EquipHealth) * healthMultiply));
-        speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
-        attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
-        abilityPower = (int)((float)((baseAbilityPower + EquipAbilityPower) * attackMultiply));
-        attackArmor = baseAttackArmor + EquipAttackArmor;
-        magicArmor = baseMagicArmor + EquipMagicArmor;
-        AD_Reduce = 200f / (200 + attackArmor);
-        AP_Reduce = 200f / (200 + magicArmor);
-        maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
-        criticalChance = baseCriticalChance + EquipCriticalChance;
-        
-        /*else {
+        if(enemyLevel == 0) {
+            maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, level) + EquipHealth) * healthMultiply));
+            speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, level) + EquipSpeed) * moveSpeedMultiply;
+            attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, level) + EquipAttackDamage) * attackMultiply));
+            abilityPower = (int)((float)((baseAbilityPower + EquipAbilityPower) * attackMultiply));
+            attackArmor = baseAttackArmor + EquipAttackArmor;
+            magicArmor = baseMagicArmor + EquipMagicArmor;
+            AD_Reduce = 200f / (200 + attackArmor);
+            AP_Reduce = 200f / (200 + magicArmor);
+            maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, level));
+            criticalChance = baseCriticalChance + EquipCriticalChance;
+            criticalMultiply = baseCriticalMultiply + EquipCriticalMultiply;
+            
+            playerStatsPanel.UpdateStatsPanel();
+        }
+        else {
             maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, enemyLevel) + EquipHealth) * healthMultiply));
             speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, enemyLevel) + EquipSpeed) * moveSpeedMultiply;
             attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, enemyLevel) + EquipAttackDamage) * attackMultiply));
@@ -181,7 +194,9 @@ public class CharacterStats : MonoBehaviour
             AD_Reduce = 200f / (200 + attackArmor);
             AP_Reduce = 200f / (200 + magicArmor);
             maxExp = (int)(baseExp * Mathf.Pow(c_Data.ExpPerLv, enemyLevel));
-        }*/
+            criticalChance = baseCriticalChance + EquipCriticalChance;
+            criticalMultiply = baseCriticalMultiply + EquipCriticalMultiply;
+        }
     }
 
     public void enemySetLevel(int lv) {
@@ -209,7 +224,7 @@ public class CharacterStats : MonoBehaviour
         bool isCritical = UnityEngine.Random.Range(0f,1f) <= attacker.criticalChance;
         int finalDamage = isAttackDamage? (int)(damage * AD_Reduce * levelReduce) : (int)(damage * AP_Reduce * levelReduce);
         if(isCritical) {
-            finalDamage *= 2;
+            finalDamage = (int)(finalDamage * attacker.criticalMultiply);
         }
         ShowDamageText(gameObject, finalDamage, isAttackDamage, isCritical);
         currentHealth -= finalDamage;

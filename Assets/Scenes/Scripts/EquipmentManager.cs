@@ -19,16 +19,15 @@ public class EquipmentManager : MonoBehaviour
         intance = this;
     }
 
-    void Start() {
+    void Start() {  
         Stats = GetComponent<CharacterStats>();
     }
 
     public static void UpdateEquipmentStats() {
-        Debug.Log(intance.Stats.EquipHealth);
         intance.Stats.ResetEquipmentsStats();
         for(int i = 0; i < intance.Inventory.equipmentSlots.Count; i++) {
             intance.Equipmentstats = intance.Inventory.equipmentSlots[i].GetComponent<EquipmentStats>();
-            if(intance.Equipmentstats != null){
+            if(intance.Equipmentstats != null){ 
                 intance.Stats.EquipHealth += intance.Equipmentstats.equipmentHp;
                 intance.Stats.EquipAttackDamage += intance.Equipmentstats.equipmentAttackDamage;
                 intance.Stats.EquipAbilityPower += intance.Equipmentstats.equipmentAbilityPower;
@@ -36,6 +35,7 @@ public class EquipmentManager : MonoBehaviour
                 intance.Stats.EquipAttackArmor += intance.Equipmentstats.equipmentAttackArmor;
                 intance.Stats.EquipMagicArmor += intance.Equipmentstats.equipmentMagicArmor;
                 intance.Stats.EquipCriticalChance += intance.Equipmentstats.equipmentCriticalChance;
+                intance.Stats.EquipCriticalMultiply += intance.Equipmentstats.equipmentCriticalMultiply;
             }
         }
 

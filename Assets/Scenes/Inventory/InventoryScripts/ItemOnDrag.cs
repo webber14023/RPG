@@ -117,6 +117,8 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 dropitemData.setItemData(orgLocation.itemList[currentItemID], orgLocation.itemListData[currentItemID].itemLevel);
                 orgLocation.itemList[currentItemID] = null;
                 orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
+                InventoryManager.RefreshItem();
+                EquipmentManager.UpdateEquipmentStats();
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Destroy(gameObject);
                 return;

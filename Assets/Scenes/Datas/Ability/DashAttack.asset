@@ -15,8 +15,9 @@ MonoBehaviour:
   abilityID: 8
   abilityName: "\u77AC\u9593\u523A\u64CA "
   abilityImage: {fileID: 21300000, guid: 7e251b9b03a89d04c8be70c2cff58143, type: 3}
-  AbilityLevel: 4
-  abilityDes: 
+  AbilityLevel: 5
+  AbilityMaxLevel: 5
+  abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u5411\u524D\u885D\u523A\u4E00\u6BB5\u8DDD\u96E2\uFF0C\u5C0D\u8DEF\u5F91\u4E0A\u7684\u6575\u4EBA\u9020\u6210*Damage*AD"
   isUnlocked: 1
   preskills: []
   cooldownTime: 1
@@ -24,9 +25,11 @@ MonoBehaviour:
   canSkip: 0
   attackDistance: 0
   isAttackDamage: 1
-  damagePercentage: 1.4
+  damagePercentage: 1.5
   BaseDamagePercentage: 1
+  BaseCooldownTime: 1.25
   damagePerLevel: 0.1
+  cooldownTimePerLevel: -0.05
   Dashdistance: 6
   effectColor: {r: 0.14509803, g: 0.5923473, b: 1, a: 0}
   AttackPrefeb: {fileID: 4381066553821232053, guid: 3238299c213127a45bfba2084a8571a4, type: 3}

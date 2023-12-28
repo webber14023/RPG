@@ -13,7 +13,8 @@ public class CharacterData : ScriptableObject
     public int attackArmor;
     public int magicArmor;
     public float speed;
-    public float CriticalChance;
+    public float criticalChance;
+    public float criticalMultiply;
     public float knockBackPower;
     public int abilityPoint;
 
@@ -23,6 +24,7 @@ public class CharacterData : ScriptableObject
     public int EquipAttackArmor;
     public int EquipMagicArmor;
     public float EquipCriticalChance;
+    public float EquipCriticalMultiply;
     public float EquipSpeed;
 
     public float AttackCooldown;

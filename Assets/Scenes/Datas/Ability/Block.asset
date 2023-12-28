@@ -16,9 +16,17 @@ MonoBehaviour:
   abilityName: Block
   abilityImage: {fileID: 21300000, guid: cd9f8247c7f4c6740b70015ba6ecf59e, type: 3}
   AbilityLevel: 1
+  AbilityMaxLevel: 1
   abilityDes: 
   isUnlocked: 1
   preskills: []
   cooldownTime: 0.5
   activeTime: 100
   canSkip: 1
+  attackDistance: 0
+  isAttackDamage: 0
+  damagePercentage: 0
+  BaseDamagePercentage: 0
+  BaseCooldownTime: 0
+  damagePerLevel: 0
+  cooldownTimePerLevel: 0

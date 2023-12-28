@@ -11,6 +11,7 @@ public class EquipmentStats : MonoBehaviour
     public int equipmentAttackArmor;
     public int equipmentMagicArmor;
     public float equipmentCriticalChance;
+    public float equipmentCriticalMultiply;
 
     public void SetEquipmentStats(Equipment equipment, int Level) {
         equipmentHp = (int)Mathf.Round(equipment.equipmentHp * Mathf.Pow(equipment.equipmentHpPerLv, Level));
@@ -20,6 +21,7 @@ public class EquipmentStats : MonoBehaviour
         equipmentAttackArmor = (int)Mathf.Round(equipment.equipmentAttackArmor * Mathf.Pow(equipment.equipmentAttackArmorPerLv, Level));
         equipmentMagicArmor = (int)Mathf.Round(equipment.equipmentMagicArmor * Mathf.Pow(equipment.equipmentMagicArmorPerLv, Level));
         equipmentCriticalChance = equipment.equipmentCriticalChance * Mathf.Pow(equipment.equipmentCriticalChancePerLv, Level);
+        equipmentCriticalMultiply = equipment.equipmentCriticalMultiply * Mathf.Pow(equipment.equipmentCriticalMultiplyPerLv, Level);
     }
     
 }

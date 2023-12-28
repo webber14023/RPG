@@ -30,6 +30,7 @@ public class ItemInfoPanel : MonoBehaviour
             if(equipment.equipmentAttackArmor != 0) Information +="物理防禦 : " +  stats.equipmentAttackArmor + "\n";
             if(equipment.equipmentMagicArmor != 0) Information +="魔法防禦 : " +  stats.equipmentMagicArmor + "\n";
             if(equipment.equipmentCriticalChance != 0) Information +="爆擊率 : " +  stats.equipmentCriticalChance * 100 + "%\n";
+            if(equipment.equipmentCriticalMultiply != 0) Information +="爆擊傷害 : " +  stats.equipmentCriticalMultiply * 100 + "%\n";
         }
 
         itemName.text = item.ItemName;
