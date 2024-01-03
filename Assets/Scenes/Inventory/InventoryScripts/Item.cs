@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public Sprite ItemImage;
     public bool isStackable;
     public int ItemHeld;
+    public int prize;
     [TextArea]
     public string ItemInfo;
 }

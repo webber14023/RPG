@@ -16,9 +16,13 @@ public class NextFloor : interactivityObject
 
     public override void Interact() {
         genrator.Data.floor += 1;
-        CharacterStats playerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        playerStats.baseCurrentHealth = playerStats.currentHealth;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        player.position = Vector3.zero;
+        player.GetComponent<PlayerMove>().ClearAllAttackEffect();
+        Camera.main.GetComponent<CameraMove>().BlackScreen();
+        Camera.main.transform.position = new Vector3(0f, 0f, -10f);
+        GameObject.FindGameObjectWithTag("RoomGenerator").transform.GetComponent<RoomGenerator>().GenerateAllRoom();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public int Combo;
     public GameObject DeathInterface;
     public GameObject HurtEffect;
+    public Text moneyText;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
@@ -49,9 +51,6 @@ public class PlayerMove : MonoBehaviour
             Move();
         else if (!canControl)
             rb.velocity = Vector2.zero;
-        if(Input.GetKeyDown(KeyCode.U)) {
-            stats.AddExp(10);
-        }
     }
 
     void Move() {
@@ -73,9 +72,14 @@ public class PlayerMove : MonoBehaviour
             Sprite.flipX = true;
         }
     }
+    public void ClearAllAttackEffect() {
+        while(transform.childCount > 3)
+            DestroyImmediate(transform.GetChild(3).gameObject);
+    }
 
     public void PlayerHurt() {
-        HurtEffect.GetComponent<Hurt>().HurtEffect();
+        HurtEffect.GetComponent<Fade>().FadeEffect();
+        Camera.main.GetComponent<CameraMove>().ShakeScreen();
     }
 
     public void Dead() {
@@ -96,5 +100,8 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - intance.transform.Find("AttackPoint").transform.position).normalized;
         return mouseDerection;
+    }
+    public static void UpdatePlayerUI() {
+        intance.moneyText.text = "Money : " + intance.stats.money.ToString();
     }
 }

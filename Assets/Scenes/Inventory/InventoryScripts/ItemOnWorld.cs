@@ -49,6 +49,13 @@ public class ItemOnWorld : interactivityObject
 
     public void AddNewItem() {
         bagfull = true;
+        if(playerInventory.itemList.Contains(ThisItem)) {
+            int itemID = playerInventory.itemList.IndexOf(ThisItem);
+            var temp = playerInventory.itemListData[itemID];
+            temp.count++;
+            playerInventory.itemListData[itemID] = temp;
+
+        }
         for(int i=0; i < playerInventory.itemList.Count; i++){
             if(playerInventory.itemList[i] == null) {
                 bagfull = false;

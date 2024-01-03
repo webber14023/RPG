@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> myBagSlots = new List<GameObject>();
     public List<GameObject> equipmentSlots = new List<GameObject>();
 
-    string[] equipTypes = {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
+    List<string> equipTypes = new List<string>() {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
     public Sprite[] equipmentBg;
 
     void Awake() {
@@ -36,6 +36,83 @@ public class InventoryManager : MonoBehaviour
         intance.itemInformation.text = itemDiscription;
     }
 
+    public void QuickEquip(int slotID, string location, string type) {
+        Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
+            {"MyBag", myBag},
+            {"Equipment", equipment}
+        };
+        Inventory itemLocation = Location[location];
+        int equipmentID = equipTypes.IndexOf(type);
+
+        var temp = itemLocation.itemList[slotID];
+        var tempData = itemLocation.itemListData[slotID];
+        itemLocation.itemList[slotID] = equipment.itemList[equipmentID];
+        equipment.itemList[equipmentID] = temp;
+        itemLocation.itemListData[slotID] = equipment.itemListData[equipmentID];
+        equipment.itemListData[equipmentID] = tempData;
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
+    }
+
+    public void BuyItem(Item item, int level, string Quality) {
+        CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
+        if(stats.money >= item.prize) {
+            bool success = AddNewItem(item, level, 1, Quality);
+            if(success) {
+                stats.money -= item.prize;
+            }
+        }
+        PlayerMove.UpdatePlayerUI();
+
+    }
+
+    public void SellItem(int slotID, string location) {
+        CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
+        Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
+            {"MyBag", myBag},
+            {"Equipment", equipment}
+        };
+        Inventory itemLocation = Location[location];
+        stats.money += itemLocation.itemList[slotID].prize;
+        itemLocation.itemList[slotID] = null;
+        itemLocation.itemListData[slotID] = new Inventory.Itemdata();
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
+        
+    }
+
+    public bool AddNewItem(Item item, int Level, int count, string Quality) {
+        bool bagfull = true;
+        if(myBag.itemList.Contains(item)) {
+            int itemID = myBag.itemList.IndexOf(item);
+            var temp = myBag.itemListData[itemID];
+            temp.count += count;
+            myBag.itemListData[itemID] = temp;
+        }
+        for(int i=0; i < myBag.itemList.Count; i++){
+            if(myBag.itemList[i] == null) {
+                bagfull = false;
+                break;
+            }
+        }
+        if(!myBag.itemList.Contains(item) || !item.isStackable) {
+            if (bagfull)
+                return false;
+
+            for(int i = 0; i < myBag.itemList.Count; i++) {
+                if(myBag.itemList[i] == null) {
+                    myBag.itemList[i] = item;
+                    var temp = myBag.itemListData[i];
+                    temp.itemLevel = Level;
+                    temp.itemQuality = Quality;
+                    myBag.itemListData[i] = temp;
+                    break;
+                }
+            }
+        }
+        InventoryManager.RefreshItem();
+        return true;
+    }
 
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
@@ -51,7 +128,7 @@ public class InventoryManager : MonoBehaviour
             intance.equipmentSlots[i].GetComponent<Slot>().slotID = i;
             intance.equipmentSlots[i].gameObject.name = intance.equipTypes[i];
             intance.equipmentSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = intance.equipmentBg[i];
-            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality);
+            intance.equipmentSlots[i].GetComponent<Slot>().SetupSlot(intance.equipment.itemList[i], intance.equipment.itemListData[i].itemLevel, intance.equipment.itemListData[i].itemQuality, intance.equipment.itemListData[i].count);
         }
         
         for(int i = 0; i < intance.slotGrid.transform.childCount; i++) {
@@ -64,7 +141,7 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].transform.SetParent(intance.slotGrid.transform);
             intance.myBagSlots[i].transform.localScale = new Vector3(1,1,1);
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
-            intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality);
+            intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality, intance.myBag.itemListData[i].count);
         }
 
     }

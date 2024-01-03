@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {   
     public int slotID;//空格ID 等於 物品ID
@@ -16,8 +15,33 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     GameObject ItemPanel;
     int Level;
     string Quality;
+    bool isClick;
+    float time;
 
     public GameObject itemInSlot;
+
+    void Update() {
+        if(time > 0)
+            time -= Time.deltaTime;
+            if(time <= 0) 
+                isClick = false;
+    }
+
+    public void ItemOnClick() {
+        Debug.Log("ClicK");
+        if(!isClick) {
+            isClick = true;
+            time = 1f;
+        }
+        else {
+            Debug.Log("Double Click");
+            if(slotItem.type != null && transform.parent.name == "MyBag") {
+                GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>().QuickEquip(slotID, transform.parent.name, slotItem.type);
+            }
+            return;
+        }
+            
+    }
 
     public void OnPointerEnter(PointerEventData data)
     {
@@ -36,13 +60,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Destroy(ItemPanel);
     }
 
-    public void SetupSlot(Item item, int itemLevel, string itemQuality) {
+    public void SetupSlot(Item item, int itemLevel, string itemQuality, int count) {
         if(item == null) {
             itemInSlot.SetActive(false);
             GetComponent<Image>().raycastTarget = true;
             return;
         }
-        if(item.type != null) {
+        if(item.type != "") {
             EquipmentStats stats = gameObject.AddComponent(typeof(EquipmentStats)) as EquipmentStats;
             stats.SetEquipmentStats((Equipment)item, itemLevel);
         }

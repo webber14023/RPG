@@ -13,9 +13,8 @@ public class Door : interactivityObject
     }
 
     public override void Interact() {
+        Camera.main.GetComponent<CameraMove>().BlackScreen();
         GameObject.FindGameObjectWithTag("Player").transform.position = target.position;
         Camera.main.transform.position = target.position + new Vector3 (0, 0, -10);
-        
-
     }
 }

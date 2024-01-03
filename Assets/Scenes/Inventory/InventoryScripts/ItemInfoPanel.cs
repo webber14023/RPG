@@ -8,6 +8,7 @@ public class ItemInfoPanel : MonoBehaviour
     public Text itemName;
     public Text itemLevel;
     public Text itemQuality;
+    public Text itemPrize;
     public Text itemInfo;
 
     void Update()
@@ -20,7 +21,7 @@ public class ItemInfoPanel : MonoBehaviour
 
     public void UpdateItemInfo(Item item, Transform slot, int Level, string Quality) {
         string Information = item.ItemInfo + "\n\n";
-        if(item.type != null) {
+        if(item.type != "") {
             Equipment equipment = (Equipment)item;
             EquipmentStats stats = slot.GetComponent<EquipmentStats>();
             if(equipment.equipmentHp != 0) Information += "最大生命 : " + stats.equipmentHp + "\n";
@@ -36,6 +37,7 @@ public class ItemInfoPanel : MonoBehaviour
         itemName.text = item.ItemName;
         itemLevel.text = "道具等級 : " + Level.ToString();
         itemQuality.text = Quality;
+        itemPrize.text = "價格 : " + item.prize.ToString();
         itemInfo.text = Information;
     }
 }

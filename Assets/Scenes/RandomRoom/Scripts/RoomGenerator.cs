@@ -33,6 +33,15 @@ public class RoomGenerator : MonoBehaviour
 
     void Start()
     {
+        GenerateAllRoom();
+    }
+
+    public void GenerateAllRoom() {
+        rooms.Clear();
+        genratorPoint.position = Vector3.zero;
+        while(transform.childCount > 1)
+            DestroyImmediate(transform.GetChild(1).gameObject);
+        
         Data = GetDungeonData(PlayerPrefs.GetString("dungeonName"));
         if (Data.floor % 5 == 0) {
             Instantiate(bossRoomPrefab, genratorPoint.position, Quaternion.identity, transform);
@@ -72,10 +81,6 @@ public class RoomGenerator : MonoBehaviour
         GenratorlongwayRoom();
         rooms[0].transform.Find("RoomArea").gameObject.SetActive(false);
         rooms[roomNumber - 1].transform.Find("RoomArea").gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
     }
 
     public void ChangePointPos()    //切換房間生成點

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: 
   maxHealth: 2500
-  currentHealth: 242726
+  currentHealth: 125163
   attackDamage: 100
   abilityPower: 50
   attackArmor: 10
@@ -23,19 +23,19 @@ MonoBehaviour:
   criticalChance: 0.55
   criticalMultiply: 2
   knockBackPower: 1
-  abilityPoint: 210
-  EquipHealth: 117563
-  EquipAttackDamage: 16970
-  EquipAbilityPower: 12084
-  EquipAttackArmor: 3715
-  EquipMagicArmor: 1749
+  abilityPoint: 54
+  EquipHealth: 100114
+  EquipAttackDamage: 10126
+  EquipAbilityPower: 159
+  EquipAttackArmor: 38
+  EquipMagicArmor: 15
   EquipCriticalChance: 0.15
-  EquipCriticalMultiply: 0.45000002
-  EquipSpeed: 0.62501955
+  EquipCriticalMultiply: 0
+  EquipSpeed: 0.27318174
   AttackCooldown: 0
   level: 28
   maxExp: 250
-  currentExp: 4738
+  currentExp: 5307
   HpPerLv: 1.15
   DamagePerLv: 1.15
   SpeedPerLv: 1

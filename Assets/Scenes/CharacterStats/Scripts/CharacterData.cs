@@ -27,6 +27,8 @@ public class CharacterData : ScriptableObject
     public float EquipCriticalMultiply;
     public float EquipSpeed;
 
+    public int money;
+
     public float AttackCooldown;
 
     [Header("Level")]

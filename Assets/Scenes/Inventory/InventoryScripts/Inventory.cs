@@ -10,6 +10,7 @@ public class Inventory : ScriptableObject
 
     [System.Serializable]public struct Itemdata {
         public int itemLevel;
+        public int count;
         public string itemQuality;
     }
 }

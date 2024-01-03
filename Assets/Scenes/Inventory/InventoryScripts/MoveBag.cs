@@ -14,6 +14,7 @@ public class MoveBag : MonoBehaviour,IDragHandler
     {
         //currentRect.anchoredPosition = eventData.position;
         currentRect.anchoredPosition += eventData.delta * size;
+        transform.SetAsLastSibling();
     }
     
     void Awake() {

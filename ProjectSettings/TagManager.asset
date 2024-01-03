@@ -8,6 +8,7 @@ TagManager:
   - slot
   - Wall
   - RoomGenerator
+  - InventoryManager
   layers:
   - Default
   - TransparentFX

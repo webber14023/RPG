@@ -95,6 +95,10 @@ public class CharacterStats : MonoBehaviour
         get { if (c_Data != null) return c_Data.EquipCriticalMultiply; else return 0; }
         set { c_Data.EquipCriticalMultiply = value; }
     }
+    public int money {
+        get { if (c_Data != null) return c_Data.money; else return 0; }
+        set { c_Data.money = value; }
+    }
     public int baseExp {
         get { if (c_Data != null) return c_Data.maxExp; else return 0; }
         set { c_Data.maxExp = value; }
@@ -111,7 +115,6 @@ public class CharacterStats : MonoBehaviour
         get { if (c_Data != null) return c_Data.abilityPoint; else return 0; }
         set { c_Data.abilityPoint = value; }
     }
-
 
     public int maxHealth;
     public int currentHealth;
@@ -230,6 +233,7 @@ public class CharacterStats : MonoBehaviour
         currentHealth -= finalDamage;
         healthBar.UpdateHealthBar((float)currentHealth/maxHealth);
         playerMove?.PlayerHurt();
+        playerStatsPanel?.UpdateStatsPanel();
 
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
@@ -255,10 +259,12 @@ public class CharacterStats : MonoBehaviour
         EquipMagicArmor = 0;
         EquipSpeed = 0f;
         EquipCriticalChance = 0f;
+        EquipCriticalMultiply = 0f;
     }
 
     public void UpdateUI() {
         healthBar.SetHealthBar((float)currentHealth/maxHealth);
+        PlayerMove.UpdatePlayerUI();
         if(expBar != null)
             expBar.GetComponent<ExpBar>().UpdateExpBar((float)CurrentExp/maxExp);
         if(levelText != null)
