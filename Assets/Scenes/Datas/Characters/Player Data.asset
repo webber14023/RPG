@@ -24,14 +24,15 @@ MonoBehaviour:
   criticalMultiply: 2
   knockBackPower: 1
   abilityPoint: 54
-  EquipHealth: 100114
-  EquipAttackDamage: 10126
-  EquipAbilityPower: 159
-  EquipAttackArmor: 38
-  EquipMagicArmor: 15
+  EquipHealth: 0
+  EquipAttackDamage: 70
+  EquipAbilityPower: 0
+  EquipAttackArmor: 0
+  EquipMagicArmor: 0
   EquipCriticalChance: 0.15
   EquipCriticalMultiply: 0
-  EquipSpeed: 0.27318174
+  EquipSpeed: 0
+  money: 96010
   AttackCooldown: 0
   level: 28
   maxExp: 250

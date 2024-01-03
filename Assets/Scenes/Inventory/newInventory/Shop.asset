@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c048b862fa9ab4049a6fe544012fa026, type: 3}
   m_Name: Shop
   m_EditorClassIdentifier: 
-  itemList: []
-  itemListData: []
+  itemList:
+  - {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
+  itemListData:
+  - itemLevel: 10
+    count: 1
+    itemQuality: "\u666E\u901A"

@@ -17,6 +17,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: f43e7dbfad774634d8291b6debb2935c, type: 3}
   isStackable: 0
   ItemHeld: 0
+  prize: 570
   ItemInfo: "\u7528\u9435\u88FD\u4F5C\u7684\u76D4\u7532"
   equipmentHp: 140
   equipmentSpeed: 0
@@ -24,9 +25,13 @@ MonoBehaviour:
   equipmentAbilityPower: 0
   equipmentAttackArmor: 55
   equipmentMagicArmor: 30
+  equipmentCriticalChance: 0
+  equipmentCriticalMultiply: 0
   equipmentHpPerLv: 1.16
   equipmentSpeedPerLv: 0
   equipmentAttackDamagePerLv: 0
   equipmentAbilityPowerPerLv: 0
   equipmentAttackArmorPerLv: 1.15
   equipmentMagicArmorPerLv: 1.15
+  equipmentCriticalChancePerLv: 0
+  equipmentCriticalMultiplyPerLv: 0
