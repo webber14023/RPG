@@ -4,31 +4,43 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    static ShopManager intance;
     public GameObject slotGrid;
     public GameObject slotPrefab;
-
+    public GameObject PlayerBag;
+    public GameObject ShopPanel;
     public Inventory testInv;
 
     public List<GameObject> Slots = new List<GameObject>();
     
-    void Start() {
-        UpdateShop(testInv);
+    void Awake() {
+        if(intance != null)
+            Destroy(this);
+        intance = this;
     }
 
-    public void UpdateShop(Inventory shopInventory) {
-        for(int i=0; i<slotGrid.transform.childCount; i++) {
-            Destroy(slotGrid.transform.GetChild(i).gameObject);
+    void Start() {
+        //UpdateShop(testInv);
+    }
+
+    public static void UpdateShop(Inventory shopInventory) {
+        for(int i=0; i<intance.slotGrid.transform.childCount; i++) {
+            Destroy(intance.slotGrid.transform.GetChild(i).gameObject);
         }
-        Slots.Clear();
+        intance.Slots.Clear();
 
         for(int i=0; i<shopInventory.itemList.Count; i++) {
-            Slots.Add(Instantiate(slotPrefab));
-            Slots[i].transform.SetParent(slotGrid.transform);
-            Slots[i].transform.localScale = new Vector3(1,1,1);
-            ShopSlot slotData = Slots[i].GetComponent<ShopSlot>();
+            intance.Slots.Add(Instantiate(intance.slotPrefab));
+            intance.Slots[i].transform.SetParent(intance.slotGrid.transform);
+            intance.Slots[i].transform.localScale = new Vector3(1,1,1);
+            ShopSlot slotData = intance.Slots[i].GetComponent<ShopSlot>();
             slotData.slotID = i;
             slotData.SetupSlot(shopInventory.itemList[i], shopInventory.itemListData[i].itemLevel, shopInventory.itemListData[i].itemQuality, shopInventory.itemListData[i].count);
         }
+    }
 
+    public static void SetShopPanel(bool state) {
+        intance.PlayerBag.SetActive(state);
+        intance.ShopPanel.SetActive(state);
     }
 }

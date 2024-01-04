@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
 public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler
-
 {
     public Transform originalParent;
     public Inventory orgLocation;
@@ -13,20 +12,23 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
     public Inventory myBag;
     public Inventory Equipment;
     private int currentItemID;//當前物品ID
-    
+    private int currentCount;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
-    
-        FindLocation(transform.parent.parent.name, 0);
         originalParent = transform.parent;
         currentItemID = originalParent.GetComponent<Slot>().slotID;
+        FindLocation(transform.parent.parent.name, 0);
+        if (eventData.button != PointerEventData.InputButton.Left && orgLocation.itemList[currentItemID].isStackable) {
+            var data = orgLocation.itemListData[currentItemID];
+            currentCount = data.count - (data.count / 2);
+            data.count /= 2;
+            transform.GetChild(1).GetComponent<Text>().text = currentCount.ToString();
+            InventoryManager.RefreshItem();
+        }
         transform.SetParent(transform.parent.parent.parent.parent);
         transform.position = eventData.position;
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
-
+        GetComponent<CanvasGroup>().blocksRaycasts = false;  
         
     }
 
@@ -57,16 +59,19 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
+        Debug.Log("Drag");
+        /*if (eventData.button != PointerEventData.InputButton.Left) {
             return;
-
+        }*/
         transform.position = eventData.position;
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
+        Debug.Log("ENd DRAG");
+        /*if (eventData.button != PointerEventData.InputButton.Left)
+            return;*/
 
             //&& eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")
         if(eventData.pointerCurrentRaycast.gameObject != null) {

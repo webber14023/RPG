@@ -37,7 +37,7 @@ public class ItemInfoPanel : MonoBehaviour
         itemName.text = item.ItemName;
         itemLevel.text = "道具等級 : " + Level.ToString();
         itemQuality.text = Quality;
-        itemPrize.text = "價格 : " + item.prize.ToString();
+        itemPrize.text = "價格 : " + ((int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, Level))).ToString();
         itemInfo.text = Information;
     }
 }

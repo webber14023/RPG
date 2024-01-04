@@ -56,14 +56,13 @@ public class InventoryManager : MonoBehaviour
 
     public void BuyItem(Item item, int level, string Quality) {
         CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        if(stats.money >= item.prize) {
+        if(stats.money >= (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level))) {
             bool success = AddNewItem(item, level, 1, Quality);
             if(success) {
                 stats.money -= item.prize;
             }
         }
         PlayerMove.UpdatePlayerUI();
-
     }
 
     public void SellItem(int slotID, string location) {
@@ -113,7 +112,7 @@ public class InventoryManager : MonoBehaviour
         InventoryManager.RefreshItem();
         return true;
     }
-
+    //Refresh單個格子
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
         for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {

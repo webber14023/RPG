@@ -15,12 +15,12 @@ public class PlayerMove : MonoBehaviour
     public GameObject DeathInterface;
     public GameObject HurtEffect;
     public Text moneyText;
+    public CharacterStats stats;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
     private float inputX, inputY;
     private AbilityManager ability;
-    CharacterStats stats;
 
     void Awake() {
         if(intance != null)
@@ -29,12 +29,13 @@ public class PlayerMove : MonoBehaviour
 
         Application.targetFrameRate = 60;
     }
+    
     void Start()
     {
+        stats = GetComponent<CharacterStats>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Sprite = GetComponent<SpriteRenderer>();
-        stats = GetComponent<CharacterStats>();
         ability = GetComponent<AbilityManager>();
     }
 
@@ -101,6 +102,7 @@ public class PlayerMove : MonoBehaviour
         Vector2 mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - intance.transform.Find("AttackPoint").transform.position).normalized;
         return mouseDerection;
     }
+
     public static void UpdatePlayerUI() {
         intance.moneyText.text = "Money : " + intance.stats.money.ToString();
     }

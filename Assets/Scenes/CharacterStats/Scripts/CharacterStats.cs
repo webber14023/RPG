@@ -135,9 +135,7 @@ public class CharacterStats : MonoBehaviour
     public float criticalMultiply;
     public bool canDamage;
     public bool canControl;
-
     public int maxExp;
-
     public int enemyLevel;
 
     private void Start() {
@@ -154,13 +152,15 @@ public class CharacterStats : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         healthBar = hpBar.GetComponent<HealthBar>();
         if(enemyLevel == 0) {
-            UpdateStats();
             currentHealth = baseCurrentHealth;
-            playerStatsPanel.UpdateStatsPanel();
+            UpdateStats();
+            UpdateUI();
         }
-        else
+        else {
             enemySetLevel(enemyLevel);
-        UpdateUI();
+            healthBar.SetHealthBar((float)currentHealth/maxHealth);
+        }
+        
     }
 
     public void ChangeStats(int addHp, int addDamage, float addSpeed) {
@@ -238,7 +238,6 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
         }
-
     }
 
     public void ShowDamageText(GameObject target, int damage, bool isAttackDamage, bool isCritical) {

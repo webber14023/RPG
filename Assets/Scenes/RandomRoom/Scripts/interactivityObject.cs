@@ -9,7 +9,6 @@ public class interactivityObject : MonoBehaviour
     public KeyCode key;
     public string hintText;
     GameObject Hintkey;
-
     bool canInteract;
 
     public virtual void Start() {
