@@ -9,7 +9,6 @@ public class ShopManager : MonoBehaviour
     public GameObject slotPrefab;
     public GameObject PlayerBag;
     public GameObject ShopPanel;
-    public Inventory testInv;
 
     public List<GameObject> Slots = new List<GameObject>();
     
@@ -17,10 +16,6 @@ public class ShopManager : MonoBehaviour
         if(intance != null)
             Destroy(this);
         intance = this;
-    }
-
-    void Start() {
-        //UpdateShop(testInv);
     }
 
     public static void UpdateShop(Inventory shopInventory) {
@@ -37,6 +32,10 @@ public class ShopManager : MonoBehaviour
             slotData.slotID = i;
             slotData.SetupSlot(shopInventory.itemList[i], shopInventory.itemListData[i].itemLevel, shopInventory.itemListData[i].itemQuality, shopInventory.itemListData[i].count);
         }
+    }
+
+    public static bool IsShopOpen() {
+        return intance.ShopPanel.activeSelf;
     }
 
     public static void SetShopPanel(bool state) {

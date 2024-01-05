@@ -21,7 +21,7 @@ public class ItemInfoPanel : MonoBehaviour
 
     public void UpdateItemInfo(Item item, Transform slot, int Level, string Quality) {
         string Information = item.ItemInfo + "\n\n";
-        if(item.type != "") {
+        if(item.type != "" && item.type != "Functional") {
             Equipment equipment = (Equipment)item;
             EquipmentStats stats = slot.GetComponent<EquipmentStats>();
             if(equipment.equipmentHp != 0) Information += "最大生命 : " + stats.equipmentHp + "\n";

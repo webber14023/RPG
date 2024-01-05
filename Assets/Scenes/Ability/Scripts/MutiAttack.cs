@@ -8,6 +8,8 @@ public class MutiAttack : Ability
     public float attackRange;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     public int attackCount;
+    public int baseAttackCount;
+    public float attackCountPerLv;
     Vector2 mouseDerection;
     
     public override void Activate(GameObject parent) {
@@ -41,5 +43,13 @@ public class MutiAttack : Ability
         PlayerMove move = parent.GetComponent<PlayerMove>();
 
         move.canControl = true;
+    }
+
+    public override void ResetAbility() {
+        attackCount = baseAttackCount;
+    }
+
+    public override void UpgradeAbility() {
+        attackCount = baseAttackCount + (int)(attackCountPerLv * AbilityLevel);
     }
 }

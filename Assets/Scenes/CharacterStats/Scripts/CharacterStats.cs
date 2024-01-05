@@ -21,6 +21,7 @@ public class CharacterStats : MonoBehaviour
     public Text levelText;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
+    public GameObject DeadEffect;
     
     
     public int baseMaxHealth {
@@ -238,6 +239,16 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth <= 0) {
             animator.SetBool("isDeath",true);
         }
+    }
+
+    public void RegenHP(int AddStats) {
+        currentHealth += AddStats;
+        GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position + (Vector3)UnityEngine.Random.insideUnitCircle, Quaternion.identity, transform);
+        DamageText damageText = damageTextObject.GetComponent<DamageText>();
+        healthBar.UpdateHealthBar((float)currentHealth/maxHealth);
+        playerStatsPanel?.UpdateStatsPanel();
+        damageText.setRegenText(AddStats);
+        
     }
 
     public void ShowDamageText(GameObject target, int damage, bool isAttackDamage, bool isCritical) {

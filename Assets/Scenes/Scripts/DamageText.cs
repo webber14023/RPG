@@ -8,6 +8,7 @@ public class DamageText : MonoBehaviour
     public float speed;
     public Color AD_DamageColor;
     public Color AP_DamageColor;
+    public Color RegenColor;
 
     private void Start() {
         Destroy(this.gameObject,0.5f);
@@ -33,6 +34,11 @@ public class DamageText : MonoBehaviour
             damageText.color += new Color(0.1f, 0.1f, 0.1f);
         }
     }
+    
+    public void setRegenText(int addStats) {
+        damageText.color = RegenColor;
+        damageText.text = "+" + KiloFormat(addStats);
+    }   
 
     public static string KiloFormat(int num)
     {

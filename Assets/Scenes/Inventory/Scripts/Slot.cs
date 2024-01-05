@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {   
     public int slotID;//空格ID 等於 物品ID
     public GameObject ItemDisciptionPrefab;
+    public GameObject ItemMenuPrefab;
     public Item slotItem;
     public Image slotImage;
     public Text slotNum; 
     public string slotInfo;
     GameObject ItemPanel;
+    GameObject ItemMenu;
+
     int Level;
     string Quality;
-    bool isClick;
+    bool isClick, isEnter;
     float time;
 
     public GameObject itemInSlot;
@@ -25,19 +29,36 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             time -= Time.deltaTime;
             if(time <= 0) 
                 isClick = false;
+                
+        if(slotItem != null && isEnter && Input.GetKeyDown(KeyCode.Mouse1)) {
+            if(ItemMenu == null) {
+                GameObject oldMenu = GameObject.FindGameObjectWithTag("ItemMenu");
+                if(oldMenu != null) {
+                    DestroyImmediate(oldMenu);
+                }
+                ItemMenu = Instantiate(ItemMenuPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.transform);
+                ItemMenu.transform.GetComponent<ItemMenu>().CurrentSlot = this;
+                Destroy(ItemPanel);
+            }
+            else 
+                Destroy(ItemMenu);
+
+        }
     }
 
     public void ItemOnClick() {
-        Debug.Log("ClicK");
         if(!isClick) {
             isClick = true;
-            time = 1f;
+            time = 0.33f;
         }
         else {
-            Debug.Log("Double Click");
-            if(slotItem.type != null && transform.parent.name == "MyBag") {
+            if(slotItem.type == "Functional") {
+                slotItem.ItemFunction(transform.parent.name, slotID);
+            }
+            else if(slotItem.type != null && transform.parent.name == "MyBag") {
                 GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>().QuickEquip(slotID, transform.parent.name, slotItem.type);
             }
+            
             return;
         }
             
@@ -45,6 +66,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData data)
     {
+        isEnter = true;
         if(!Input.GetKey(KeyCode.Mouse0)) {
             if (slotItem != null && ItemPanel == null) {
             ItemPanel = Instantiate(ItemDisciptionPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.transform);
@@ -56,6 +78,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData data)
     {
+        isEnter = false;
         if (slotItem != null)
             Destroy(ItemPanel);
     }
@@ -66,7 +89,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             GetComponent<Image>().raycastTarget = true;
             return;
         }
-        if(item.type != "") {
+        if(item.type != "" && item.type != "Functional") {
             EquipmentStats stats = gameObject.AddComponent(typeof(EquipmentStats)) as EquipmentStats;
             stats.SetEquipmentStats((Equipment)item, itemLevel);
         }
@@ -77,7 +100,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Quality = itemQuality;
         itemInSlot.SetActive(true);
         if(item.isStackable)
-            slotNum.text = item.ItemHeld.ToString();
+            slotNum.text = count.ToString();
         else if(slotNum != null)
             slotNum.gameObject.SetActive(false);
         slotInfo = item.ItemInfo;

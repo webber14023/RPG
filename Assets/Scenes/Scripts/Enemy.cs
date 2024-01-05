@@ -160,18 +160,20 @@ public class Enemy : MonoBehaviour
         for(int i = 0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
                 for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
-                    Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity, transform.parent.parent).GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel);
+                    Transform dropitem = Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).transform;
+                    dropitem.GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel, 1);
+                    dropitem.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
                 }
             }
         }
     }
 
-    void StopAttack() {
+    private void Die() {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
         for(int i=0; i<AbilityHolders.Length; i++)
             AbilityHolders[i].enabled = false;
-    }
-
-    private void Die() {
+        
         int levelGap = targetStats.level - stats.enemyLevel;
         //float levelReduce = (levelGap >= -5 && levelGap <= 7)? levelGap > 0? (float)Mathf.Pow(1.15f, -levelGap) 
                                                              //: 1 + (float)(Mathf.Pow(1.05f ,-levelGap) % 1 / 2) :levelGap > 0? 0.3f: 1.2f;
@@ -180,6 +182,10 @@ public class Enemy : MonoBehaviour
                                                              : 1 + (float)(Mathf.Pow(1.05f ,-levelGap) % 1 / 2) :levelGap > 0? 0.3f: 1.2f;
         targetStats.AddExp((int)(stats.maxExp * levelReduce));
         DropItem();
+    }
+
+    private void DestroyGameObject() {
+        Instantiate(stats.DeadEffect, transform.position, Quaternion.identity, transform.parent);
         Destroy(gameObject);
     }
 }

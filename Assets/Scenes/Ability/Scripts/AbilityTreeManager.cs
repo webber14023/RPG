@@ -20,6 +20,8 @@ public class AbilityTreeManager : MonoBehaviour
     public Text AbilityNameText; 
     public Text AbilityLvText, AbilityDesText, AbilityPointText;
 
+    private bool showMoreInfo;
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -36,6 +38,17 @@ public class AbilityTreeManager : MonoBehaviour
         DisplayAbilityLevel();
     }
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.LeftShift)) {
+            showMoreInfo = true;
+            DisplayAbilityInfo();
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift)) {
+            showMoreInfo = false;
+            DisplayAbilityInfo();
+        }
+    }
+
     public void UpgradeButton() {
         if(activeAbility == null || activeAbility.AbilityMaxLevel <= activeAbility.AbilityLevel) {
             return;
@@ -43,7 +56,7 @@ public class AbilityTreeManager : MonoBehaviour
 
         if(C_stats.abilityPoint > 0 && activeAbility.preskills.Length == 0) {
             if(activeAbility.preskills.Length == 0)
-                UpdateAbility();
+                UpgradeAbility();
             else {
                 for(int i=0; i < activeAbility.preskills.Length; i++) {
                     
@@ -68,6 +81,7 @@ public class AbilityTreeManager : MonoBehaviour
             abilitys[i].isUnlocked = false;
             abilitys[i].damagePercentage = abilitys[i].BaseDamagePercentage;
             abilitys[i].cooldownTime = abilitys[i].BaseCooldownTime;
+            abilitys[i].ResetAbility();
         }
         UpdatePointUI();
         DisplayAbilityLevel();
@@ -75,10 +89,11 @@ public class AbilityTreeManager : MonoBehaviour
             DisplayAbilityInfo();
     }
 
-    public void UpdateAbility() {
+    public void UpgradeAbility() {
         activeAbility.AbilityLevel++;
         activeAbility.damagePercentage = activeAbility.BaseDamagePercentage + activeAbility.damagePerLevel * activeAbility.AbilityLevel;
         activeAbility.cooldownTime = activeAbility.BaseCooldownTime + activeAbility.cooldownTimePerLevel * activeAbility.AbilityLevel;
+        activeAbility.UpgradeAbility();
         C_stats.abilityPoint--;
         activeAbility.isUnlocked = true;
         activeButton.gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
@@ -90,10 +105,14 @@ public class AbilityTreeManager : MonoBehaviour
     public void DisplayAbilityInfo() {
         Dictionary<string, string> AbilityValue = new Dictionary<string, string>() {
             {"Damage", (activeAbility.damagePercentage*100).ToString() + "%"},
-            {"Cooldown", activeAbility.cooldownTime.ToString("0.0") + "秒"},
+            {"Cooldown", activeAbility.cooldownTime.ToString("0.00") + "秒"},
             {"AD", "物理傷害"},
             {"AP", "魔法傷害"},
             {"AttackCount", "Get"}
+        };
+        Dictionary<string, string> AbilityValuePerLv = new Dictionary<string, string>() {
+            {"Damage", $"({activeAbility.damagePerLevel*100}%)"},
+            {"Cooldown", $"({activeAbility.cooldownTimePerLevel}秒)"}
         };
         AbilityNameText.text = activeAbility.abilityName;
         AbilityLvText.text = "Skill Level : " + activeAbility.AbilityLevel + "/" + activeAbility.AbilityMaxLevel;
@@ -101,10 +120,14 @@ public class AbilityTreeManager : MonoBehaviour
         string[] desTexts = activeAbility.abilityDes.Split('*');
         for(int i=0; i<desTexts.Length; i++) {
             if(AbilityValue.TryGetValue(desTexts[i],out value)){
-                if(value != "Get")
+                if(value != "Get") {
                     desText += value;
-                else
+                    if(showMoreInfo && AbilityValuePerLv.TryGetValue(desTexts[i],out value))
+                        desText += value;
+                }
+                else {
                     desText += GetAbilityValue(desTexts[i]);
+                }
             }
             else
                 desText += desTexts[i];
@@ -115,7 +138,12 @@ public class AbilityTreeManager : MonoBehaviour
     public string GetAbilityValue(string key) {
         if(key == "AttackCount") {
             MutiAttack Temp = (MutiAttack)activeAbility;
-            return Temp.attackCount.ToString();
+            if(showMoreInfo) {
+                return Temp.attackCount.ToString() + $"({Temp.attackCountPerLv})";
+            }
+            else {
+                return Temp.attackCount.ToString();
+            }
         }
         return null;
     }

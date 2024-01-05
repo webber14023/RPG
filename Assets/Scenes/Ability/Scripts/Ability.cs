@@ -29,4 +29,6 @@ public class Ability : ScriptableObject
 
     public virtual void Activate(GameObject parent) {}
     public virtual void BeginCooldown(GameObject parent) {}
+    public virtual void ResetAbility() {}
+    public virtual void UpgradeAbility() {}
 }

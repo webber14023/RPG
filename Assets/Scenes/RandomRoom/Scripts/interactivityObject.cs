@@ -8,7 +8,7 @@ public class interactivityObject : MonoBehaviour
 {
     public KeyCode key;
     public string hintText;
-    GameObject Hintkey;
+    public GameObject Hintkey;
     bool canInteract;
 
     public virtual void Start() {
@@ -30,6 +30,7 @@ public class interactivityObject : MonoBehaviour
         if(other.CompareTag("Player")) {
             canInteract = true;
             Hintkey.SetActive(true);
+            Hintkey.transform.rotation = Quaternion.identity;
         }
     }
 

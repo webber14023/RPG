@@ -115,7 +115,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 256577499
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 895014620, guid: e0136f566edac7a489bf14e1b002bee6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd59aab448db5c49beb57d346e50dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyStates: 0
   target: {fileID: 0}
   sightRadius: 17
   attackRange: 11
@@ -229,22 +230,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Data: {fileID: 11400000, guid: 5fb804cbc24b8a34cbcb67f0b2dc0695, type: 2}
+  playerStatsPanel: {fileID: 0}
   hpBar: {fileID: 4908798660906121293}
   expBar: {fileID: 0}
   levelText: {fileID: 0}
   damageTextPrefab: {fileID: 4719213298264859033, guid: 9d2ccacb955fadc459e557f617ffd30b, type: 3}
   hitEffect: {fileID: 3764579976803197859, guid: 95c50a2e955c16844922669d07c34a8f, type: 3}
+  DeadEffect: {fileID: 3614481153871026672, guid: 61b359c5210dea742aa0b4936436b2cc, type: 3}
   maxHealth: 0
   currentHealth: 0
   attackDamage: 0
+  abilityPower: 0
+  attackArmor: 0
+  magicArmor: 0
   speed: 0
   knockBackPower: 0
   attackMultiply: 0
+  abilityMultiply: 0
   healthMultiply: 0
   moveSpeedMultiply: 0
-  DamageReduce: 0
+  AD_Reduce: 0
+  AP_Reduce: 0
+  criticalChance: 0
+  criticalMultiply: 0
   canDamage: 0
   canControl: 0
+  maxExp: 0
   enemyLevel: 0
 --- !u!114 &8632900983589822777
 MonoBehaviour:

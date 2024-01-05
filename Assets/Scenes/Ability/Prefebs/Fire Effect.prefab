@@ -292,7 +292,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 256577499
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e85b34269e4fb45acb0c556b99be10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttackDamage: 0
   abilityDamage: 0
   abilityknockBackPower: 0
   abilityDelayTime: 0
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayTime: 0.25
-  attackDelay: 1
+  attackDelay: 0.15
   destroyTime: 0
   Hitbox: {fileID: 1321424608636880595}
   HitboxEffect: {fileID: 1321424608751996111}

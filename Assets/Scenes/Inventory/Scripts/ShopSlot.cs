@@ -45,7 +45,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             GetComponent<Image>().raycastTarget = true;
             return;
         }
-        if(item.type != "") {
+        if(item.type != "" && item.type != "Functional") {
             EquipmentStats stats = gameObject.AddComponent(typeof(EquipmentStats)) as EquipmentStats;
             stats.SetEquipmentStats((Equipment)item, itemLevel);
         }

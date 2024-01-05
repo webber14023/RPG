@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2521096747763983790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   speed: 1.25
   AD_DamageColor: {r: 1, g: 0.5294118, b: 0, a: 1}
   AP_DamageColor: {r: 0, g: 1, b: 0.9921569, a: 1}
+  RegenColor: {r: 0.3647059, g: 1, b: 0, a: 1}
 --- !u!1001 &5250191292160082065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235,11 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5121452717882343567, guid: c59f5fb60ffbb0b4b960ae4338ae6abf, type: 3}
       propertyPath: m_Color.g
-      value: 0.52949166
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5121452717882343567, guid: c59f5fb60ffbb0b4b960ae4338ae6abf, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.36520195
       objectReference: {fileID: 0}
     - target: {fileID: 5121452717882343567, guid: c59f5fb60ffbb0b4b960ae4338ae6abf, type: 3}
       propertyPath: m_FontData.m_Font

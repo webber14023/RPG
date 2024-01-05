@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - RoomGenerator
   - InventoryManager
+  - ItemMenu
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Wall
   - Room
   - Enemy
-  - 
+  - DropItem
   - 
   - 
   - 
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Door
     uniqueID: 3242634001
+    locked: 0
+  - name: DropItem
+    uniqueID: 1450939001
     locked: 0
   - name: Player
     uniqueID: 256577499

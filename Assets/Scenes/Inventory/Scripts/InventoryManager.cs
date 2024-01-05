@@ -23,6 +23,11 @@ public class InventoryManager : MonoBehaviour
     List<string> equipTypes = new List<string>() {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
     public Sprite[] equipmentBg;
 
+    public AudioClip SellItemSound;
+    public AudioClip BuyItemSound;
+
+    public AudioSource SoundSource;
+
     void Awake() {
         if(intance != null)
             Destroy(this);
@@ -36,12 +41,17 @@ public class InventoryManager : MonoBehaviour
         intance.itemInformation.text = itemDiscription;
     }
 
-    public void QuickEquip(int slotID, string location, string type) {
+    private Inventory GetItemLocation(string loactionName) {
         Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
             {"MyBag", myBag},
             {"Equipment", equipment}
         };
-        Inventory itemLocation = Location[location];
+        return Location[loactionName];
+    }
+
+    public void QuickEquip(int slotID, string location, string type) {
+        Debug.Log("QuickEquip");
+        Inventory itemLocation = GetItemLocation(location);
         int equipmentID = equipTypes.IndexOf(type);
 
         var temp = itemLocation.itemList[slotID];
@@ -52,67 +62,124 @@ public class InventoryManager : MonoBehaviour
         equipment.itemListData[equipmentID] = tempData;
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
+        EquipmentManager.PlayEquipSound();
     }
 
     public void BuyItem(Item item, int level, string Quality) {
         CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
         if(stats.money >= (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level))) {
-            bool success = AddNewItem(item, level, 1, Quality);
-            if(success) {
+            if(FindEmptyID(myBag) != -1) {
+                AddItem(item, level, 1, Quality);
                 stats.money -= item.prize;
             }
         }
+        SoundSource.clip = BuyItemSound;
+        SoundSource.Play();
         PlayerMove.UpdatePlayerUI();
     }
 
-    public void SellItem(int slotID, string location) {
+    public void SellItem(int slotID, string location, int SellCount) {
         CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
-            {"MyBag", myBag},
-            {"Equipment", equipment}
-        };
-        Inventory itemLocation = Location[location];
-        stats.money += itemLocation.itemList[slotID].prize;
+        Inventory itemLocation = GetItemLocation(location);
+        stats.money += itemLocation.itemList[slotID].prize * SellCount;
+        ReduceItem(slotID, location, SellCount);
+        SoundSource.clip = SellItemSound;
+        SoundSource.Play();
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
+    }
+
+    public void DropItem(int slotID, string location) {
+        Inventory itemLocation = GetItemLocation(location);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity).GetComponent<ItemOnWorld>();
+        dropitemData.setItemData(itemLocation.itemList[slotID], itemLocation.itemListData[slotID].itemLevel, itemLocation.itemListData[slotID].count);
         itemLocation.itemList[slotID] = null;
         itemLocation.itemListData[slotID] = new Inventory.Itemdata();
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
-        
     }
 
-    public bool AddNewItem(Item item, int Level, int count, string Quality) {
-        bool bagfull = true;
+    public void DeleteItem(int slotID, string location) {
+        Inventory itemLocation = GetItemLocation(location);
+        itemLocation.itemList[slotID] = null;
+        itemLocation.itemListData[slotID] = new Inventory.Itemdata();
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
+    }
+
+    public void ReduceItem(int slotID, string location, int amount) {
+        Inventory itemLocation = GetItemLocation(location);
+        var tempData = itemLocation.itemListData[slotID];
+        if(tempData.count > 1) {
+            tempData.count -= amount;
+            itemLocation.itemListData[slotID] = tempData;
+        }
+        else {
+            DeleteItem(slotID, location);
+        }
+        RefreshItem();
+    }
+    
+
+    public void SplitItem(int slotID, string location, int amount) {
+        Inventory itemLocation = GetItemLocation(location);
+        int emptyID = FindEmptyID(itemLocation);
+        if(emptyID == -1)
+            return;
+        var orgItemData = itemLocation.itemListData[slotID];
+        orgItemData.count -= amount;
+        myBag.itemListData[slotID] = orgItemData;
+        AddNewItem(itemLocation.itemList[slotID], orgItemData.itemLevel, amount, orgItemData.itemQuality, emptyID);
+        RefreshItem();
+
+    }
+
+    public int FindEmptyID(Inventory targetInv) {
+        for(int i=0; i < myBag.itemList.Count; i++){
+            if(myBag.itemList[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void AddItem(Item item, int Level, int count, string Quality) {
         if(myBag.itemList.Contains(item)) {
             int itemID = myBag.itemList.IndexOf(item);
             var temp = myBag.itemListData[itemID];
             temp.count += count;
             myBag.itemListData[itemID] = temp;
-        }
-        for(int i=0; i < myBag.itemList.Count; i++){
-            if(myBag.itemList[i] == null) {
-                bagfull = false;
-                break;
-            }
-        }
-        if(!myBag.itemList.Contains(item) || !item.isStackable) {
-            if (bagfull)
-                return false;
+            RefreshItem();
 
-            for(int i = 0; i < myBag.itemList.Count; i++) {
-                if(myBag.itemList[i] == null) {
-                    myBag.itemList[i] = item;
-                    var temp = myBag.itemListData[i];
-                    temp.itemLevel = Level;
-                    temp.itemQuality = Quality;
-                    myBag.itemListData[i] = temp;
-                    break;
-                }
-            }
+            return;
         }
-        InventoryManager.RefreshItem();
-        return true;
+        int EmptyID = FindEmptyID(myBag);
+
+        if (EmptyID == -1)
+            return;
+        if(!myBag.itemList.Contains(item) || !item.isStackable) {
+            myBag.itemList[EmptyID] = item;
+            var temp = myBag.itemListData[EmptyID];
+            temp.itemLevel = Level;
+            temp.itemQuality = Quality;
+            myBag.itemListData[EmptyID] = temp;
+                
+            }
+        RefreshItem();
     }
-    //Refresh單個格子
+
+    public void AddNewItem(Item item, int Level, int count, string Quality ,int slotID) {
+        myBag.itemList[slotID] = item;
+        var temp = myBag.itemListData[slotID];
+        temp.itemLevel = Level;
+        temp.itemQuality = Quality;
+        temp.count = count;
+        myBag.itemListData[slotID] = temp;
+
+    }
+    
+    
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體
         for(int i = 0; i < intance.equipmentSlotGrid.transform.childCount; i++) {

@@ -19,7 +19,7 @@ public class RangeAttackClass : MonoBehaviour
     float timer;
 
     bool canAttack;
-
+    private List<Collider2D> attackedTarget = new List<Collider2D>();
 
     Vector3 Effectscale;
 
@@ -38,37 +38,33 @@ public class RangeAttackClass : MonoBehaviour
         if(delayTime > 0){
             HitboxEffect.transform.localScale += Effectscale * Time.deltaTime;
             delayTime -= Time.deltaTime;
-        }
-        else if(delayTime == 0) {
-            HitboxEffect.transform.localScale = Hitbox.transform.localScale;
+            if(delayTime <= 0) {
+                HitboxEffect.transform.localScale = Hitbox.transform.localScale;
+                HitboxCollider.enabled = true;
+                anim.SetBool("Hit",true);
+            }
         }
         else {
-            HitboxCollider.enabled = true;
-            anim.SetBool("Hit",true);
+            Attack();
         }
     }
 
     void Attack(){
-        Debug.Log("Attack");
-        HitboxCollider.enabled = true;
+        if(timer > 0f) {
+            timer -= Time.deltaTime;
+        }
+        else if(timer <= 0f) {
+            timer = attackDelay;
+            Debug.Log("attack");
+            attackedTarget.Clear();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.CompareTag(target)) {
-            canAttack = true;
-            BuffHolder otherBuffHolder = other.GetComponent<BuffHolder>();
-
-            foreach (BuffStatus buff in otherBuffHolder.buffs) {
-                if(buff == attackDelayBuff) {
-                    canAttack = false;
-                    break;
-                }
-            }
-            if(canAttack) {
-                int currentDamage = (int)(stats.abilityDamage*Random.Range(0.9f,1.1f));
-                other.GetComponent<CharacterStats>().TakeDamage(currentDamage, stats.isAttackDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
-                otherBuffHolder.addBuff(attackDelayBuff);
-            }
+        if(other.CompareTag(target) && !attackedTarget.Contains(other)) {
+            attackedTarget.Add(other);
+            int currentDamage = (int)(stats.abilityDamage*Random.Range(0.9f,1.1f));
+            other.GetComponent<CharacterStats>().TakeDamage(currentDamage, stats.isAttackDamage, transform.parent.GetComponent<CharacterStats>(), Vector2.zero);
         }
 
     }

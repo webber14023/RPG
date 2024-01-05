@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject HurtEffect;
     public Text moneyText;
     public CharacterStats stats;
+    public AudioClip[] walkSound;
+    public AudioSource walkSoundPlayer;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
@@ -48,10 +50,13 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if(!ability.isCasting)
+        if(!ability.isCasting) {
             Move();
-        else if (!canControl)
+        }
+        else if (!canControl) {
+            animator.SetBool("isMoving", false);
             rb.velocity = Vector2.zero;
+        }
     }
 
     void Move() {
@@ -97,6 +102,11 @@ public class PlayerMove : MonoBehaviour
         SceneManager.LoadScene("Vallage");
     }
 
+    public void PlayWalkSound() {
+        walkSoundPlayer.clip = walkSound[Random.Range(0, walkSound.Length)];
+        walkSoundPlayer.Play();
+    }
+
     public static Vector2 GetMouseDerection()
     {
         Vector2 mouseDerection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - intance.transform.Find("AttackPoint").transform.position).normalized;
@@ -104,6 +114,6 @@ public class PlayerMove : MonoBehaviour
     }
 
     public static void UpdatePlayerUI() {
-        intance.moneyText.text = "Money : " + intance.stats.money.ToString();
+        intance.moneyText.text = "金錢 : " + intance.stats.money.ToString();
     }
 }

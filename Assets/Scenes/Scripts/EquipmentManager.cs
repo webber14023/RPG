@@ -10,6 +10,8 @@ public class EquipmentManager : MonoBehaviour
     public Transform Equipments;
     public InventoryManager Inventory;
     public CharacterStats Stats;
+    public AudioClip EquipSound;
+    public AudioSource audioSource;
 
     EquipmentStats Equipmentstats;
 
@@ -21,6 +23,7 @@ public class EquipmentManager : MonoBehaviour
 
     void Start() {  
         Stats = GetComponent<CharacterStats>();
+        audioSource.clip = EquipSound;
     }
 
     public static void UpdateEquipmentStats() {
@@ -44,6 +47,10 @@ public class EquipmentManager : MonoBehaviour
         intance.Stats.currentHealth = (int)(intance.Stats.maxHealth * hpPersent);
         intance.Stats.UpdateUI();
         intance.Equipmentstats = null;
+    }
+
+    public static void PlayEquipSound() { 
+        intance.audioSource.Play();
     }
 
 }

@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemList:
   - {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
+  - {fileID: 11400000, guid: a362ac55b14e91145bf3656f5b9d18c5, type: 2}
   itemListData:
+  - itemLevel: 10
+    count: 1
+    itemQuality: "\u666E\u901A"
   - itemLevel: 10
     count: 1
     itemQuality: "\u666E\u901A"

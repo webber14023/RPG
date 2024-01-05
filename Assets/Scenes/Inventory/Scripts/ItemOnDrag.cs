@@ -75,20 +75,33 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
             //&& eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")
         if(eventData.pointerCurrentRaycast.gameObject != null) {
-            Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
             if(eventData.pointerCurrentRaycast.gameObject.name != "ItemImage")
                 FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
             else
                 FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.parent.name, 1);
             
             if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage" && TargetLocation == orgLocation) {//判斷下面物體名字是 ItemImage 那麼互換位置
-                //itemList的物品存取位置改變
+                int targetSlotID = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID;
+
+                if(orgLocation.itemList[currentItemID] == orgLocation.itemList[targetSlotID]) {
+                    var tempTargetData = orgLocation.itemListData[targetSlotID];
+                    tempTargetData.count += orgLocation.itemListData[currentItemID].count;
+                    orgLocation.itemListData[targetSlotID] = tempTargetData;
+                    orgLocation.itemList[currentItemID] = null;
+                    orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
+                    Destroy(gameObject);
+                    InventoryManager.RefreshItem();
+                    return;
+                }
+                
                 var temp = orgLocation.itemList[currentItemID];
                 var tempData = orgLocation.itemListData[currentItemID];
-                orgLocation.itemList[currentItemID] = orgLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID];
-                orgLocation.itemList[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID] = temp;
-                orgLocation.itemListData[currentItemID] = orgLocation.itemListData[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID];
-                orgLocation.itemListData[eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID] = tempData;
+
+                //itemList的物品存取位置改變
+                orgLocation.itemList[currentItemID] = orgLocation.itemList[targetSlotID];
+                orgLocation.itemList[targetSlotID] = temp;
+                orgLocation.itemListData[currentItemID] = orgLocation.itemListData[targetSlotID];
+                orgLocation.itemListData[targetSlotID] = tempData;
 
                 transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent);
                 transform.position = eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.position;
@@ -119,12 +132,11 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
             else if(eventData.pointerCurrentRaycast.gameObject.name == "DropArea") {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity).GetComponent<ItemOnWorld>();
-                dropitemData.setItemData(orgLocation.itemList[currentItemID], orgLocation.itemListData[currentItemID].itemLevel);
+                dropitemData.setItemData(orgLocation.itemList[currentItemID], orgLocation.itemListData[currentItemID].itemLevel, orgLocation.itemListData[currentItemID].count);
                 orgLocation.itemList[currentItemID] = null;
                 orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
                 InventoryManager.RefreshItem();
                 EquipmentManager.UpdateEquipmentStats();
-                GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Destroy(gameObject);
                 return;
             }

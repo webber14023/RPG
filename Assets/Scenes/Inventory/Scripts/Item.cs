@@ -14,5 +14,7 @@ public class Item : ScriptableObject
     public float prizePerLv = 1.05f;
     [TextArea]
     public string ItemInfo;
+
+    public virtual void ItemFunction(string loaction, int itemID) {}
 }
 
