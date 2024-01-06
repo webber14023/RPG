@@ -17,7 +17,9 @@ public class PlayerMove : MonoBehaviour
     public Text moneyText;
     public CharacterStats stats;
     public AudioClip[] walkSound;
-    public AudioSource walkSoundPlayer;
+    public AudioSource audioSource;
+    public GameObject UpgradeEffect;
+    public AudioClip UpgradeSound;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer Sprite;
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();
         Sprite = GetComponent<SpriteRenderer>();
         ability = GetComponent<AbilityManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -89,7 +92,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void Dead() {
-        canControl = true;
+        canControl = false;
         rb.velocity = Vector2.zero;
         ability.isCasting = true;
         GetComponent<BoxCollider2D>().enabled = false;
@@ -103,8 +106,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void PlayWalkSound() {
-        walkSoundPlayer.clip = walkSound[Random.Range(0, walkSound.Length)];
-        walkSoundPlayer.Play();
+        audioSource.PlayOneShot(walkSound[Random.Range(0, walkSound.Length)]);
     }
 
     public static Vector2 GetMouseDerection()
@@ -115,5 +117,9 @@ public class PlayerMove : MonoBehaviour
 
     public static void UpdatePlayerUI() {
         intance.moneyText.text = "金錢 : " + intance.stats.money.ToString();
+    }
+    public static void PlayerUpgrade() {
+        intance.audioSource.PlayOneShot(intance.UpgradeSound);
+        Instantiate(intance.UpgradeEffect, intance.transform.position, Quaternion.identity, intance.transform);
     }
 }

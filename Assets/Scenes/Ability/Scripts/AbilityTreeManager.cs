@@ -108,7 +108,8 @@ public class AbilityTreeManager : MonoBehaviour
             {"Cooldown", activeAbility.cooldownTime.ToString("0.00") + "秒"},
             {"AD", "物理傷害"},
             {"AP", "魔法傷害"},
-            {"AttackCount", "Get"}
+            {"AttackCount", "Get"},
+            {"DestoryTime", "Get"}
         };
         Dictionary<string, string> AbilityValuePerLv = new Dictionary<string, string>() {
             {"Damage", $"({activeAbility.damagePerLevel*100}%)"},
@@ -137,13 +138,19 @@ public class AbilityTreeManager : MonoBehaviour
 
     public string GetAbilityValue(string key) {
         if(key == "AttackCount") {
-            MutiAttack Temp = (MutiAttack)activeAbility;
-            if(showMoreInfo) {
-                return Temp.attackCount.ToString() + $"({Temp.attackCountPerLv})";
-            }
-            else {
-                return Temp.attackCount.ToString();
-            }
+            MutiAttack temp = (MutiAttack)activeAbility;
+            if(showMoreInfo) 
+                return temp.attackCount.ToString() + $"({temp.attackCountPerLv})";
+            else 
+                return temp.attackCount.ToString();
+        }
+        if(key == "DestoryTime") {
+            RangeAttack temp = (RangeAttack)activeAbility;
+            if(showMoreInfo) 
+                return temp.destroyTime.ToString() + $"({temp.destroyTimePerLv})";
+            else 
+                return temp.destroyTime.ToString();
+
         }
         return null;
     }

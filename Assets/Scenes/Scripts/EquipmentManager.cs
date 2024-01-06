@@ -23,7 +23,7 @@ public class EquipmentManager : MonoBehaviour
 
     void Start() {  
         Stats = GetComponent<CharacterStats>();
-        audioSource.clip = EquipSound;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public static void UpdateEquipmentStats() {
@@ -50,7 +50,7 @@ public class EquipmentManager : MonoBehaviour
     }
 
     public static void PlayEquipSound() { 
-        intance.audioSource.Play();
+        intance.audioSource.PlayOneShot(intance.EquipSound);
     }
 
 }

@@ -12,6 +12,8 @@ public class MeleeAttackClass : MonoBehaviour
     AbilityStats stats;
     AudioSource audioSource;
 
+    List<Collider2D> attackedTarget = new List<Collider2D>();
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -24,7 +26,8 @@ public class MeleeAttackClass : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag(target)) {
+        if (other.CompareTag(target) && !attackedTarget.Contains(other)) {
+            attackedTarget.Add(other);
             CharacterStats character = other.GetComponent<CharacterStats>();
             if(character.canDamage) {
                 int currentDamage = (int)(stats.abilityDamage * Random.Range(0.9f,1.1f));

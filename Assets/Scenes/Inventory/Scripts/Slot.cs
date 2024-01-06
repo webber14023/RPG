@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using System;
 
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {   
@@ -17,7 +18,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     GameObject ItemPanel;
     GameObject ItemMenu;
 
-    int Level;
+    public int Level;
     string Quality;
     bool isClick, isEnter;
     float time;
@@ -30,7 +31,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if(time <= 0) 
                 isClick = false;
                 
-        if(slotItem != null && isEnter && Input.GetKeyDown(KeyCode.Mouse1)) {
+        if(slotItem != null && isEnter && Input.GetKeyDown(KeyCode.Mouse1) && !Input.GetKey(KeyCode.Mouse0)) {
             if(ItemMenu == null) {
                 GameObject oldMenu = GameObject.FindGameObjectWithTag("ItemMenu");
                 if(oldMenu != null) {
@@ -56,7 +57,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 slotItem.ItemFunction(transform.parent.name, slotID);
             }
             else if(slotItem.type != null && transform.parent.name == "MyBag") {
-                GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>().QuickEquip(slotID, transform.parent.name, slotItem.type);
+                if(!ShopManager.IsShopOpen()) 
+                    InventoryManager.QuickEquip(slotID, transform.parent.name, slotItem.type);
+                else {
+                    InventoryManager.SellItem(slotID, transform.parent.name, Int32.Parse(slotNum.text));
+                }
             }
             
             return;

@@ -6,6 +6,9 @@ using UnityEngine;
 public class RangeAttack : Ability
 {
     public float attackRange;
+    public float destroyTime;
+    public float baseDestroyTime;
+    public float destroyTimePerLv;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     Vector2 mouseDerection;
 
@@ -30,6 +33,7 @@ public class RangeAttack : Ability
         Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
         Stats.isAttackDamage = isAttackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
+        Stats.abilityDestroyTime = destroyTime;
         Stats.abilityDelayTime = 0.2f;
     }
 
@@ -37,5 +41,13 @@ public class RangeAttack : Ability
         PlayerMove move = parent.GetComponent<PlayerMove>();
 
         move.canControl = true;
+    }
+
+    public override void ResetAbility() {
+        destroyTime = baseDestroyTime;
+    }
+
+    public override void UpgradeAbility() {
+        destroyTime = baseDestroyTime + destroyTimePerLv * AbilityLevel;
     }
 }

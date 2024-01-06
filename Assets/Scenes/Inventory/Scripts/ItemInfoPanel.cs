@@ -5,15 +5,46 @@ using UnityEngine.UI;
 
 public class ItemInfoPanel : MonoBehaviour
 {
+    public Transform BackGround;
+    public RectTransform infoTransform;
+    public Transform Corner;
     public Text itemName;
     public Text itemLevel;
     public Text itemQuality;
     public Text itemPrize;
     public Text itemInfo;
 
-    void Update()
+    Vector3 cornerPos;
+    Vector3 changePos;
+
+    void Start() {
+        transform.position = Input.mousePosition;
+        cornerPos = Corner.position;
+        cornerPos.x = BackGround.GetComponent<RectTransform>().rect.width;
+        cornerPos.y = BackGround.GetComponent<RectTransform>().rect.height;
+        if(cornerPos.x > Screen.width) 
+            changePos.x += Screen.width - cornerPos.x;
+        if(cornerPos.y < 0) 
+            changePos.y -= cornerPos.y;
+
+        transform.position += changePos;
+    }
+
+    void FixedUpdate()
     {
         transform.position = Input.mousePosition;
+        cornerPos = Corner.position;
+        changePos = new Vector3(0,0);
+        if(cornerPos.x > Screen.width) 
+            changePos.x += Screen.width - cornerPos.x;
+        if(cornerPos.y < 0) 
+            changePos.y -= cornerPos.y;
+
+        transform.position += changePos;
+
+        float itemInfoHeight = infoTransform.rect.height / 4;
+        BackGround.GetComponent<RectTransform>().sizeDelta = new Vector2 (207, 108f + itemInfoHeight);
+
         if(Input.GetKey(KeyCode.Mouse0)) {
             Destroy(gameObject);
         }
@@ -37,7 +68,19 @@ public class ItemInfoPanel : MonoBehaviour
         itemName.text = item.ItemName;
         itemLevel.text = "道具等級 : " + Level.ToString();
         itemQuality.text = Quality;
-        itemPrize.text = "價格 : " + ((int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, Level))).ToString();
+        if(slot.parent.name == "Shop Grid")
+            itemPrize.text = "價格 : " + ((int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, Level))).ToString();
+        else
+            itemPrize.text = "價格 : " + ((int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, Level) * 0.8f)).ToString();
         itemInfo.text = Information;
+        StartCoroutine(ChangeBGSize());
+
+    }
+
+    IEnumerator ChangeBGSize()
+    {
+        yield return new WaitForSeconds(.01f);
+        float itemInfoHeight = infoTransform.rect.height / 4;
+        BackGround.GetComponent<RectTransform>().sizeDelta = new Vector2 (207, 110f + itemInfoHeight);
     }
 }

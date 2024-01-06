@@ -8,6 +8,8 @@ public class NpcData : ScriptableObject
 {
     public string NPCName;
     public Sprite NPCImage;
+    public NpcFunction AfterTalkFunction;
+    public bool RandomSentence;
     public List<Conversation> Conversations = new List<Conversation>();
 
     [System.Serializable]public struct Conversation {

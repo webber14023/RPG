@@ -19,7 +19,7 @@ MonoBehaviour:
   abilityPower: 0
   attackArmor: 80
   magicArmor: 25
-  speed: 2
+  speed: 3.5
   criticalChance: 0.1
   criticalMultiply: 2
   knockBackPower: 1
@@ -32,6 +32,7 @@ MonoBehaviour:
   EquipCriticalChance: 0.55
   EquipCriticalMultiply: 0
   EquipSpeed: 0
+  money: 0
   AttackCooldown: 3
   level: 0
   maxExp: 170

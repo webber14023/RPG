@@ -20,8 +20,8 @@ MonoBehaviour:
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u5411\u524D\u63EE\u780D\uFF0C\u9020\u6210*Damage*AD"
   isUnlocked: 1
   preskills: []
-  cooldownTime: 0.2
-  activeTime: 0.18
+  cooldownTime: 0.15
+  activeTime: 0.14
   canSkip: 0
   attackDistance: 0
   isAttackDamage: 1
@@ -29,6 +29,6 @@ MonoBehaviour:
   BaseDamagePercentage: 0.8
   BaseCooldownTime: 0.2
   damagePerLevel: 0.05
-  cooldownTimePerLevel: 0
+  cooldownTimePerLevel: -0.01
   attackRange: 1
   AttackEffectPrefab: {fileID: 8057289851498912510, guid: 83bafe945f6dc6e48b3f55871c87a687, type: 3}

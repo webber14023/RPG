@@ -12,77 +12,56 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
     public Inventory myBag;
     public Inventory Equipment;
     private int currentItemID;//當前物品ID
-    private int currentCount;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+    
+        orgLocation = InventoryManager.GetItemLocation(transform.parent.parent.name);
         originalParent = transform.parent;
         currentItemID = originalParent.GetComponent<Slot>().slotID;
-        FindLocation(transform.parent.parent.name, 0);
-        if (eventData.button != PointerEventData.InputButton.Left && orgLocation.itemList[currentItemID].isStackable) {
-            var data = orgLocation.itemListData[currentItemID];
-            currentCount = data.count - (data.count / 2);
-            data.count /= 2;
-            transform.GetChild(1).GetComponent<Text>().text = currentCount.ToString();
-            InventoryManager.RefreshItem();
-        }
         transform.SetParent(transform.parent.parent.parent.parent);
         transform.position = eventData.position;
         GetComponent<CanvasGroup>().blocksRaycasts = false;  
         
     }
 
-    public void FindLocation(string locationName, int num) {
-        if (num == 0){
-            switch(locationName)
-            {
-                case "MyBag":
-                    orgLocation = myBag;
-                    break;
-                case "Equipment":
-                    orgLocation = Equipment;
-                    break;
-            }
-        }
-        else {
-            switch(locationName)
-            {
-                case "MyBag":
-                    TargetLocation = myBag;
-                    break;
-                case "Equipment":
-                    TargetLocation = Equipment;
-                    break;
-            }
-        }
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag");
-        /*if (eventData.button != PointerEventData.InputButton.Left) {
+        if (eventData.button != PointerEventData.InputButton.Left) {
             return;
-        }*/
+        }
         transform.position = eventData.position;
         
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("ENd DRAG");
-        /*if (eventData.button != PointerEventData.InputButton.Left)
-            return;*/
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
 
-            //&& eventData.pointerCurrentRaycast.gameObject.CompareTag("slot")
         if(eventData.pointerCurrentRaycast.gameObject != null) {
             if(eventData.pointerCurrentRaycast.gameObject.name != "ItemImage")
-                FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name, 1);
+                TargetLocation = InventoryManager.GetItemLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
             else
-                FindLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.parent.name, 1);
+                TargetLocation = InventoryManager.GetItemLocation(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.parent.name);
             
-            if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage" && TargetLocation == orgLocation) {//判斷下面物體名字是 ItemImage 那麼互換位置
+            if(eventData.pointerCurrentRaycast.gameObject.name == "ItemImage") {
                 int targetSlotID = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<Slot>().slotID;
-
+                if(orgLocation.itemList[currentItemID] == orgLocation.itemList[targetSlotID]) {
+                    var tempTargetData = orgLocation.itemListData[targetSlotID];
+                    tempTargetData.count += orgLocation.itemListData[currentItemID].count;
+                    orgLocation.itemListData[targetSlotID] = tempTargetData;
+                    orgLocation.itemList[currentItemID] = null;
+                    orgLocation.itemListData[currentItemID] = new Inventory.Itemdata();
+                    InventoryManager.RefreshItem();
+                }
+                else
+                    InventoryManager.SwitchItem(currentItemID, orgLocation, targetSlotID, TargetLocation);
+                Destroy(gameObject);
+                return;
+                /*
                 if(orgLocation.itemList[currentItemID] == orgLocation.itemList[targetSlotID]) {
                     var tempTargetData = orgLocation.itemListData[targetSlotID];
                     tempTargetData.count += orgLocation.itemListData[currentItemID].count;
@@ -108,13 +87,16 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 eventData.pointerCurrentRaycast.gameObject.transform.parent.position = originalParent.position;
                 eventData.pointerCurrentRaycast.gameObject.transform.parent.SetParent(originalParent);
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
-                InventoryManager.RefreshItem();
-                return;
+                InventoryManager.RefreshItem();*/
             }
 
             if(eventData.pointerCurrentRaycast.gameObject.name == "slot(Clone)" || eventData.pointerCurrentRaycast.gameObject.name == orgLocation.itemList[currentItemID].type) {
+                int targetSlotID = eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID;
+                InventoryManager.SwitchItem(currentItemID, orgLocation, targetSlotID, TargetLocation);
+                Destroy(gameObject);
+                return;
                 //否則直接掛在檢測到的Slot下面
-                transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform);
+                /*transform.SetParent(eventData.pointerCurrentRaycast.gameObject.transform);
                 transform.position = eventData.pointerCurrentRaycast.gameObject.transform.position;
                 //itemList的物品存取位置改變
                 if(eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID != currentItemID){
@@ -127,9 +109,13 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 }
 
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
-                return;
+                return;*/
             }
             else if(eventData.pointerCurrentRaycast.gameObject.name == "DropArea") {
+                InventoryManager.DropItem(currentItemID, orgLocation);
+                Destroy(gameObject);
+                return;
+                /*
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity).GetComponent<ItemOnWorld>();
                 dropitemData.setItemData(orgLocation.itemList[currentItemID], orgLocation.itemListData[currentItemID].itemLevel, orgLocation.itemListData[currentItemID].count);
@@ -138,7 +124,7 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
                 InventoryManager.RefreshItem();
                 EquipmentManager.UpdateEquipmentStats();
                 Destroy(gameObject);
-                return;
+                return;*/
             }
         }
         transform.SetParent(originalParent);

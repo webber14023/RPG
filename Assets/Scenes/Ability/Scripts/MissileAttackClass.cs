@@ -8,6 +8,7 @@ public class MissileAttackClass : MonoBehaviour
     public float knockBackPower;
     public float destroyTime;
     public float delayTime;
+    public bool isTrack;
     [Header("附加效果")]
     public BuffStatus[] Buffs;
     
@@ -22,6 +23,8 @@ public class MissileAttackClass : MonoBehaviour
     Animator anim;
     AbilityStats stats;
     AudioSource audioSource;
+    
+    List<Collider2D> attackedTarget = new List<Collider2D>();
 
     void Start()
     {
@@ -35,6 +38,7 @@ public class MissileAttackClass : MonoBehaviour
         fire = false;
         delayTime = stats.abilityDelayTime;
         Derection = stats.Derection;
+        isTrack = stats.isTrack;
         audioSource.pitch = Random.Range(0.9f,1.1f);
     }
 
@@ -43,7 +47,7 @@ public class MissileAttackClass : MonoBehaviour
             if(delayTime > 0f) {
                 if(target == "Enemy")
                     Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-                else if(target == "Player") {
+                else if(target == "Player" && isTrack) {
                     Enemy controller = transform.parent.GetComponent<Enemy>();
                     Derection = (controller.target.GetChild(0).position - transform.position).normalized;
                 }
@@ -91,8 +95,8 @@ public class MissileAttackClass : MonoBehaviour
         }
            
 
-        if (other.CompareTag(target))
-        {
+        if (other.CompareTag(target) && !attackedTarget.Contains(other)) {
+            attackedTarget.Add(other);
             CharacterStats characterStats = other.GetComponent<CharacterStats>();
             BuffHolder BuffHolder = other.GetComponent<BuffHolder>();
             if(characterStats.canDamage) {

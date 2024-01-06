@@ -21,6 +21,7 @@ public class CharacterStats : MonoBehaviour
     public Text levelText;
     public GameObject damageTextPrefab;
     public GameObject hitEffect;
+    public AudioClip hitSound;
     public GameObject DeadEffect;
     
     
@@ -219,7 +220,7 @@ public class CharacterStats : MonoBehaviour
     public void TakeDamage(int damage, bool isAttackDamage, CharacterStats attacker, Vector2 knockBack) {
         rb.MovePosition(transform.position + (Vector3)knockBack);
         Instantiate(hitEffect, transform.transform.GetChild(0).position, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(knockBack.y, knockBack.x) * Mathf.Rad2Deg)), transform);
-        audioSource.Play();
+        audioSource.PlayOneShot(hitSound);
         StartCoroutine(Hurt());
         
         int levelGap = (level == 0? enemyLevel: level) - (attacker.level == 0? attacker.enemyLevel: attacker.level);
@@ -286,6 +287,7 @@ public class CharacterStats : MonoBehaviour
         abilityPoint += c_Data.abilityPointPerLv;
         UpdateStats();
         UpdateUI();
+        PlayerMove.PlayerUpgrade();
     }
 
     public void AddExp(int exp) {

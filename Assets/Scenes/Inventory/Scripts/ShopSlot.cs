@@ -21,7 +21,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ItemOnClick() {
         Debug.Log("buy");
-        GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>().BuyItem(slotItem, Level, Quality);
+        InventoryManager.BuyItem(slotItem, Level, Quality);
     }
 
     public void OnPointerEnter(PointerEventData data) {
@@ -52,11 +52,11 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GetComponent<Image>().raycastTarget = false;
         slotImage.sprite = item.ItemImage;
         slotItem = item;
-        Level = itemLevel;
-        Quality = itemQuality;
+        Level = item.baseLevel == 0? itemLevel: item.baseLevel;
+        Quality = item.baseQuality == ""? itemQuality : item.baseQuality;
         itemInSlot.SetActive(true);
         if(item.isStackable)
-            slotNum.text = item.ItemHeld.ToString();
+            slotNum.text = count.ToString();
         else if(slotNum != null)
             slotNum.gameObject.SetActive(false);
         slotInfo = item.ItemInfo;

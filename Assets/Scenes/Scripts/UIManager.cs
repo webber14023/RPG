@@ -40,13 +40,14 @@ public class UIManager : MonoBehaviour
         }  
     }
     void CloseUI(GameObject UI, KeyCode key) {
-        if(Input.GetKeyDown(key) || Input.GetKeyDown(KeyCode.Escape)) {
+        if(Input.GetKeyDown(key) || (key != KeyCode.None && Input.GetKeyDown(KeyCode.Escape))) {
             currentPanel = null;
             currentKey = KeyCode.None;
             UI.SetActive(false);
             manager.isCasting = false;
             move.canControl = true;
             ShopManager.SetShopPanel(false);
+            CraftingManager.SetPanel(false);
         }  
     }
     void DetectUI() {

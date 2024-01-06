@@ -24,7 +24,8 @@ public class BuffHolder : MonoBehaviour
                 if(buffs[i].isDisplay) {
                     buffs[i].RemoveEffect(gameObject);
                     Destroy(buffsSlot[i]);
-                    effectAnim[i].SetBool("Destory", true);
+                    if(effectAnim[i] != null)
+                        effectAnim[i].SetBool("Destory", true);
                     timer.RemoveAt(i);
                     buffs.RemoveAt(i);
                     SlotTime.RemoveAt(i);

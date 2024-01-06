@@ -10,7 +10,7 @@ public class RegenItem : Item
 
     public override void ItemFunction(string location, int itemID)
     {
-        GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>().ReduceItem(itemID, location, 1);
+        InventoryManager.ReduceItem(itemID, location, 1);
         CharacterStats playerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
         playerStats.RegenHP(regenValue);
         

@@ -22,6 +22,12 @@ public class BossRoom : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            GameObject enemy = genrator.Data.dungeonBoss[Random.Range(0, genrator.Data.dungeonBoss.Length)];
+            Enemys.Add(Instantiate(enemy, spawnPoint.position, Quaternion.identity, transform));
+            int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor * genrator.Data.floor);
+            Enemys[0].GetComponent<CharacterStats>().enemyLevel = level + Random.Range(0, 2);
+        }
         if(EnterRoom == true) {
             for(int i=0; i<Enemys.Count; i++) {
                 if(Enemys[i] == null) {
@@ -50,8 +56,6 @@ public class BossRoom : MonoBehaviour
             GameObject enemy = genrator.Data.dungeonBoss[Random.Range(0, genrator.Data.dungeonBoss.Length)];
             Enemys.Add(Instantiate(enemy, spawnPoint.position, Quaternion.identity, transform));
             int level = genrator.Data.minLevel + (int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor * genrator.Data.floor);
-            Debug.Log(level);
-            Debug.Log((int)((float)(genrator.Data.maxLevel - genrator.Data.minLevel) / genrator.Data.maxFloor  * genrator.Data.floor));
             Enemys[0].GetComponent<CharacterStats>().enemyLevel = level + Random.Range(0, 2);
             
             //CameraMove.instance.ChangeTarget(transform);

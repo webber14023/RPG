@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b18b9e450118f4cba6bb6cd27a3455, type: 3}
+  m_Name: Waiter
+  m_EditorClassIdentifier: 
+  NPCName: "\u597D\u718A\u5BF6"
+  NPCImage: {fileID: 21300000, guid: 4f6fe36c25281a74f8f56f60a57b77d5, type: 3}
+  AfterTalkFunction: {fileID: 11400000, guid: 5cce3d10d5750e740b4f76f907550113, type: 2}
+  RandomSentence: 0
+  Conversations:
+  - isNpcTalk: 1
+    sentence: "\u5C41\u773C\u6D3E\u5C0D"
+  - isNpcTalk: 0
+    sentence: "\u621112\u4E86"
+  - isNpcTalk: 1
+    sentence: "\u5587\u53ED\u9593"

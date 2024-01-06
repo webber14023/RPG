@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStates: 0
   target: {fileID: 0}
-  sightRadius: 17
+  sightRadius: 40
   attackRange: 11
   canControl: 0
   AttackCooldown: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   levelText: {fileID: 0}
   damageTextPrefab: {fileID: 4719213298264859033, guid: 9d2ccacb955fadc459e557f617ffd30b, type: 3}
   hitEffect: {fileID: 3764579976803197859, guid: 95c50a2e955c16844922669d07c34a8f, type: 3}
+  hitSound: {fileID: 8300000, guid: 33c28f40f496fee42b30010542e67ef5, type: 3}
   DeadEffect: {fileID: 3614481153871026672, guid: 61b359c5210dea742aa0b4936436b2cc, type: 3}
   maxHealth: 0
   currentHealth: 0
@@ -256,7 +257,7 @@ MonoBehaviour:
   canDamage: 0
   canControl: 0
   maxExp: 0
-  enemyLevel: 0
+  enemyLevel: 1
 --- !u!114 &8632900983589822777
 MonoBehaviour:
   m_ObjectHideFlags: 0

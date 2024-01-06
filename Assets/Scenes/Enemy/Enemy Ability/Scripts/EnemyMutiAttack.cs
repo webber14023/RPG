@@ -8,6 +8,7 @@ public class EnemyMutiAttack : Ability
     public float attackRange;
     public float DelayTime;
     public float areaAngle;
+    public bool isTrack;
     public int attackCount;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     Vector2 Derection;
@@ -32,6 +33,7 @@ public class EnemyMutiAttack : Ability
             Stats.isAttackDamage = isAttackDamage;
             Stats.abilityknockBackPower = characterStats.knockBackPower;
             Stats.abilityDelayTime = DelayTime * (i + 1);
+            Stats.isTrack = isTrack;
             Stats.Derection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin (angle * Mathf.Deg2Rad));
             angle += area;
         }

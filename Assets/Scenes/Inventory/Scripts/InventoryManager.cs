@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,55 +42,68 @@ public class InventoryManager : MonoBehaviour
         intance.itemInformation.text = itemDiscription;
     }
 
-    private Inventory GetItemLocation(string loactionName) {
+    public static Inventory GetItemLocation(string loactionName) {
         Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
-            {"MyBag", myBag},
-            {"Equipment", equipment}
+            {"MyBag", intance.myBag},
+            {"Equipment", intance.equipment}
         };
-        return Location[loactionName];
+        if(Location.TryGetValue(loactionName, out Inventory value)) {
+            return value;
+        }
+        return null;
     }
 
-    public void QuickEquip(int slotID, string location, string type) {
+    public static int FindEmptyID(Inventory targetInv) {
+        for(int i=0; i < targetInv.itemList.Count; i++){
+            if(targetInv.itemList[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void QuickEquip(int slotID, string location, string type) {
         Debug.Log("QuickEquip");
         Inventory itemLocation = GetItemLocation(location);
-        int equipmentID = equipTypes.IndexOf(type);
+        int equipmentID = intance.equipTypes.IndexOf(type);
 
         var temp = itemLocation.itemList[slotID];
         var tempData = itemLocation.itemListData[slotID];
-        itemLocation.itemList[slotID] = equipment.itemList[equipmentID];
-        equipment.itemList[equipmentID] = temp;
-        itemLocation.itemListData[slotID] = equipment.itemListData[equipmentID];
-        equipment.itemListData[equipmentID] = tempData;
+        itemLocation.itemList[slotID] = intance.equipment.itemList[equipmentID];
+        intance.equipment.itemList[equipmentID] = temp;
+        itemLocation.itemListData[slotID] = intance.equipment.itemListData[equipmentID];
+        intance.equipment.itemListData[equipmentID] = tempData;
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
         EquipmentManager.PlayEquipSound();
     }
 
-    public void BuyItem(Item item, int level, string Quality) {
+    public static void BuyItem(Item item, int level, string Quality) {
         CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        if(stats.money >= (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level))) {
-            if(FindEmptyID(myBag) != -1) {
+        int realPrize = (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level));
+        if(stats.money >= realPrize) {
+            if(FindEmptyID(intance.myBag) != -1) {
                 AddItem(item, level, 1, Quality);
-                stats.money -= item.prize;
+                stats.money -= realPrize;
             }
         }
-        SoundSource.clip = BuyItemSound;
-        SoundSource.Play();
+        intance.SoundSource.PlayOneShot(intance.BuyItemSound);
         PlayerMove.UpdatePlayerUI();
     }
 
-    public void SellItem(int slotID, string location, int SellCount) {
+    public static void SellItem(int slotID, string location, int SellCount) {
         CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
         Inventory itemLocation = GetItemLocation(location);
-        stats.money += itemLocation.itemList[slotID].prize * SellCount;
+        int itemPrize = itemLocation.itemList[slotID].prize;
+        int realPrize = (int)Mathf.Round(itemPrize * Mathf.Pow(itemLocation.itemList[slotID].prizePerLv, itemLocation.itemListData[slotID].itemLevel) * 0.8f);
+        stats.money += realPrize * SellCount;
         ReduceItem(slotID, location, SellCount);
-        SoundSource.clip = SellItemSound;
-        SoundSource.Play();
+        intance.SoundSource.PlayOneShot(intance.SellItemSound);
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
     }
 
-    public void DropItem(int slotID, string location) {
+    /*public static void DropItem(int slotID, string location) {
         Inventory itemLocation = GetItemLocation(location);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity).GetComponent<ItemOnWorld>();
@@ -98,9 +112,19 @@ public class InventoryManager : MonoBehaviour
         itemLocation.itemListData[slotID] = new Inventory.Itemdata();
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
+    }*/
+    public static void DropItem(int slotID, Inventory itemLocation) {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position, Quaternion.identity).GetComponent<ItemOnWorld>();
+        dropitemData.transform.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
+        dropitemData.setItemData(itemLocation.itemList[slotID], itemLocation.itemListData[slotID].itemLevel, itemLocation.itemListData[slotID].count, itemLocation.itemListData[slotID].itemQuality);
+        itemLocation.itemList[slotID] = null;
+        itemLocation.itemListData[slotID] = new Inventory.Itemdata();
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
     }
 
-    public void DeleteItem(int slotID, string location) {
+    public static void DeleteItem(int slotID, string location) {
         Inventory itemLocation = GetItemLocation(location);
         itemLocation.itemList[slotID] = null;
         itemLocation.itemListData[slotID] = new Inventory.Itemdata();
@@ -108,10 +132,10 @@ public class InventoryManager : MonoBehaviour
         EquipmentManager.UpdateEquipmentStats();
     }
 
-    public void ReduceItem(int slotID, string location, int amount) {
+    public static void ReduceItem(int slotID, string location, int amount) {
         Inventory itemLocation = GetItemLocation(location);
         var tempData = itemLocation.itemListData[slotID];
-        if(tempData.count > 1) {
+        if(tempData.count > amount) {
             tempData.count -= amount;
             itemLocation.itemListData[slotID] = tempData;
         }
@@ -121,64 +145,82 @@ public class InventoryManager : MonoBehaviour
         RefreshItem();
     }
     
-
-    public void SplitItem(int slotID, string location, int amount) {
+    public static void SplitItem(int slotID, string location, int amount) {
         Inventory itemLocation = GetItemLocation(location);
         int emptyID = FindEmptyID(itemLocation);
         if(emptyID == -1)
             return;
         var orgItemData = itemLocation.itemListData[slotID];
         orgItemData.count -= amount;
-        myBag.itemListData[slotID] = orgItemData;
+        intance.myBag.itemListData[slotID] = orgItemData;
         AddNewItem(itemLocation.itemList[slotID], orgItemData.itemLevel, amount, orgItemData.itemQuality, emptyID);
         RefreshItem();
 
     }
 
-    public int FindEmptyID(Inventory targetInv) {
-        for(int i=0; i < myBag.itemList.Count; i++){
-            if(myBag.itemList[i] == null) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public void AddItem(Item item, int Level, int count, string Quality) {
-        if(myBag.itemList.Contains(item)) {
-            int itemID = myBag.itemList.IndexOf(item);
-            var temp = myBag.itemListData[itemID];
+    public static void AddItem(Item item, int Level, int count, string Quality) {
+        if(intance.myBag.itemList.Contains(item) && item.isStackable) {
+            int itemID = intance.myBag.itemList.IndexOf(item);
+            var temp = intance.myBag.itemListData[itemID];
             temp.count += count;
-            myBag.itemListData[itemID] = temp;
+            intance.myBag.itemListData[itemID] = temp;
             RefreshItem();
 
             return;
         }
-        int EmptyID = FindEmptyID(myBag);
+        int EmptyID = FindEmptyID(intance.myBag);
 
         if (EmptyID == -1)
             return;
-        if(!myBag.itemList.Contains(item) || !item.isStackable) {
-            myBag.itemList[EmptyID] = item;
-            var temp = myBag.itemListData[EmptyID];
-            temp.itemLevel = Level;
-            temp.itemQuality = Quality;
-            myBag.itemListData[EmptyID] = temp;
-                
-            }
+        if(!intance.myBag.itemList.Contains(item) || !item.isStackable) {
+            intance.myBag.itemList[EmptyID] = item;
+            var temp = intance.myBag.itemListData[EmptyID];
+            
+            temp.itemLevel = item.baseLevel == 0? Level: item.baseLevel;
+            temp.itemQuality = item.baseQuality == ""? Quality: item.baseQuality;
+            temp.count = count;
+            intance.myBag.itemListData[EmptyID] = temp;
+        }
         RefreshItem();
     }
 
-    public void AddNewItem(Item item, int Level, int count, string Quality ,int slotID) {
-        myBag.itemList[slotID] = item;
-        var temp = myBag.itemListData[slotID];
+    public static void AddNewItem(Item item, int Level, int count, string Quality ,int slotID) {
+        intance.myBag.itemList[slotID] = item;
+        var temp = intance.myBag.itemListData[slotID];
         temp.itemLevel = Level;
         temp.itemQuality = Quality;
         temp.count = count;
-        myBag.itemListData[slotID] = temp;
-
+        intance.myBag.itemListData[slotID] = temp;
     }
-    
+
+    public static void SwitchItem(int FirstslotID, Inventory FirstLocation, int SecondSlotID, Inventory SecondLocation) {
+        var tempItem = FirstLocation.itemList[FirstslotID];
+        var tempItemData = FirstLocation.itemListData[FirstslotID];
+        FirstLocation.itemList[FirstslotID] = SecondLocation.itemList[SecondSlotID];
+        FirstLocation.itemListData[FirstslotID] = SecondLocation.itemListData[SecondSlotID];
+        SecondLocation.itemList[SecondSlotID] = tempItem;
+        SecondLocation.itemListData[SecondSlotID] = tempItemData;
+
+        RefreshItem();
+        EquipmentManager.UpdateEquipmentStats();
+    }
+
+    public static bool FindItemInPlayerBag(Item item, int count) {
+        if(intance.myBag.itemList.Contains(item)) {
+            if(item.isStackable) {
+                if(intance.myBag.itemListData[intance.myBag.itemList.IndexOf(item)].count >= count)
+                    return true;
+            }
+            else
+                return true;
+
+        }
+        return false;
+    }
+
+    public static int FindItemIDInPlayerBag(Item findItem) {
+        return intance.myBag.itemList.IndexOf(findItem);;
+    }
     
     public static void RefreshItem() {
         //循環刪除slotGrid下的子集物體

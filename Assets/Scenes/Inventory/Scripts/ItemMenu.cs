@@ -18,20 +18,31 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Text SplitMenuTitle;
     public InputField SplitField;
     public Slider SplitSlider;
+    public Text HintText;
 
-    InventoryManager inventoryManager;
+    Transform Corner;
 
     bool isInside;
     int splitAmount = 1;
     int SplitmaxAmount;
 
+    Vector3 changePos;
+
     private void Start() {
-        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").transform.GetComponent<InventoryManager>();
+        SplitmaxAmount = Int32.Parse(CurrentSlot.slotNum.text) - 1;
         useButton.interactable = CurrentSlot.slotItem.type != "";
         DropButton.interactable = true;
-        SplitButton.interactable = CurrentSlot.slotItem.isStackable;
+        SplitButton.interactable = CurrentSlot.slotItem.isStackable && SplitmaxAmount > 1;
         SellButton.interactable = ShopManager.IsShopOpen();
-        SplitmaxAmount = Int32.Parse(CurrentSlot.slotNum.text) - 1;
+        Corner = transform.Find("Corner");
+        if(Corner.position.x > Screen.width) 
+            changePos.x += Screen.width - Corner.position.x;
+        if(Corner.position.y < 0) 
+            changePos.y -= Corner.position.y;
+
+        transform.position += changePos;
+
+
     }
 
     private void Update() {
@@ -50,7 +61,7 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Use() {
         List<string> equipTypes = new List<string>() {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
         if(equipTypes.Contains(CurrentSlot.slotItem.type)) {
-            inventoryManager.QuickEquip(CurrentSlot.slotID, CurrentSlot.transform.parent.name, CurrentSlot.slotItem.type);
+            InventoryManager.QuickEquip(CurrentSlot.slotID, CurrentSlot.transform.parent.name, CurrentSlot.slotItem.type);
         }
         else if(CurrentSlot.slotItem.type == "Functional") {
             CurrentSlot.slotItem.ItemFunction(CurrentSlot.transform.parent.name, CurrentSlot.slotID);
@@ -59,7 +70,7 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     public void Drop() {
-        inventoryManager.DropItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name);
+        InventoryManager.DropItem(CurrentSlot.slotID, InventoryManager.GetItemLocation(CurrentSlot.transform.parent.name));
         Destroy(gameObject);
     }
 
@@ -88,6 +99,11 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
         SplitField.text = splitAmount.ToString();
         SplitSlider.value = (float)splitAmount / SplitmaxAmount;
+        if(SplitMenuTitle.text == "銷售數量") {
+            int realPrize = (int)Mathf.Round(CurrentSlot.slotItem.prize * Mathf.Pow(CurrentSlot.slotItem.prizePerLv, CurrentSlot.Level) * 0.8f);
+            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
+            
+        }
     }
 
     public void ChangeSplitAmount(Slider Input) {
@@ -98,25 +114,30 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             splitAmount = 1;
         
         SplitField.text = splitAmount.ToString();
+        if(SplitMenuTitle.text == "銷售數量") {
+            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
+        }
     }
     
     public void Split() {
-        if(SplitMenuTitle.text == "拆分數量")
-            inventoryManager.SplitItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, splitAmount);
+        if(SplitMenuTitle.text == "銷售數量")
+            InventoryManager.SellItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, splitAmount);
+            
         else
-            inventoryManager.SellItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, splitAmount);
+            InventoryManager.SplitItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, splitAmount);
         Destroy(gameObject);
     }
 
     public void Sell() {
         if(!CurrentSlot.slotItem.isStackable){
-            inventoryManager.SellItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, 1);
+            InventoryManager.SellItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, 1);
             Destroy(gameObject);
         }
         else {
             SplitMenuGameObject.SetActive(true);
             SplitmaxAmount += 1;
             SplitMenuTitle.text = "銷售數量";
+            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
         }
     }
 }

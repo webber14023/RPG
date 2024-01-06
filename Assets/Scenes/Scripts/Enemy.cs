@@ -66,8 +66,9 @@ public class Enemy : MonoBehaviour
             else
                 enemyStates = EnemyStates.GUARD;
         }
-        else
+        else {
             enemyStates = EnemyStates.DEAD;
+        }
 
         switch (enemyStates)
         {
@@ -157,11 +158,12 @@ public class Enemy : MonoBehaviour
     }
 
     void DropItem() {
+        Debug.Log("DropItem");
         for(int i = 0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
                 for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
                     Transform dropitem = Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).transform;
-                    dropitem.GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel, 1);
+                    dropitem.GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel, 1, "優質");
                     dropitem.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
                 }
             }
@@ -169,7 +171,6 @@ public class Enemy : MonoBehaviour
     }
 
     private void Die() {
-        agent.isStopped = true;
         agent.velocity = Vector3.zero;
         for(int i=0; i<AbilityHolders.Length; i++)
             AbilityHolders[i].enabled = false;

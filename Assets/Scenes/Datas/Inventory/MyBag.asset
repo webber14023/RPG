@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MyBag
   m_EditorClassIdentifier: 
   itemList:
+  - {fileID: 11400000, guid: edfe6fa6b95ecab4b8003d327f59aa3e, type: 2}
+  - {fileID: 11400000, guid: a362ac55b14e91145bf3656f5b9d18c5, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
-  - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
-  - {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -38,51 +38,75 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   itemListData:
+  - itemLevel: 777
+    count: 32
+    itemQuality: UwU
+  - itemLevel: 10
+    count: 1
+    itemQuality: "\u666E\u901A"
   - itemLevel: 0
-    itemQuality: 
-  - itemLevel: 3
-    itemQuality: "\u512A\u826F"
-  - itemLevel: 0
-    itemQuality: 
-  - itemLevel: 0
-    itemQuality: 
-  - itemLevel: 0
-    itemQuality: 
-  - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
     itemQuality: 
   - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
     itemQuality: 

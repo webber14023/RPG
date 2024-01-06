@@ -188,7 +188,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 0
   hintText: 
+  Hintkey: {fileID: 0}
   playerInventory: {fileID: 11400000, guid: cd5d0f29b5abb4f4ebf8f750e133f70d, type: 2}
+  PickColider: {fileID: 5987962076178633462}
   dropSound: {fileID: 8300000, guid: 114df91c6feb56247a9bd729341811c0, type: 3}
   pickSound: {fileID: 8300000, guid: 164b156e029e9bc4e933dc7a124845ce, type: 3}
 --- !u!82 &95862143113973073

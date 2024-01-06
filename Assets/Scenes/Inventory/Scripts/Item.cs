@@ -9,7 +9,8 @@ public class Item : ScriptableObject
     public string type;
     public Sprite ItemImage;
     public bool isStackable;
-    public int ItemHeld;
+    public int baseLevel;
+    public string baseQuality;
     public int prize = 100;
     public float prizePerLv = 1.05f;
     [TextArea]

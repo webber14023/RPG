@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BasicDungeon
   m_EditorClassIdentifier: 
   dungeonName: BasicDungeon
-  floor: 32
+  floor: 35
   maxFloor: 100
-  historyFloor: 19
+  historyFloor: 64
   enemyCount: 4
   minLevel: 1
   maxLevel: 100

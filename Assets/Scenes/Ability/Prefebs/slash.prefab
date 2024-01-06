@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8057289851498912501}
   - component: {fileID: 8057289851498912498}
-  - component: {fileID: 6772836064209614370}
   - component: {fileID: 8057289851498912496}
   - component: {fileID: 8057289851498912497}
   - component: {fileID: -1523207828041046199}
   - component: {fileID: 8608190706638652445}
   - component: {fileID: 1890008686177416413}
+  - component: {fileID: 6621811448223732062}
   m_Layer: 0
   m_Name: slash
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8057289851498912510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.4131656, y: 1.3212909, z: 0.0406974}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,22 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6772836064209614370
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057289851498912510}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.14268401, y: -0.015727576}
-  serializedVersion: 2
-  m_Radius: 0.6401196
 --- !u!50 &8057289851498912496
 Rigidbody2D:
   serializedVersion: 4
@@ -160,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8e5f2103582ed46a93437bb12ac8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
   knockBackPower: 1
   Audios:
   - {fileID: 8300000, guid: b69311642e8facd45b6481d368bb37c8, type: 3}
@@ -179,9 +162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e85b34269e4fb45acb0c556b99be10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttackDamage: 0
   abilityDamage: 0
   abilityknockBackPower: 0
   abilityDelayTime: 0
+  ActvateSound: {fileID: 0}
+  HitSound: {fileID: 0}
   Derection: {x: 0, y: 0}
 --- !u!82 &1890008686177416413
 AudioSource:
@@ -279,3 +265,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &6621811448223732062
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057289851498912510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.2160047, y: -0.040406402}
+  m_Size: {x: 1.4338763, y: 1.6284318}
+  m_Direction: 1

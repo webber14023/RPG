@@ -16,7 +16,8 @@ MonoBehaviour:
   type: 
   ItemImage: {fileID: 21300000, guid: 11cc7af08fc06204285384df7c4163a4, type: 3}
   isStackable: 1
-  ItemHeld: 0
-  prize: 100
+  baseLevel: 777
+  baseQuality: UwU
+  prize: 0
   prizePerLv: 1.05
   ItemInfo: UWUWUWUW
