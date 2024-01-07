@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class interactivityObject : MonoBehaviour
     public KeyCode key;
     public string hintText;
     public GameObject Hintkey;
+    public string ColliderTag = "Player";
     bool canInteract;
 
     public virtual void Start() {
@@ -22,20 +24,40 @@ public class interactivityObject : MonoBehaviour
     }
     
     private void Update() {
-        if(canInteract && Input.GetKeyDown(key))
-            Interact();
+        if(key != KeyCode.Mouse0) {
+            if(canInteract && Input.GetKeyDown(key)) {
+                Interact();
+            }
+        }
+    }
+
+    private void OnMouseOver() {
+        Debug.Log("mouseIn");
+        if(key == KeyCode.Mouse0 && canInteract) {
+            if(Input.GetKeyDown(KeyCode.Mouse0)) {
+                Interact();
+                Debug.Log("clickDropItem");
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Player")) {
-            canInteract = true;
-            Hintkey.SetActive(true);
-            Hintkey.transform.rotation = Quaternion.identity;
+        if(other.CompareTag(ColliderTag)) {
+            Debug.Log(PlayerMove.PlayerInteractStats());
+            if(!PlayerMove.PlayerInteractStats()) {
+                canInteract = true;
+                Hintkey.SetActive(true);
+                Hintkey.transform.rotation = Quaternion.identity;
+            }
+            else {
+                canInteract = false;
+            }
+            
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.CompareTag("Player")) {
+        if(other.CompareTag(ColliderTag)) {
             canInteract = false;
             Hintkey.SetActive(false);
         }

@@ -22,7 +22,28 @@ public class MeleeAttackClass : MonoBehaviour
         audioSource.clip = stats.ActvateSound;
         audioSource.clip = Audios[Random.Range(0,Audios.Length-1)];
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";
-        audioSource.Play();
+        anim.enabled = false;
+        knockBackPower = stats.abilityknockBackPower;
+        if(stats.abilityDelayTime == 0) {
+            Derection = stats.Derection;
+            float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            anim.enabled = true;
+            audioSource.Play();
+        }
+    }
+
+    void Update() {
+        if(stats.abilityDelayTime > 0) {
+            stats.abilityDelayTime -= Time.deltaTime;
+            if(stats.abilityDelayTime <= 0) {
+                Derection = PlayerMove.GetMouseDerection();
+                float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                anim.enabled = true;
+                audioSource.Play();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {

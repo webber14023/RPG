@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject DeathInterface;
     public GameObject HurtEffect;
     public Text moneyText;
+    public Text moneyTextInBag;
     public CharacterStats stats;
     public AudioClip[] walkSound;
     public AudioSource audioSource;
@@ -25,6 +27,7 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer Sprite;
     private float inputX, inputY;
     private AbilityManager ability;
+    public bool InteractStats;
 
     void Awake() {
         if(intance != null)
@@ -82,8 +85,8 @@ public class PlayerMove : MonoBehaviour
         }
     }
     public void ClearAllAttackEffect() {
-        while(transform.childCount > 3)
-            DestroyImmediate(transform.GetChild(3).gameObject);
+        while(transform.childCount > 4)
+            DestroyImmediate(transform.GetChild(4).gameObject);
     }
 
     public void PlayerHurt() {
@@ -115,11 +118,32 @@ public class PlayerMove : MonoBehaviour
         return mouseDerection;
     }
 
+    public static bool PlayerInteractStats() {
+        return intance.InteractStats;
+    }
+
+    public static void PlayerInteractSet(bool stats) {
+        intance.InteractStats = stats;
+    }
+
     public static void UpdatePlayerUI() {
+        Debug.Log(intance.stats.money);
         intance.moneyText.text = "金錢 : " + intance.stats.money.ToString();
+        intance.moneyTextInBag.text = "金錢 : " + intance.stats.money.ToString();
     }
     public static void PlayerUpgrade() {
         intance.audioSource.PlayOneShot(intance.UpgradeSound);
         Instantiate(intance.UpgradeEffect, intance.transform.position, Quaternion.identity, intance.transform);
+    }
+    public static void ResetStatsAndUI() {
+        EquipmentManager.UpdateEquipmentStats();
+        intance.stats.UpdateStats();
+        intance.stats.currentHealth = intance.stats.maxHealth;
+        intance.stats.UpdateUI();
+        UpdatePlayerUI();
+    }
+
+    public static CharacterStats GetPlayerStats() {
+        return intance.stats;
     }
 }

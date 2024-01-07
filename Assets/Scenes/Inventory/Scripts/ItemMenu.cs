@@ -101,8 +101,7 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         SplitSlider.value = (float)splitAmount / SplitmaxAmount;
         if(SplitMenuTitle.text == "銷售數量") {
             int realPrize = (int)Mathf.Round(CurrentSlot.slotItem.prize * Mathf.Pow(CurrentSlot.slotItem.prizePerLv, CurrentSlot.Level) * 0.8f);
-            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
-            
+            HintText.text = $"售價 {(int)Mathf.Round(CurrentSlot.slotItem.prize * Mathf.Pow(CurrentSlot.slotItem.prizePerLv, CurrentSlot.Level) * 0.8f) * splitAmount} $:";
         }
     }
 
@@ -115,7 +114,7 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
         SplitField.text = splitAmount.ToString();
         if(SplitMenuTitle.text == "銷售數量") {
-            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
+            HintText.text = $"售價 {(int)Mathf.Round(CurrentSlot.slotItem.prize * Mathf.Pow(CurrentSlot.slotItem.prizePerLv, CurrentSlot.Level) * 0.8f) * splitAmount} $:";
         }
     }
     
@@ -129,7 +128,7 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     public void Sell() {
-        if(!CurrentSlot.slotItem.isStackable){
+        if(!CurrentSlot.slotItem.isStackable || SplitmaxAmount == 0){
             InventoryManager.SellItem(CurrentSlot.slotID, CurrentSlot.transform.parent.name, 1);
             Destroy(gameObject);
         }
@@ -137,7 +136,8 @@ public class ItemMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             SplitMenuGameObject.SetActive(true);
             SplitmaxAmount += 1;
             SplitMenuTitle.text = "銷售數量";
-            HintText.text = $"售價 {CurrentSlot.slotItem.prize * splitAmount} $:";
+            HintText.text = $"售價 {(int)Mathf.Round(CurrentSlot.slotItem.prize * Mathf.Pow(CurrentSlot.slotItem.prizePerLv, CurrentSlot.Level) * 0.8f) * splitAmount} $:";
+            
         }
     }
 }

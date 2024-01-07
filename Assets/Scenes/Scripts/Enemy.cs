@@ -161,11 +161,9 @@ public class Enemy : MonoBehaviour
         Debug.Log("DropItem");
         for(int i = 0; i < stats.c_Data.dropItems.Length; i++) {
             if(Random.Range(0,100) <= stats.c_Data.dropItems[i].dropPercent) {
-                for(int j=0; j<Random.Range(1, stats.c_Data.dropItems[i].Count); j++) {
-                    Transform dropitem = Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).transform;
-                    dropitem.GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel, 1, "優質");
-                    dropitem.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
-                }
+                Transform dropitem = Instantiate((GameObject)Resources.Load("items/itemPrefab"), transform.position, Quaternion.identity, transform.parent.parent).transform;
+                dropitem.GetComponent<ItemOnWorld>().setItemData(stats.c_Data.dropItems[i].item, stats.enemyLevel, Random.Range(1, stats.c_Data.dropItems[i].Count), "優質");
+                dropitem.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
             }
         }
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c93ff9e8f2f7b345bcc667c616cceba, type: 3}
   m_Name: Inferno Explosion
   m_EditorClassIdentifier: 
-  abilityID: 41
+  abilityID: 4
   abilityName: "\u70C8\u7130\u7206\u7834"
   abilityImage: {fileID: -1181100440, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 5

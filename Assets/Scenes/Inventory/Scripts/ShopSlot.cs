@@ -8,6 +8,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int slotID;//空格ID 等於 物品ID
     public GameObject ItemDisciptionPrefab;
+    public GameObject ItemCountMenuPrefab;
     public Item slotItem;
     public Image slotImage;
     public Text slotNum; 
@@ -15,13 +16,25 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     GameObject ItemPanel;
     int Level;
     string Quality;
-    float time;
     public GameObject itemInSlot;
 
-
     public void ItemOnClick() {
-        Debug.Log("buy");
-        InventoryManager.BuyItem(slotItem, Level, Quality);
+        int itemRealPrize = (int)Mathf.Round(slotItem.prize * Mathf.Pow(slotItem.prizePerLv, Level));
+        int maxAmount = itemRealPrize != 0? PlayerMove.GetPlayerStats().money / itemRealPrize : 999;
+        if(maxAmount == 1) {
+            BuyItem(1);
+        }
+        else if(maxAmount > 1) {
+            ItemCountMenu countMenu = Instantiate(ItemCountMenuPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.transform).GetComponent<ItemCountMenu>();
+            countMenu.maxAmount = maxAmount;
+            countMenu.target = transform;
+            
+            //open count menu
+        }
+    }
+
+    public void BuyItem(int count) {
+        InventoryManager.BuyItem(slotItem, Level, Quality, count);
     }
 
     public void OnPointerEnter(PointerEventData data) {

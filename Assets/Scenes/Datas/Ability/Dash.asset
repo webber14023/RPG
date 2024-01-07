@@ -12,14 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61485aa8221537647b4e9c65c68e5eee, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  abilityID: 99
+  abilityID: -1
   abilityName: Dash
   abilityImage: {fileID: 0}
   AbilityLevel: 0
+  AbilityMaxLevel: 0
   abilityDes: 
   isUnlocked: 0
   preskills: []
   cooldownTime: 0.1
   activeTime: 0.3
   canSkip: 0
+  attackDistance: 0
+  isAttackDamage: 0
+  damagePercentage: 0
+  BaseDamagePercentage: 0
+  BaseCooldownTime: 0
+  damagePerLevel: 0
+  cooldownTimePerLevel: 0
   dashForse: 15

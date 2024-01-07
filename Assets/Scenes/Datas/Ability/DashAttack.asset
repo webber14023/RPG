@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d7d79fd8463514596fd4206963f989, type: 3}
   m_Name: DashAttack
   m_EditorClassIdentifier: 
-  abilityID: 8
+  abilityID: 1
   abilityName: "\u77AC\u9593\u523A\u64CA "
   abilityImage: {fileID: 21300000, guid: 7e251b9b03a89d04c8be70c2cff58143, type: 3}
   AbilityLevel: 5

@@ -41,7 +41,7 @@ public class CraftingManager : MonoBehaviour
             if(intance.HideOption) {
                 intance.canCraft = true;
                 for(int j=0; j<intance.recipeList.Recipes[i].material.Length; j++) {
-                    if(!InventoryManager.FindItemInPlayerBag(intance.recipeList.Recipes[i].material[j].item, intance.recipeList.Recipes[i].material[j].count)) {
+                    if(InventoryManager.FindItemInPlayerBag(intance.recipeList.Recipes[i].material[j].item) < intance.recipeList.Recipes[i].material[j].count) {
                         intance.canCraft = false;
                         break;
                     }
@@ -55,7 +55,9 @@ public class CraftingManager : MonoBehaviour
             else {
                 CraftOption option = Instantiate(intance.CraftOptionsPrefeb, intance.CraftOptionsGrid).GetComponent<CraftOption>();
                 for(int j=0; j<intance.recipeList.Recipes[i].material.Length; j++) {
-                    if(!InventoryManager.FindItemInPlayerBag(intance.recipeList.Recipes[i].material[j].item, intance.recipeList.Recipes[i].material[j].count))
+                    int maxAmount = InventoryManager.FindItemInPlayerBag(intance.recipeList.Recipes[i].material[j].item) / intance.recipeList.Recipes[i].material[j].count;
+                    option.maxAmount = option.maxAmount > maxAmount? maxAmount: option.maxAmount;
+                    if(maxAmount < 1)
                         option.lackItem.Add(intance.recipeList.Recipes[i].material[j].item);
                 }
                 option.SetOption(intance.recipeList.Recipes[i]);
@@ -72,6 +74,10 @@ public class CraftingManager : MonoBehaviour
     public static void SetPanel(bool state) {
         intance.PlayerBag.SetActive(state);
         intance.CraftingPanel.SetActive(state);
+    }
+    
+    public static bool IsPenalOpen() {
+        return intance.CraftingPanel.activeSelf;
     }
 
     public void ChangeShowMode(Toggle toggle) {

@@ -154,9 +154,11 @@ public class CharacterStats : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         healthBar = hpBar.GetComponent<HealthBar>();
         if(enemyLevel == 0) {
-            currentHealth = baseCurrentHealth;
+            EquipmentManager.UpdateEquipmentStats();
             UpdateStats();
+            currentHealth = maxHealth;
             UpdateUI();
+            playerStatsPanel.UpdateStatsPanel();
         }
         else {
             enemySetLevel(enemyLevel);

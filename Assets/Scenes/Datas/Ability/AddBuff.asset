@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336f11e52f7f7ce4aaade929dbdc4d1e, type: 3}
   m_Name: AddBuff
   m_EditorClassIdentifier: 
-  abilityID: 0
+  abilityID: -1
   abilityName: 
   abilityImage: {fileID: 21300000, guid: 7004782f29a83f4498add10e8e12f6c5, type: 3}
   AbilityLevel: 0

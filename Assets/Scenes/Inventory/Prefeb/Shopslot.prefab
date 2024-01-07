@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotID: 0
   ItemDisciptionPrefab: {fileID: 4875009732150243563, guid: 085dc80d381f4a9489a9ff7f6b042585, type: 3}
+  ItemCountMenuPrefab: {fileID: 8953273211896723217, guid: 1b8b458033c3f434fb4ccd92fd3de86f, type: 3}
   slotItem: {fileID: 0}
   slotImage: {fileID: 542087219021906579}
   slotNum: {fileID: 9159978229867731080}

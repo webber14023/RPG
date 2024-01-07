@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +27,15 @@ public class InventoryManager : MonoBehaviour
 
     public AudioSource SoundSource;
 
+    List<Item> allItem = new List<Item>();
+
     void Awake() {
         if(intance != null)
             Destroy(this);
         intance = this;
     }
     private void OnEnable() {
+        allItem = ((Item[])Resources.FindObjectsOfTypeAll(typeof(Item))).ToList();
         RefreshItem();
     }
 
@@ -78,12 +79,12 @@ public class InventoryManager : MonoBehaviour
         EquipmentManager.PlayEquipSound();
     }
 
-    public static void BuyItem(Item item, int level, string Quality) {
-        CharacterStats stats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        int realPrize = (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level));
+    public static void BuyItem(Item item, int level, string Quality, int count) {
+        CharacterStats stats = PlayerMove.GetPlayerStats();
+        int realPrize = (int)Mathf.Round(item.prize * Mathf.Pow(item.prizePerLv, level)) * count;
         if(stats.money >= realPrize) {
             if(FindEmptyID(intance.myBag) != -1) {
-                AddItem(item, level, 1, Quality);
+                AddItem(item, level, count, Quality);
                 stats.money -= realPrize;
             }
         }
@@ -205,21 +206,38 @@ public class InventoryManager : MonoBehaviour
         EquipmentManager.UpdateEquipmentStats();
     }
 
-    public static bool FindItemInPlayerBag(Item item, int count) {
+    public static int FindItemInPlayerBag(Item item) {
         if(intance.myBag.itemList.Contains(item)) {
             if(item.isStackable) {
-                if(intance.myBag.itemListData[intance.myBag.itemList.IndexOf(item)].count >= count)
-                    return true;
+                if(intance.myBag.itemListData[intance.myBag.itemList.IndexOf(item)].count > 0)
+                    return intance.myBag.itemListData[intance.myBag.itemList.IndexOf(item)].count;
             }
             else
-                return true;
+                return 1;
 
         }
-        return false;
+        return -1;
     }
 
     public static int FindItemIDInPlayerBag(Item findItem) {
         return intance.myBag.itemList.IndexOf(findItem);;
+    }
+
+    public static Item FindItemByName(string ItemName) {
+        return intance.allItem.Find(x => x.ItemName.Contains(ItemName));
+    }
+
+    public static Inventory[] GetAllInventory() {
+        Inventory[] AllInv = {intance.myBag, intance.equipment};
+        return AllInv;
+    }
+
+    public static void ClearAllInvData() {
+        intance.myBag.itemList.Clear();
+        intance.myBag.itemListData.Clear();
+        intance.equipment.itemList.Clear();
+        intance.equipment.itemListData.Clear();
+
     }
     
     public static void RefreshItem() {
@@ -251,6 +269,5 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality, intance.myBag.itemListData[i].count);
         }
-
     }
 }

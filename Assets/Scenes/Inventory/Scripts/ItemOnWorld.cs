@@ -19,7 +19,8 @@ public class ItemOnWorld : interactivityObject
 
     public override void Start() {
         hintText = "撿起 " + ThisItem.ItemName;
-        key = KeyCode.G;
+        key = KeyCode.Mouse0;
+        ColliderTag = "PlayerPickCollider";
         if(ThisItem.isStackable) {
             hintText += " x " + itemCount;
         }
@@ -73,5 +74,6 @@ public class ItemOnWorld : interactivityObject
         itemLevel = level;
         itemCount = Count;
         itemQuality = Quality;
+
     }
 }

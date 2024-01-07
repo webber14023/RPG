@@ -10,6 +10,7 @@ TagManager:
   - RoomGenerator
   - InventoryManager
   - ItemMenu
+  - PlayerPickCollider
   layers:
   - Default
   - TransparentFX

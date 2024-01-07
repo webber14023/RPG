@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32250cd478ed0f408ec27299159f534, type: 3}
+  m_Name: Wood Stick
+  m_EditorClassIdentifier: 
+  ItemName: "\u6728\u68CD"
+  type: 
+  ItemImage: {fileID: 1495736434, guid: 8d18567e5c3e7e143a53b6b6b0ace3df, type: 3}
+  isStackable: 1
+  baseLevel: 1
+  baseQuality: "\u666E\u901A"
+  prize: 20
+  prizePerLv: 1.05
+  ItemInfo: 

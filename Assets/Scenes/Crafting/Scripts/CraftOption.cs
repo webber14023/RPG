@@ -11,7 +11,10 @@ public class CraftOption : MonoBehaviour
     public Transform materialGrid;
     public GameObject resultSlot;
     public GameObject CraftSlotPrefeb;
+    public GameObject ItemCountMenuPrefab;
     public Button CraftButton;
+
+    public int maxAmount = 999;
 
     public List<Item> lackItem = new List<Item>();
 
@@ -31,11 +34,23 @@ public class CraftOption : MonoBehaviour
             }
         }
     }
-    public void CraftItem() {
-        for(int i=0; i<optionRecipe.material.Length; i++) {
-            InventoryManager.ReduceItem(InventoryManager.FindItemIDInPlayerBag(optionRecipe.material[i].item), "MyBag", optionRecipe.material[i].count);
+    public void OpenCountMenu() {
+        if(maxAmount == 1) {
+            CraftItem(1);
         }
-        InventoryManager.AddItem(optionRecipe.result.item, optionRecipe.result.itemLevel, optionRecipe.result.count, optionRecipe.result.itemQuality);
+        else if(maxAmount > 1) {
+            ItemCountMenu countMenu = Instantiate(ItemCountMenuPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.parent.transform).GetComponent<ItemCountMenu>();
+            countMenu.maxAmount = maxAmount;
+            Debug.Log(transform.parent);
+            countMenu.target = transform;
+        }
+    }
+    
+    public void CraftItem(int count) {
+        for(int i=0; i<optionRecipe.material.Length; i++) {
+            InventoryManager.ReduceItem(InventoryManager.FindItemIDInPlayerBag(optionRecipe.material[i].item), "MyBag", optionRecipe.material[i].count * count);
+        }
+        InventoryManager.AddItem(optionRecipe.result.item, optionRecipe.result.itemLevel, optionRecipe.result.count * count, optionRecipe.result.itemQuality);
         CraftingManager.UpdateOptions();
     }
 }

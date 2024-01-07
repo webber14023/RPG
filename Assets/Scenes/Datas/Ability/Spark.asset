@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228ac8f0438a54840a984b2f044773b7, type: 3}
   m_Name: Spark
   m_EditorClassIdentifier: 
-  abilityID: 1
+  abilityID: 3
   abilityName: Spark
   abilityImage: {fileID: -446385667, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
   AbilityLevel: 0

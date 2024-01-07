@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c93ff9e8f2f7b345bcc667c616cceba, type: 3}
   m_Name: Water Blast
   m_EditorClassIdentifier: 
-  abilityID: 0
+  abilityID: 5
   abilityName: "\u6FE4\u65CB\u98B6\u98A8"
   abilityImage: {fileID: 21300000, guid: 0b02f1cf7c5002e468bffdd74a27ea8f, type: 3}
   AbilityLevel: 5

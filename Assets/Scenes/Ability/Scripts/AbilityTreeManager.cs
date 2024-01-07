@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +15,10 @@ public class AbilityTreeManager : MonoBehaviour
     public AbilityPanel abilityPanel;
     public CharacterStats C_stats;
     
+    public GameObject AbilityButtonsPrefab;
+    public Transform AbilityMap;
     public Ability[] abilitys;
-    public AbilityTreeButton[] AbilityButtons;
+    public List<AbilityTreeButton> AbilityButtons = new List<AbilityTreeButton>();
 
     [Header("UI")]
     public Text AbilityNameText; 
@@ -34,6 +38,7 @@ public class AbilityTreeManager : MonoBehaviour
 
     private void Start() {
         abilityPanel = EquipAbilityPanel.GetComponent<AbilityPanel>();
+        CreateButton();
         UpdatePointUI();
         DisplayAbilityLevel();
     }
@@ -159,8 +164,15 @@ public class AbilityTreeManager : MonoBehaviour
         AbilityPointText.text = "Skill Point : " + C_stats.abilityPoint.ToString();
     }
 
+    public void CreateButton() {
+        for(int i=0; i<abilitys.Length; i++) {
+            AbilityButtons.Add(Instantiate(AbilityButtonsPrefab, AbilityMap).GetComponent<AbilityTreeButton>());
+            AbilityButtons[i].AbilityData = abilitys[i];
+        }
+    }
+
     public void DisplayAbilityLevel() {
-        for(int i=0; i < AbilityButtons.Length; i++) {
+        for(int i=0; i < AbilityButtons.Count; i++) {
             AbilityButtons[i].LevelText.text = AbilityButtons[i].AbilityData.AbilityLevel.ToString();
             if(AbilityButtons[i].AbilityData.isUnlocked) {
                 AbilityButtons[i].gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
@@ -169,5 +181,9 @@ public class AbilityTreeManager : MonoBehaviour
                 AbilityButtons[i].gameObject.transform.Find("Image").GetComponent<Image>().color = new Color(0.33f, 0.33f, 0.33f);
         }
         
+    }
+
+    public static Ability[] GetAllAbilitys() {
+        return instance.abilitys;
     }
 }

@@ -12,26 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d97958b37a54994db45dfecc05b1e96, type: 3}
   m_Name: Ice Shard
   m_EditorClassIdentifier: 
-  abilityID: 4
+  abilityID: 2
   abilityName: "\u51B0\u5D29\u5C04\u64CA"
   abilityImage: {fileID: 21300000, guid: 7004782f29a83f4498add10e8e12f6c5, type: 3}
-  AbilityLevel: 0
+  AbilityLevel: 5
   AbilityMaxLevel: 5
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u767C\u5C04\u51FA*AttackCount*\u500B\u788E\u7247\uFF0C\u6BCF\u500B\u788E\u7247\u9020\u6210*Damage*AP"
-  isUnlocked: 0
+  isUnlocked: 1
   preskills: []
-  cooldownTime: 8
+  cooldownTime: 6.75
   activeTime: 0.1
   canSkip: 0
   attackDistance: 0
   isAttackDamage: 0
-  damagePercentage: 0.3
+  damagePercentage: 0.55
   BaseDamagePercentage: 0.3
   BaseCooldownTime: 8
   damagePerLevel: 0.05
   cooldownTimePerLevel: -0.25
   attackRange: 0.7
+  attackGapTime: 0.1
+  areaAngle: 0
+  knockBackPower: 0
   AttackEffectPrefab: {fileID: 6959049934315051725, guid: ca3f35eff7da0dd4888243d8b6574a56, type: 3}
-  attackCount: 2
+  attackCount: 4
   baseAttackCount: 2
   attackCountPerLv: 0.5

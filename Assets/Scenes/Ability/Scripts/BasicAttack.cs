@@ -6,6 +6,7 @@ using UnityEngine;
 public class BasicAttack : Ability
 {
     public float attackRange;
+    public float knockBackPower;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     Vector2 mouseDerection;
     
@@ -24,14 +25,12 @@ public class BasicAttack : Ability
         move.canControl = false;
         sprite.flipX = mouseDerection.x >= 0? false: true;
 
-        Vector2 Derection = PlayerMove.GetMouseDerection();
-        float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
-        GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange , Quaternion.Euler(new Vector3(0, 0, angle)), parent.transform);
+        GameObject attackEffect = Instantiate(AttackEffectPrefab, (Vector2)parent.transform.Find("AttackPoint").position + mouseDerection.normalized * attackRange , Quaternion.identity, parent.transform);
         AbilityStats Stats = attackEffect.GetComponent<AbilityStats>();
         Stats.abilityDamage = isAttackDamage? (int)(characterStats.attackDamage * damagePercentage) : (int)(characterStats.abilityPower * damagePercentage);
         Stats.isAttackDamage = isAttackDamage;
-        Stats.abilityknockBackPower = characterStats.knockBackPower;
-        Stats.abilityDelayTime = 0.2f;
+        Stats.Derection = mouseDerection;
+        Stats.abilityknockBackPower = knockBackPower;
     }
 
     public override void BeginCooldown(GameObject parent) {

@@ -23,7 +23,7 @@ public class CraftSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if(!Input.GetKey(KeyCode.Mouse0)) {
             if (slotItem != null && ItemPanel == null) {
-            ItemPanel = Instantiate(ItemDisciptionPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.parent.parent.parent.transform);
+            ItemPanel = Instantiate(ItemDisciptionPrefab,Input.mousePosition, Quaternion.identity, transform.parent.parent.parent.parent.parent.parent.parent);
             ItemInfoPanel Info = ItemPanel.GetComponent<ItemInfoPanel>();
             Info.UpdateItemInfo(slotItem, transform, Level, Quality);
             }
