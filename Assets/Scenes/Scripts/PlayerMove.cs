@@ -150,4 +150,5 @@ public class PlayerMove : MonoBehaviour
     public static CharacterStats GetPlayerStats() {
         return intance.stats;
     }
+
 }

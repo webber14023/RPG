@@ -251,17 +251,17 @@ public class InventoryManager : MonoBehaviour
     }
 
     public static Inventory[] GetAllInventory() {
-        Inventory[] AllInv = {intance.myBag, intance.equipment};
+        Inventory[] AllInv = {intance.myBag, intance.equipment, intance.quickItemList};
         return AllInv;
     }
-
-    
 
     public static void ClearAllInvData() {
         intance.myBag.itemList.Clear();
         intance.myBag.itemListData.Clear();
         intance.equipment.itemList.Clear();
         intance.equipment.itemListData.Clear();
+        intance.quickItemList.itemList.Clear();
+        intance.quickItemList.itemListData.Clear();
 
     }
     

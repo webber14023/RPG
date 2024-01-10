@@ -32831,6 +32831,7 @@ MonoBehaviour:
   ExitPortal: {fileID: 6811018684884930349}
   spawnPoint: {fileID: 7696709515811051597}
   Enemys: []
+  genrator: {fileID: 0}
 --- !u!1001 &3245300904223242797
 PrefabInstance:
   m_ObjectHideFlags: 0

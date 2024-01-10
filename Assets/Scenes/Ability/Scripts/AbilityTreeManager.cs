@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class AbilityTreeManager : MonoBehaviour
 {
-    public static AbilityTreeManager instance;
+    public static AbilityTreeManager intance;
     public Ability activeAbility;
     public GameObject activeButton;
     public Transform EquipAbilityPanel;
@@ -17,23 +17,18 @@ public class AbilityTreeManager : MonoBehaviour
     
     public GameObject AbilityButtonsPrefab;
     public Transform AbilityMap;
-    public Ability[] abilitys;
+    public List<Ability> abilitys = new List<Ability>();
     public List<AbilityTreeButton> AbilityButtons = new List<AbilityTreeButton>();
-
     [Header("UI")]
     public Text AbilityNameText; 
     public Text AbilityLvText, AbilityDesText, AbilityPointText;
 
     private bool showMoreInfo;
 
-    private void Awake() {
-        if(instance == null) {
-            instance = this;
-        }
-        else if(instance != this){
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+    void Awake() {
+        if(intance != null)
+            Destroy(this);
+        intance = this;
     }
 
     private void Start() {
@@ -81,7 +76,7 @@ public class AbilityTreeManager : MonoBehaviour
 
     public void ResetButton() {
         C_stats.abilityPoint = C_stats.c_Data.abilityPointPerLv * C_stats.level;
-        for(int i=0; i<abilitys.Length; i++) {
+        for(int i=0; i<abilitys.Count; i++) {
             abilitys[i].AbilityLevel = 0;
             abilitys[i].isUnlocked = false;
             abilitys[i].damagePercentage = abilitys[i].BaseDamagePercentage;
@@ -165,7 +160,7 @@ public class AbilityTreeManager : MonoBehaviour
     }
 
     public void CreateButton() {
-        for(int i=0; i<abilitys.Length; i++) {
+        for(int i=0; i<abilitys.Count; i++) {
             AbilityButtons.Add(Instantiate(AbilityButtonsPrefab, AbilityMap).GetComponent<AbilityTreeButton>());
             AbilityButtons[i].AbilityData = abilitys[i];
         }
@@ -183,7 +178,19 @@ public class AbilityTreeManager : MonoBehaviour
         
     }
 
-    public static Ability[] GetAllAbilitys() {
-        return instance.abilitys;
+    public static List<Ability> GetAllAbilitys() {
+        return intance.abilitys;
     }
+
+    public static Ability FindAbilityByName(string name) {
+        if(name != "")
+            return intance.abilitys.Find(x => x.abilityName.Contains(name));
+        else
+            return null;
+    }
+    public static void ResetAbilityUI() {
+        intance.DisplayAbilityLevel();
+        intance.UpdatePointUI();
+    }
+
 }

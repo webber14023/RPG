@@ -13,6 +13,10 @@ public class Save
 
     public List<ItemData> playerBag = new List<ItemData>();
     public List<ItemData> PlayerEquipment = new List<ItemData>();
+    public List<ItemData> playerQuickItemList = new List<ItemData>();
+
+    public List<AbilityData> playerAbilitys = new List<AbilityData>();
+    public List<string> playerUseAbilityList = new List<string>();
 
     [System.Serializable]
     public class ItemData {
@@ -20,5 +24,10 @@ public class Save
         public int itemCount;
         public int itemLevel;
         public string itemQuality = "";
+    }
+    [System.Serializable]
+    public class AbilityData {
+        public string abilityName = "";
+        public int abilityLevel;
     }
 }

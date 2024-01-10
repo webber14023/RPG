@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b18b9e450118f4cba6bb6cd27a3455, type: 3}
   m_Name: Waiter 1
   m_EditorClassIdentifier: 
-  NPCName: "\u597D\u718A\u5BF6"
+  NPCName: "\u9435\u5320"
   NPCImage: {fileID: 21300000, guid: 4f6fe36c25281a74f8f56f60a57b77d5, type: 3}
   AfterTalkFunction: {fileID: 11400000, guid: e072cdc206d3b7c4ab50adc8819b54af, type: 2}
   RandomSentence: 0
   Conversations:
-  - isNpcTalk: 1
-    sentence: "\u5C41\u773C\u6D3E\u5C0D"
   - isNpcTalk: 0
-    sentence: "\u621112\u4E86"
+    sentence: "\u6211\u60F3\u88FD\u4F5C\u4E00\u4E9B\u9053\u5177\u3002"
   - isNpcTalk: 1
-    sentence: "\u5587\u53ED\u9593"
+    sentence: "\u6211\u53EF\u4EE5\u88FD\u4F5C\u4EE5\u4E0B\u5E7E\u7A2E\u9053\u5177\u3002"

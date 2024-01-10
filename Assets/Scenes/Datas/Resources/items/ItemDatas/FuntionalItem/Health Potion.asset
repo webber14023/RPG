@@ -18,7 +18,7 @@ MonoBehaviour:
   isStackable: 1
   baseLevel: 15
   baseQuality: "\u7CBE\u826F"
-  prize: 400
+  prize: 500
   prizePerLv: 1
   ItemInfo: "\u56DE\u5FA93000\u751F\u547D\u503C"
   regenValue: 3000

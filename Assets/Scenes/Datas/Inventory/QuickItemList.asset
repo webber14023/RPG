@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: QuickItemList
   m_EditorClassIdentifier: 
   itemList:
-  - {fileID: 11400000, guid: edfe6fa6b95ecab4b8003d327f59aa3e, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   itemListData:
-  - itemLevel: 777
-    count: 1176
-    itemQuality: UwU
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
   - itemLevel: 0
     count: 0
     itemQuality: 

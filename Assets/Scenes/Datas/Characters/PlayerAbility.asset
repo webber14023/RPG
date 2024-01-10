@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PlayerAbility
   m_EditorClassIdentifier: 
   Abilitys:
-  - playerAbility: {fileID: 11400000, guid: 21d70eb981483904f974e4da83694aef, type: 2}
-    abilityKey: 323
-  - playerAbility: {fileID: 11400000, guid: 618cb0f43f5d4a343a703fbde699fafd, type: 2}
-    abilityKey: 324
-  - playerAbility: {fileID: 11400000, guid: 51cbce2ee524a5b4ead2d05660b258cf, type: 2}
-    abilityKey: 101
-  - playerAbility: {fileID: 11400000, guid: 1999e1dea0d720d42a4bc3b7288fcfdd, type: 2}
-    abilityKey: 113
-  - playerAbility: {fileID: 11400000, guid: 3da03cbeea3861941ab411f1ecc1d4b6, type: 2}
-    abilityKey: 114
+  - playerAbility: {fileID: 0}
+    abilityKey: 0
+  - playerAbility: {fileID: 0}
+    abilityKey: 0
+  - playerAbility: {fileID: 0}
+    abilityKey: 0
+  - playerAbility: {fileID: 0}
+    abilityKey: 0
+  - playerAbility: {fileID: 0}
+    abilityKey: 0

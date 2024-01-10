@@ -22,7 +22,7 @@ public class AbilityPanel : MonoBehaviour
         }
         for(int i=0; i<playerAbilitys.Abilitys.Count; i++) {
             AbilitySlots[i].SetActive(true);
-            AbilitySlots[i].transform.GetChild(0).GetComponent<Image>().sprite = playerAbilitys.Abilitys[i].playerAbility.abilityImage;
+            AbilitySlots[i].transform.GetChild(0).GetComponent<Image>().sprite = playerAbilitys.Abilitys[i].playerAbility != null? playerAbilitys.Abilitys[i].playerAbility.abilityImage : null;
             AbilitySlots[i].name = i.ToString();
         }
     }

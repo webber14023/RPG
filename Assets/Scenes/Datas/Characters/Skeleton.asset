@@ -45,13 +45,10 @@ MonoBehaviour:
   dropItems:
   - item: {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
     Count: 1
-    dropPercent: 10
-  - item: {fileID: 11400000, guid: edfe6fa6b95ecab4b8003d327f59aa3e, type: 2}
-    Count: 7
-    dropPercent: 65
-  - item: {fileID: 11400000, guid: 8205eb1f8e571c149aa9c7112aa9a35b, type: 2}
-    Count: 3
-    dropPercent: 70
+    dropPercent: 12
   - item: {fileID: 11400000, guid: b46f523bba4338c4fae0e46252f0ac2d, type: 2}
     Count: 2
-    dropPercent: 55
+    dropPercent: 35
+  - item: {fileID: 11400000, guid: 8205eb1f8e571c149aa9c7112aa9a35b, type: 2}
+    Count: 5
+    dropPercent: 85

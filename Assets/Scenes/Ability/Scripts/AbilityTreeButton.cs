@@ -14,8 +14,8 @@ public class AbilityTreeButton : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData){
-        AbilityTreeManager.instance.activeAbility = AbilityData;
-        AbilityTreeManager.instance.activeButton = gameObject;
-        AbilityTreeManager.instance.DisplayAbilityInfo();
+        AbilityTreeManager.intance.activeAbility = AbilityData;
+        AbilityTreeManager.intance.activeButton = gameObject;
+        AbilityTreeManager.intance.DisplayAbilityInfo();
     }
 }

@@ -15,12 +15,12 @@ MonoBehaviour:
   abilityID: 5
   abilityName: "\u6FE4\u65CB\u98B6\u98A8"
   abilityImage: {fileID: 21300000, guid: 0b02f1cf7c5002e468bffdd74a27ea8f, type: 3}
-  AbilityLevel: 3
+  AbilityLevel: 0
   AbilityMaxLevel: 5
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u5728\u6240\u6307\u5340\u57DF\u751F\u6210\u4E00\u500B\u6FE4\u65CB\u98B6\u98A8\uFF0C\u6301\u7E8C*DestoryTime*\u79D2\uFF0C\u6BCF0.15\u79D2\u9020\u6210\u4E00\u6B21*Damage*AP*"
-  isUnlocked: 1
+  isUnlocked: 0
   preskills: []
-  cooldownTime: 0
+  cooldownTime: 22
   activeTime: 0.12
   canSkip: 0
   attackDistance: 0

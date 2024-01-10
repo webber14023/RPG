@@ -18,7 +18,7 @@ MonoBehaviour:
   isStackable: 0
   baseLevel: 0
   baseQuality: "\u512A\u826F"
-  prize: 100
+  prize: 480
   prizePerLv: 1.05
   ItemInfo: shhiiiiiiiiiii
   equipmentHp: 0

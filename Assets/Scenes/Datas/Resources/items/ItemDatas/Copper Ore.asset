@@ -18,6 +18,6 @@ MonoBehaviour:
   isStackable: 1
   baseLevel: 1
   baseQuality: "\u666E\u901A"
-  prize: 10
-  prizePerLv: 1.05
+  prize: 13
+  prizePerLv: 1
   ItemInfo: "\u9285\u7684\u539F\u7926\uFF0C\u53EF\u52A0\u5DE5\u88FD\u6210\u9285\u9320\u3002"

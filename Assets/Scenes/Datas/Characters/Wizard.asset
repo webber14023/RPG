@@ -45,7 +45,7 @@ MonoBehaviour:
   dropItems:
   - item: {fileID: 11400000, guid: 18b45e817a917eb46b2bc2e39634ce28, type: 2}
     Count: 3
-    dropPercent: 25
+    dropPercent: 17
   - item: {fileID: 11400000, guid: d928d7dc7696b6a4fa11d0d276c33b3c, type: 2}
     Count: 1
-    dropPercent: 33
+    dropPercent: 10

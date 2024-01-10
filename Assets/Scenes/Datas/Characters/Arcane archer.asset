@@ -43,9 +43,9 @@ MonoBehaviour:
   ExpPerLv: 1.12
   abilityPointPerLv: 0
   dropItems:
-  - item: {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
-    Count: 1
-    dropPercent: 50
   - item: {fileID: 11400000, guid: 1f07b9d6899332d4d81e64e540d7082f, type: 2}
-    Count: 1
-    dropPercent: 80
+    Count: 0
+    dropPercent: 10
+  - item: {fileID: 11400000, guid: 18b45e817a917eb46b2bc2e39634ce28, type: 2}
+    Count: 5
+    dropPercent: 100

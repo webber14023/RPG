@@ -19,5 +19,5 @@ MonoBehaviour:
   baseLevel: 10
   baseQuality: "\u512A\u826F"
   prize: 55
-  prizePerLv: 1.05
+  prizePerLv: 1
   ItemInfo: "\u9435\u7684\u539F\u7926\uFF0C\u53EF\u52A0\u5DE5\u88FD\u6210\u9435\u9320\u3002"
