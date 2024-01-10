@@ -40,6 +40,7 @@ public class RangeAttackClass : MonoBehaviour
         Debug.Log(readyAnimTime);
         audioSource = transform.GetComponent<AudioSource>();
         stats = GetComponent<AbilityStats>();
+        attackDelay = stats.abilityDelayTime;
         destroyTime = stats.abilityDestroyTime;
         
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";

@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer Sprite;
     private float inputX, inputY;
     private AbilityManager ability;
-    public bool InteractStats;
+    public bool InteractStats, autoPickItem;
 
     void Awake() {
         if(intance != null)
@@ -124,6 +124,10 @@ public class PlayerMove : MonoBehaviour
 
     public static void PlayerInteractSet(bool stats) {
         intance.InteractStats = stats;
+    }
+
+    public static bool PlayerAutoPickItem() {
+        return intance.autoPickItem;
     }
 
     public static void UpdatePlayerUI() {

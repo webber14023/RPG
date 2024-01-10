@@ -35,7 +35,7 @@ public class CraftOption : MonoBehaviour
         }
     }
     public void OpenCountMenu() {
-        if(maxAmount == 1) {
+        if(!optionRecipe.result.item.isStackable || maxAmount == 1) {
             CraftItem(1);
         }
         else if(maxAmount > 1) {
@@ -50,7 +50,10 @@ public class CraftOption : MonoBehaviour
         for(int i=0; i<optionRecipe.material.Length; i++) {
             InventoryManager.ReduceItem(InventoryManager.FindItemIDInPlayerBag(optionRecipe.material[i].item), "MyBag", optionRecipe.material[i].count * count);
         }
-        InventoryManager.AddItem(optionRecipe.result.item, optionRecipe.result.itemLevel, optionRecipe.result.count * count, optionRecipe.result.itemQuality);
+        if(InventoryManager.FindEmptyID(InventoryManager.GetItemLocation("MyBag")) == -1)
+            InventoryManager.DropNewItem(optionRecipe.result.item, optionRecipe.result.itemLevel, optionRecipe.result.count * count, optionRecipe.result.itemQuality);
+        else
+            InventoryManager.AddItem(optionRecipe.result.item, optionRecipe.result.itemLevel, optionRecipe.result.count * count, optionRecipe.result.itemQuality);
         CraftingManager.UpdateOptions();
     }
 }

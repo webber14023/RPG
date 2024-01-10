@@ -32,6 +32,7 @@ MonoBehaviour:
   cooldownTimePerLevel: -0.25
   attackRange: 1
   attackGapTime: 0.08
+  isTrack: 0
   areaAngle: 30
   knockBackPower: 0.1
   AttackEffectPrefab: {fileID: 8057289851498912510, guid: 83bafe945f6dc6e48b3f55871c87a687, type: 3}

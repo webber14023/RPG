@@ -18,7 +18,7 @@ MonoBehaviour:
   attackDamage: 250
   abilityPower: 0
   attackArmor: 80
-  magicArmor: 25
+  magicArmor: 40
   speed: 3.5
   criticalChance: 0.1
   criticalMultiply: 2
@@ -37,10 +37,10 @@ MonoBehaviour:
   level: 0
   maxExp: 170
   currentExp: 0
-  HpPerLv: 1.15
-  DamagePerLv: 1.15
+  HpPerLv: 1.12
+  DamagePerLv: 1.12
   SpeedPerLv: 1
-  ExpPerLv: 1.175
+  ExpPerLv: 1.12
   abilityPointPerLv: 0
   dropItems:
   - item: {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}

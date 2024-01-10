@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   CharacterName: "\u53F2\u840A\u59C6"
-  maxHealth: 700
-  currentHealth: 700
-  attackDamage: 85
+  maxHealth: 800
+  currentHealth: 800
+  attackDamage: 100
   abilityPower: 0
-  attackArmor: 150
+  attackArmor: 350
   magicArmor: 10
-  speed: 3.4
+  speed: 3.2
   criticalChance: 0.1
   criticalMultiply: 2
   knockBackPower: 1
@@ -37,10 +37,10 @@ MonoBehaviour:
   level: 0
   maxExp: 8
   currentExp: 0
-  HpPerLv: 1.15
-  DamagePerLv: 1.15
+  HpPerLv: 1.12
+  DamagePerLv: 1.12
   SpeedPerLv: 1
-  ExpPerLv: 1.15
+  ExpPerLv: 1.12
   abilityPointPerLv: 0
   dropItems:
   - item: {fileID: 11400000, guid: edfe6fa6b95ecab4b8003d327f59aa3e, type: 2}

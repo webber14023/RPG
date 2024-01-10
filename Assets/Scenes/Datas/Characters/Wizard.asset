@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030cb83bfca0d2e4682bf55ac0fc2e93, type: 3}
+  m_Name: Wizard
+  m_EditorClassIdentifier: 
+  CharacterName: "\u6CD5\u5E2B"
+  maxHealth: 550
+  currentHealth: 550
+  attackDamage: 0
+  abilityPower: 175
+  attackArmor: 10
+  magicArmor: 250
+  speed: 4.5
+  criticalChance: 0.3
+  criticalMultiply: 2
+  knockBackPower: 1
+  abilityPoint: 0
+  EquipHealth: 0
+  EquipAttackDamage: 0
+  EquipAbilityPower: 0
+  EquipAttackArmor: 0
+  EquipMagicArmor: 0
+  EquipCriticalChance: 0
+  EquipCriticalMultiply: 0
+  EquipSpeed: 0
+  money: 0
+  AttackCooldown: 1.33
+  level: 0
+  maxExp: 12
+  currentExp: 0
+  HpPerLv: 1.12
+  DamagePerLv: 1.12
+  SpeedPerLv: 1
+  ExpPerLv: 1.12
+  abilityPointPerLv: 0
+  dropItems:
+  - item: {fileID: 11400000, guid: 18b45e817a917eb46b2bc2e39634ce28, type: 2}
+    Count: 3
+    dropPercent: 25
+  - item: {fileID: 11400000, guid: d928d7dc7696b6a4fa11d0d276c33b3c, type: 2}
+    Count: 1
+    dropPercent: 33

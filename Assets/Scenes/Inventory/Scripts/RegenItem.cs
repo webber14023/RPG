@@ -7,12 +7,16 @@ using UnityEngine;
 public class RegenItem : Item
 {
     public int regenValue;
+    public BuffStatus DeBuff;
 
     public override void ItemFunction(string location, int itemID)
     {
-        InventoryManager.ReduceItem(itemID, location, 1);
-        CharacterStats playerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
-        playerStats.RegenHP(regenValue);
-        
+        BuffHolder buffHolder = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<BuffHolder>();
+        if(!buffHolder.buffs.Contains(DeBuff)) {
+            InventoryManager.ReduceItem(itemID, location, 1);
+            CharacterStats playerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>();
+            playerStats.RegenHP(regenValue);
+            buffHolder.addBuff(DeBuff);
+        }
     }
 }

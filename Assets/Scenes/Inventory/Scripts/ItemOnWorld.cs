@@ -6,6 +6,7 @@ public class ItemOnWorld : interactivityObject
 {
     public Inventory playerInventory;
     public Transform PickColider;
+    public float delayTime;
     [SerializeField]AudioClip dropSound;
     [SerializeField]AudioClip pickSound;
     Item ThisItem;
@@ -39,6 +40,18 @@ public class ItemOnWorld : interactivityObject
         Hintkey.SetActive(false);
         AddNewItem();
 
+    }
+
+    public void Update() {
+        if(delayTime >= 0) {
+            delayTime -= Time.deltaTime;
+        }
+        else {
+            if(canInteract && PlayerMove.PlayerAutoPickItem()) {
+                canInteract = false;
+                Interact();
+            }
+        }
     }
     /*
     private void Start() {

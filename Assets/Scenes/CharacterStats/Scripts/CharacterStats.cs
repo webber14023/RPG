@@ -211,6 +211,7 @@ public class CharacterStats : MonoBehaviour
         maxHealth = (int)((float)((baseMaxHealth * Mathf.Pow(c_Data.HpPerLv, lv) + EquipHealth) * healthMultiply));
         speed = (baseSpeed * Mathf.Pow(c_Data.SpeedPerLv, lv) + EquipSpeed) * moveSpeedMultiply;
         attackDamage = (int)((float)((baseAttackDamage * Mathf.Pow(c_Data.DamagePerLv, lv) + EquipAttackDamage) * attackMultiply));
+        abilityPower = (int)((float)((baseAbilityPower + EquipAbilityPower) * attackMultiply));
         attackArmor = baseAttackArmor + EquipAttackArmor;
         magicArmor = baseMagicArmor + EquipMagicArmor;
         AD_Reduce = 200f / (200 + attackArmor);
@@ -246,6 +247,8 @@ public class CharacterStats : MonoBehaviour
 
     public void RegenHP(int AddStats) {
         currentHealth += AddStats;
+        if(currentHealth >= maxHealth)
+            currentHealth = maxHealth;
         GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position + (Vector3)UnityEngine.Random.insideUnitCircle, Quaternion.identity, transform);
         DamageText damageText = damageTextObject.GetComponent<DamageText>();
         healthBar.UpdateHealthBar((float)currentHealth/maxHealth);

@@ -70,6 +70,7 @@ public class ConversationManager : MonoBehaviour
     }
 
     public static void SetConversation(NpcData setData) {
+        PlayerMove.PlayerInteractSet(true);
         intance.talkTextPoint = 0;
         intance.charPoint = 0;
         intance.ConversationPenal.SetActive(true);

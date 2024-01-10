@@ -20,7 +20,7 @@ MonoBehaviour:
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u767C\u5C04\u51FA*AttackCount*\u500B\u788E\u7247\uFF0C\u6BCF\u500B\u788E\u7247\u9020\u6210*Damage*AP"
   isUnlocked: 1
   preskills: []
-  cooldownTime: 6.75
+  cooldownTime: 0.2
   activeTime: 0.1
   canSkip: 0
   attackDistance: 0
@@ -30,11 +30,12 @@ MonoBehaviour:
   BaseCooldownTime: 8
   damagePerLevel: 0.05
   cooldownTimePerLevel: -0.25
-  attackRange: 0.7
-  attackGapTime: 0.1
-  areaAngle: 0
-  knockBackPower: 0
+  attackRange: 1
+  attackGapTime: 0
+  isTrack: 0
+  areaAngle: 30
+  knockBackPower: 0.7
   AttackEffectPrefab: {fileID: 6959049934315051725, guid: ca3f35eff7da0dd4888243d8b6574a56, type: 3}
-  attackCount: 4
+  attackCount: 5
   baseAttackCount: 2
   attackCountPerLv: 0.5

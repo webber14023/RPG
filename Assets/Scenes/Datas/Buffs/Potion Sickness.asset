@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3380fef10b6f4ac4da6611c4d89cabba, type: 3}
+  m_Name: Potion Sickness
+  m_EditorClassIdentifier: 
+  BuffID: 2
+  BuffName: "\u85E5\u6C34\u75BE\u75C5"
+  BuffImage: {fileID: -118846760, guid: 8aecba7c596f7c348ac6f6950e9dc16d, type: 3}
+  abilityDes: 
+  activeTime: 30
+  effectPrefebs: {fileID: 3614481153871026672, guid: 61b359c5210dea742aa0b4936436b2cc, type: 3}
+  isDisplay: 1
+  AttackMultiply: 0
+  HealthMultiply: 0
+  MoveSpeedMultiply: 0

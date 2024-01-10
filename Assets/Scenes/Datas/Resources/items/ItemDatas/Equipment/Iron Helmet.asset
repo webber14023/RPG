@@ -29,11 +29,11 @@ MonoBehaviour:
   equipmentMagicArmor: 10
   equipmentCriticalChance: 0
   equipmentCriticalMultiply: 0
-  equipmentHpPerLv: 1.18
+  equipmentHpPerLv: 1.12
   equipmentSpeedPerLv: 0
   equipmentAttackDamagePerLv: 0
   equipmentAbilityPowerPerLv: 0
-  equipmentAttackArmorPerLv: 1.15
-  equipmentMagicArmorPerLv: 1.15
+  equipmentAttackArmorPerLv: 1.12
+  equipmentMagicArmorPerLv: 1.12
   equipmentCriticalChancePerLv: 0
   equipmentCriticalMultiplyPerLv: 0

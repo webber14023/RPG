@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   CharacterName: "\u9AB7\u9ACF"
-  maxHealth: 500
-  currentHealth: 500
-  attackDamage: 200
+  maxHealth: 600
+  currentHealth: 600
+  attackDamage: 250
   abilityPower: 0
   attackArmor: 10
   magicArmor: 100
-  speed: 7
+  speed: 4.5
   criticalChance: 0.3
   criticalMultiply: 2
   knockBackPower: 1
@@ -33,14 +33,14 @@ MonoBehaviour:
   EquipCriticalMultiply: 0
   EquipSpeed: 0
   money: 0
-  AttackCooldown: 0.8
+  AttackCooldown: 0.33
   level: 0
   maxExp: 14
   currentExp: 0
-  HpPerLv: 1.15
-  DamagePerLv: 1.15
+  HpPerLv: 1.12
+  DamagePerLv: 1.12
   SpeedPerLv: 1
-  ExpPerLv: 1.15
+  ExpPerLv: 1.12
   abilityPointPerLv: 0
   dropItems:
   - item: {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}

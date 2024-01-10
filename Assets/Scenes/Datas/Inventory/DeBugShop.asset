@@ -16,6 +16,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1dd7451836994d7408e10b8b07ca4d5b, type: 2}
   - {fileID: 11400000, guid: a362ac55b14e91145bf3656f5b9d18c5, type: 2}
   - {fileID: 11400000, guid: edfe6fa6b95ecab4b8003d327f59aa3e, type: 2}
+  - {fileID: 11400000, guid: 5071e148843c8ba4abf83ff68baa6336, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   itemListData:
   - itemLevel: 10
     count: 1
@@ -26,3 +51,78 @@ MonoBehaviour:
   - itemLevel: 1
     count: 1
     itemQuality: "\u512A\u826F"
+  - itemLevel: 0
+    count: 1
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 
+  - itemLevel: 0
+    count: 0
+    itemQuality: 

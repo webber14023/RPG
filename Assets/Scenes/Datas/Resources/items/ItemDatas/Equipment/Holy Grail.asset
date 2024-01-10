@@ -32,7 +32,7 @@ MonoBehaviour:
   equipmentHpPerLv: 0
   equipmentSpeedPerLv: 0
   equipmentAttackDamagePerLv: 0
-  equipmentAbilityPowerPerLv: 1.15
+  equipmentAbilityPowerPerLv: 1.12
   equipmentAttackArmorPerLv: 0
   equipmentMagicArmorPerLv: 0
   equipmentCriticalChancePerLv: 0

@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
             UI.SetActive(true);
             manager.isCasting = true;
             move.canControl = false;
+            PlayerMove.PlayerInteractSet(true);
         }  
     }
     void CloseUI(GameObject UI, KeyCode key) {
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
             move.canControl = true;
             ShopManager.SetShopPanel(false);
             CraftingManager.SetPanel(false);
+            PlayerMove.PlayerInteractSet(false);
         }  
     }
     void DetectUI() {

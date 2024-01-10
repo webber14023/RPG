@@ -79,15 +79,15 @@ SpriteRenderer:
   m_SortingLayerID: 256577499
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1138693826, guid: e5c8e24ae6ebeb648a86c2b8e8e277af, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &8057289851498912496
@@ -166,6 +166,8 @@ MonoBehaviour:
   abilityDamage: 0
   abilityknockBackPower: 0
   abilityDelayTime: 0
+  abilityDestroyTime: 0
+  isTrack: 0
   ActvateSound: {fileID: 0}
   HitSound: {fileID: 0}
   Derection: {x: 0, y: 0}

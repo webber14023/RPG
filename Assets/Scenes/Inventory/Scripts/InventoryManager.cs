@@ -9,8 +9,10 @@ public class InventoryManager : MonoBehaviour
     
     public Inventory myBag;
     public Inventory equipment;
+    public Inventory quickItemList;
     public GameObject slotGrid;
     public GameObject equipmentSlotGrid;
+    public GameObject quickItemGrid;
     // public Slot slotPrefab;
     public GameObject emptySlot;
     public GameObject emptyEquipmentSlot;
@@ -18,6 +20,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<GameObject> myBagSlots = new List<GameObject>();
     public List<GameObject> equipmentSlots = new List<GameObject>();
+    public List<GameObject> quickItemSlots = new List<GameObject>();
 
     List<string> equipTypes = new List<string>() {"Head", "Body", "Feet", "Ring", "Weapon", "OffHand", "Accessory", "Neck"};
     public Sprite[] equipmentBg;
@@ -46,9 +49,22 @@ public class InventoryManager : MonoBehaviour
     public static Inventory GetItemLocation(string loactionName) {
         Dictionary<string, Inventory> Location = new Dictionary<string, Inventory>() {
             {"MyBag", intance.myBag},
-            {"Equipment", intance.equipment}
+            {"Equipment", intance.equipment},
+            {"QuickItemList", intance.quickItemList}
         };
         if(Location.TryGetValue(loactionName, out Inventory value)) {
+            return value;
+        }
+        return null;
+    }
+
+    List<GameObject> FindSlotsByInv(Inventory inventory) {
+        Dictionary<Inventory, List<GameObject>> Slots = new Dictionary<Inventory, List<GameObject>>() {
+            {myBag, myBagSlots},
+            {equipment, equipmentSlots},
+            {quickItemList, quickItemSlots}
+        };
+        if(Slots.TryGetValue(inventory, out List<GameObject> value)) {
             return value;
         }
         return null;
@@ -123,6 +139,13 @@ public class InventoryManager : MonoBehaviour
         itemLocation.itemListData[slotID] = new Inventory.Itemdata();
         RefreshItem();
         EquipmentManager.UpdateEquipmentStats();
+    }
+
+    public static void DropNewItem(Item item, int Level, int count, string Quality) {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        ItemOnWorld dropitemData = Instantiate((GameObject)Resources.Load("items/itemPrefab"), player.transform.position, Quaternion.identity).GetComponent<ItemOnWorld>();
+        dropitemData.transform.GetComponent<Rigidbody2D>().velocity = (Vector3)Random.insideUnitCircle * 2;
+        dropitemData.setItemData(item, Level, count, Quality);
     }
 
     public static void DeleteItem(int slotID, string location) {
@@ -232,6 +255,8 @@ public class InventoryManager : MonoBehaviour
         return AllInv;
     }
 
+    
+
     public static void ClearAllInvData() {
         intance.myBag.itemList.Clear();
         intance.myBag.itemListData.Clear();
@@ -269,5 +294,35 @@ public class InventoryManager : MonoBehaviour
             intance.myBagSlots[i].GetComponent<Slot>().slotID = i;
             intance.myBagSlots[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality, intance.myBag.itemListData[i].count);
         }
+
+        for(int i = 0; i < intance.quickItemGrid.transform.childCount; i++) {
+            Destroy(intance.quickItemGrid.transform.GetChild(i).gameObject);
+            intance.quickItemSlots.Clear();
+        }
+        for(int i = 0; i < intance.quickItemList.itemList.Count; i++) {
+            intance.quickItemSlots.Add(Instantiate(intance.emptySlot));
+            intance.quickItemSlots[i].transform.SetParent(intance.quickItemGrid.transform);
+            intance.quickItemSlots[i].transform.localScale = new Vector3(1,1,1);
+            intance.quickItemSlots[i].GetComponent<Slot>().slotID = i;
+            intance.quickItemSlots[i].GetComponent<Slot>().SetupSlot(intance.quickItemList.itemList[i], intance.quickItemList.itemListData[i].itemLevel, intance.quickItemList.itemListData[i].itemQuality, intance.quickItemList.itemListData[i].count);
+        }
+    }
+    
+    public static void RefreshItem(Inventory inventory) {
+        //List<GameObject> inventorySlots = intance.FindSlotsByInv(inventory);
+        Transform slotGrid = intance.FindSlotsByInv(inventory)[0].transform.parent;
+        for(int i = 0; i < slotGrid.childCount; i++) {
+            Destroy(slotGrid.GetChild(i).gameObject);
+            intance.FindSlotsByInv(inventory).Clear();
+        }
+        //重新生成對應myBag裡面物品的slot
+        for(int i = 0; i < intance.myBag.itemList.Count; i++) {
+            intance.FindSlotsByInv(inventory).Add(Instantiate(intance.emptySlot));
+            intance.FindSlotsByInv(inventory)[i].transform.SetParent(intance.slotGrid.transform);
+            intance.FindSlotsByInv(inventory)[i].transform.localScale = new Vector3(1,1,1);
+            intance.FindSlotsByInv(inventory)[i].GetComponent<Slot>().slotID = i;
+            intance.FindSlotsByInv(inventory)[i].GetComponent<Slot>().SetupSlot(intance.myBag.itemList[i], intance.myBag.itemListData[i].itemLevel, intance.myBag.itemListData[i].itemQuality, intance.myBag.itemListData[i].count);
+        }
+        
     }
 }

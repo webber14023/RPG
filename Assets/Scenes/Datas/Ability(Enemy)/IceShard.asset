@@ -16,17 +16,20 @@ MonoBehaviour:
   abilityName: 
   abilityImage: {fileID: 0}
   AbilityLevel: 0
+  AbilityMaxLevel: 0
   abilityDes: 
   isUnlocked: 0
   preskills: []
   cooldownTime: 3
   activeTime: 1
   canSkip: 0
-  attackDistance: 0
+  attackDistance: 4.5
   isAttackDamage: 0
   damagePercentage: 1.15
   BaseDamagePercentage: 0
+  BaseCooldownTime: 0
   damagePerLevel: 0
+  cooldownTimePerLevel: 0
   attackRange: 1
-  DelayTime: 0.5
+  DelayTime: 0
   AttackEffectPrefab: {fileID: 6959049934315051725, guid: ca3f35eff7da0dd4888243d8b6574a56, type: 3}

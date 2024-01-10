@@ -11,7 +11,7 @@ public class interactivityObject : MonoBehaviour
     public string hintText;
     public GameObject Hintkey;
     public string ColliderTag = "Player";
-    bool canInteract;
+    public bool canInteract;
 
     public virtual void Start() {
         if(key == KeyCode.None)
@@ -24,19 +24,19 @@ public class interactivityObject : MonoBehaviour
     }
     
     private void Update() {
-        if(key != KeyCode.Mouse0) {
-            if(canInteract && Input.GetKeyDown(key)) {
-                Interact();
+        if(!PlayerMove.PlayerInteractStats()) {
+            if(key != KeyCode.Mouse0) {
+                if(canInteract && Input.GetKeyDown(key)) {
+                    Interact();
+                }
             }
         }
     }
 
     private void OnMouseOver() {
-        Debug.Log("mouseIn");
         if(key == KeyCode.Mouse0 && canInteract) {
             if(Input.GetKeyDown(KeyCode.Mouse0)) {
                 Interact();
-                Debug.Log("clickDropItem");
             }
         }
     }

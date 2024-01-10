@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BasicDungeon
   m_EditorClassIdentifier: 
   dungeonName: BasicDungeon
-  floor: 5
+  floor: 7
   maxFloor: 100
-  historyFloor: 80
+  historyFloor: 15
   enemyCount: 4
   minLevel: 1
   maxLevel: 100
@@ -24,5 +24,6 @@ MonoBehaviour:
   - {fileID: 2756756266515007926, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
   - {fileID: 6975369299909785047, guid: 099d1033344ce5c4aa6cdd49092210c8, type: 3}
   - {fileID: 3214162189862768969, guid: 1dddc9130b06a3543ab24b10dc270bf4, type: 3}
+  - {fileID: 462467905790338681, guid: 4ef64bddd042668439cb02b4da7e39b8, type: 3}
   dungeonBoss:
   - {fileID: 2749036979712445471, guid: 66d5981c5f30af94597bbac86d7cf5ba, type: 3}

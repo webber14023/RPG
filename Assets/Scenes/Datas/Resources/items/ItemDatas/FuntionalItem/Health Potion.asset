@@ -22,3 +22,4 @@ MonoBehaviour:
   prizePerLv: 1
   ItemInfo: "\u56DE\u5FA93000\u751F\u547D\u503C"
   regenValue: 3000
+  DeBuff: {fileID: 11400000, guid: 6472b32ee25d6124d9ed1a679da34498, type: 2}

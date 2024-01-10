@@ -24,12 +24,14 @@ public class MeleeAttackClass : MonoBehaviour
         target = transform.parent.CompareTag("Player")? "Enemy": "Player";
         anim.enabled = false;
         knockBackPower = stats.abilityknockBackPower;
-        if(stats.abilityDelayTime == 0) {
+        if(stats.abilityDelayTime == 0 || !stats.isTrack) {
             Derection = stats.Derection;
             float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            anim.enabled = true;
-            audioSource.Play();
+            if(stats.abilityDelayTime == 0) {
+                anim.enabled = true;
+                audioSource.Play();
+            }
         }
     }
 
@@ -37,9 +39,11 @@ public class MeleeAttackClass : MonoBehaviour
         if(stats.abilityDelayTime > 0) {
             stats.abilityDelayTime -= Time.deltaTime;
             if(stats.abilityDelayTime <= 0) {
-                Derection = PlayerMove.GetMouseDerection();
-                float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                if(stats.isTrack) {
+                    Derection = PlayerMove.GetMouseDerection();
+                    float angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                }
                 anim.enabled = true;
                 audioSource.Play();
             }

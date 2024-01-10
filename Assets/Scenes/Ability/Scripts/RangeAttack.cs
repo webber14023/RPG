@@ -9,6 +9,7 @@ public class RangeAttack : Ability
     public float destroyTime;
     public float baseDestroyTime;
     public float destroyTimePerLv;
+    public float AbilityAttackDelayTime;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
     Vector2 mouseDerection;
 
@@ -34,7 +35,7 @@ public class RangeAttack : Ability
         Stats.isAttackDamage = isAttackDamage;
         Stats.abilityknockBackPower = characterStats.knockBackPower;
         Stats.abilityDestroyTime = destroyTime;
-        Stats.abilityDelayTime = 0.2f;
+        Stats.abilityDelayTime = AbilityAttackDelayTime;
     }
 
     public override void BeginCooldown(GameObject parent) {

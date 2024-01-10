@@ -7,6 +7,7 @@ public class MutiAttack : Ability
 {
     public float attackRange;
     public float attackGapTime;
+    public bool isTrack;
     public float areaAngle;
     public float knockBackPower;
     public GameObject AttackEffectPrefab;   //攻擊產生的特效
@@ -47,7 +48,9 @@ public class MutiAttack : Ability
             Stats.isAttackDamage = isAttackDamage;
             Stats.Derection = mouseDerection;
             Stats.abilityknockBackPower = knockBackPower;
+            Stats.isTrack = isTrack;
             Stats.abilityDelayTime = attackGapTime * i;
+            Debug.Log(mouseDerection);
         }
 
     }

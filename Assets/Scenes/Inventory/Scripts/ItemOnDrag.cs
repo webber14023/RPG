@@ -9,8 +9,6 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
     public Transform originalParent;
     public Inventory orgLocation;
     public Inventory TargetLocation;
-    public Inventory myBag;
-    public Inventory Equipment;
     private int currentItemID;//當前物品ID
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -92,6 +90,8 @@ public class ItemOnDrag : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragH
 
             if(eventData.pointerCurrentRaycast.gameObject.name == "slot(Clone)" || eventData.pointerCurrentRaycast.gameObject.name == orgLocation.itemList[currentItemID].type) {
                 int targetSlotID = eventData.pointerCurrentRaycast.gameObject.GetComponent<Slot>().slotID;
+                Debug.Log(orgLocation);
+                Debug.Log(TargetLocation);
                 InventoryManager.SwitchItem(currentItemID, orgLocation, targetSlotID, TargetLocation);
                 Destroy(gameObject);
                 return;

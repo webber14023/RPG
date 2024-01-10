@@ -15,17 +15,17 @@ MonoBehaviour:
   abilityID: 4
   abilityName: "\u70C8\u7130\u7206\u7834"
   abilityImage: {fileID: -1181100440, guid: a0003011df3c0c24492d8598cd4e56b7, type: 3}
-  AbilityLevel: 5
+  AbilityLevel: 0
   AbilityMaxLevel: 5
   abilityDes: "\u51B7\u537B\u6642\u9593*Cooldown*\n\u5F15\u7206\u6240\u6307\u5340\u57DF\uFF0C\u751F\u6210\u4E00\u500B\u70C8\u7130\u98A8\u66B4\uFF0C\u6301\u7E8C*DestoryTime*\u79D2\uFF0C\u6BCF0.15\u79D2\u9020\u6210\u4E00\u6B21*Damage*AP*"
-  isUnlocked: 1
+  isUnlocked: 0
   preskills: []
-  cooldownTime: 7
+  cooldownTime: 9
   activeTime: 0.12
   canSkip: 0
   attackDistance: 0
   isAttackDamage: 0
-  damagePercentage: 1.0500001
+  damagePercentage: 0.5
   BaseDamagePercentage: 0.5
   BaseCooldownTime: 9
   damagePerLevel: 0.05
@@ -34,4 +34,5 @@ MonoBehaviour:
   destroyTime: 1.2
   baseDestroyTime: 1.2
   destroyTimePerLv: 0.2
+  AbilityAttackDelayTime: 0.15
   AttackEffectPrefab: {fileID: 1321424609052944426, guid: 295c9e3703dd7fc4288020c5c558e022, type: 3}

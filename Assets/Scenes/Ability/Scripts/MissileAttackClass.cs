@@ -45,17 +45,19 @@ public class MissileAttackClass : MonoBehaviour
     void FixedUpdate() {
         if(!anim.GetBool("Hit")) {
             if(delayTime > 0f) {
-                if(target == "Enemy")
-                    Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-                else if(target == "Player" && isTrack) {
-                    Enemy controller = transform.parent.GetComponent<Enemy>();
-                    Derection = (controller.target.GetChild(0).position - transform.position).normalized;
+                if(stats.isTrack) {
+                    if(target == "Enemy")
+                        Derection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                    else if(target == "Player" && isTrack) {
+                        Enemy controller = transform.parent.GetComponent<Enemy>();
+                        Derection = (controller.target.GetChild(0).position - transform.position).normalized;
+                    }
+                    angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                    
+                    rb.velocity = new Vector2(0, 0);
+                    rb.AddForce(Derection.normalized * speed * 0.05f);
                 }
-                angle = Mathf.Atan2(Derection.y, Derection.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-                
-                rb.velocity = new Vector2(0, 0);
-                rb.AddForce(Derection.normalized * speed * 0.05f);
                 lineSp.color = new Color(255, 255, 255, (1f - (delayTime/stats.abilityDelayTime))/2f);
                 delayTime -= Time.deltaTime;
             }
