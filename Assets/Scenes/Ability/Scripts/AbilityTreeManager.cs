@@ -87,6 +87,9 @@ public class AbilityTreeManager : MonoBehaviour
         DisplayAbilityLevel();
         if (activeAbility != null)
             DisplayAbilityInfo();
+        
+        AbilityManager.ClearAbilityData();
+
     }
 
     public void UpgradeAbility() {

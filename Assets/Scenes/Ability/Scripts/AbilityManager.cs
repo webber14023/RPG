@@ -8,6 +8,8 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager intance;
     public bool isCasting = false;
 
+    public Sprite EmptyAbilityImage;
+
     public PlayerAbilitysList PlayerAbilityData;
     
     public List<KeyCode> keyCodes = new List<KeyCode>();
@@ -43,8 +45,8 @@ public class AbilityManager : MonoBehaviour
             activeEffect.Add(abilitySlots[i].transform.GetChild(3).GetComponent<Image>());
             abilityKeyText.Add(abilitySlots[i].transform.GetChild(4).GetComponent<Text>());
         }
-        
-        UpdateAbilityData();
+        if(PlayerPrefs.GetInt("ResetAbility") == 1)
+            UpdateAbilityData();
         //UpdateAbilityIcon();
     }
 
@@ -71,8 +73,14 @@ public class AbilityManager : MonoBehaviour
     public void UpdateAbilityIcon() {
         for(int i=0; i<abilityHolders.Count; i++)
         {
-            AbilityIcon[i].sprite = abilityHolders[i].ability.abilityImage;
-            abilityKeyText[i].text = abilityHolders[i].key.ToString();
+            if(abilityHolders[i] != null) {
+                AbilityIcon[i].sprite = abilityHolders[i].ability.abilityImage;
+                abilityKeyText[i].text = abilityHolders[i].key.ToString();
+            }
+            else {
+                AbilityIcon[i].sprite = EmptyAbilityImage;
+                abilityKeyText[i].text = "";
+            }
         }
     }
 
@@ -85,9 +93,15 @@ public class AbilityManager : MonoBehaviour
 
         for(int i=0; i<PlayerAbilityData.Abilitys.Count; i++) {
             if(PlayerAbilityData.Abilitys[i].playerAbility != null) {
-                abilityHolders.Add(gameObject.AddComponent(typeof(AbilityHolder)) as AbilityHolder);
-                abilityHolders[i].ability = PlayerAbilityData.Abilitys[i].playerAbility;
-                abilityHolders[i].key = keyCodes[i];
+                Debug.Log(PlayerAbilityData.Abilitys[i].playerAbility);
+                AbilityHolder newHolders = gameObject.AddComponent(typeof(AbilityHolder)) as AbilityHolder;
+                newHolders.ability = PlayerAbilityData.Abilitys[i].playerAbility;
+                newHolders.key = keyCodes[i];
+                
+                abilityHolders.Add(newHolders);
+            }
+            else {
+                abilityHolders.Add(null);
             }
         }
         UpdateAbilityIcon();
@@ -95,6 +109,13 @@ public class AbilityManager : MonoBehaviour
 
     public static void SetAbilityData(PlayerAbilitysList newData) {
         intance.PlayerAbilityData = newData;
+        intance.UpdateAbilityData();
+    }
+
+    public static void ClearAbilityData() {
+        for(int i=0; i<intance.PlayerAbilityData.Abilitys.Count; i++) {
+            intance.PlayerAbilityData.Abilitys[i] = new PlayerAbilitysList.AbilityData();
+        }
         intance.UpdateAbilityData();
     }
 

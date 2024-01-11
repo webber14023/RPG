@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee156c68a0c30a54a91aa21bbf937859, type: 3}
+  m_Name: Gilmmer Sword
+  m_EditorClassIdentifier: 
+  result:
+    item: {fileID: 11400000, guid: 430a9f59fdafe254583a7a900b9b4b8e, type: 2}
+    itemLevel: 0
+    count: 1
+    itemQuality: 
+  material:
+  - item: {fileID: 11400000, guid: fc6fd2ed713587246b233cc6e3472a8c, type: 2}
+    itemLevel: 0
+    count: 5
+    itemQuality: 
+  - item: {fileID: 11400000, guid: d4bc47392e25a1549a2e31114f0b888b, type: 2}
+    itemLevel: 0
+    count: 2
+    itemQuality: 
+  - item: {fileID: 11400000, guid: 1a7ea3c21c4c9d74e9a89c8ffc08617c, type: 2}
+    itemLevel: 0
+    count: 1
+    itemQuality: 

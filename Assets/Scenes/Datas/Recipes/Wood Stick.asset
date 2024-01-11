@@ -15,10 +15,10 @@ MonoBehaviour:
   result:
     item: {fileID: 11400000, guid: 1a7ea3c21c4c9d74e9a89c8ffc08617c, type: 2}
     itemLevel: 0
-    count: 3
+    count: 6
     itemQuality: 
   material:
-  - item: {fileID: 11400000, guid: cf91fb71ee5b9ed41a567e0f18428f42, type: 2}
+  - item: {fileID: 11400000, guid: 3a53477aa8130214bb6516f22002d039, type: 2}
     itemLevel: 0
     count: 1
     itemQuality: 

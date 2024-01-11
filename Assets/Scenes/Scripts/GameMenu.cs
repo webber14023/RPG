@@ -6,6 +6,6 @@ public class GameMenu : MonoBehaviour
 {
     public void SaveAndExit() {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<SaveLoadManager>().SaveByJson();
-        Application.Quit();
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameTitleManager>().BackToTitleScreen();
     }
 }

@@ -15,6 +15,7 @@ public class DungeonPortal : interactivityObject
         dungeonData.floor = 1;
         GameObject.FindGameObjectWithTag("Player").transform.GetComponent<CharacterStats>().ResetStats();
         PlayerPrefs.SetString("dungeonName", dungeonData.dungeonName);
+        PlayerPrefs.SetInt("ResetAbility", 1);
         SceneManager.LoadScene("Dungeon");
     }
 }

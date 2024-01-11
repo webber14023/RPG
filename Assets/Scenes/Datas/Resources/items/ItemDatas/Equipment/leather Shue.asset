@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21db29ef3c545814fb08885cddc9072e, type: 3}
+  m_Name: leather Shue
+  m_EditorClassIdentifier: 
+  ItemName: "\u76AE\u9769\u624B\u5957"
+  type: OffHand
+  ItemImage: {fileID: 21300000, guid: c1d331e6f15c24c47ad8ed311258a27e, type: 3}
+  isStackable: 0
+  baseLevel: 0
+  baseQuality: "\u666E\u901A"
+  prize: 120
+  prizePerLv: 1.05
+  ItemInfo: "\u7528\u76AE\u9769\u88FD\u4F5C\u7684\u624B\u5957\u3002"
+  equipmentHp: 35
+  equipmentSpeed: 0
+  equipmentAttackDamage: 15
+  equipmentAbilityPower: 0
+  equipmentAttackArmor: 0
+  equipmentMagicArmor: 0
+  equipmentCriticalChance: 0
+  equipmentCriticalMultiply: 0
+  equipmentHpPerLv: 1.11
+  equipmentSpeedPerLv: 0
+  equipmentAttackDamagePerLv: 1.11
+  equipmentAbilityPowerPerLv: 0
+  equipmentAttackArmorPerLv: 0
+  equipmentMagicArmorPerLv: 0
+  equipmentCriticalChancePerLv: 0
+  equipmentCriticalMultiplyPerLv: 0

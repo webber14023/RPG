@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21db29ef3c545814fb08885cddc9072e, type: 3}
+  m_Name: GlimmerSilver sword
+  m_EditorClassIdentifier: 
+  ItemName: "\u8F1D\u5149\u9280\u528D"
+  type: Weapon
+  ItemImage: {fileID: -1475813501, guid: 8aecba7c596f7c348ac6f6950e9dc16d, type: 3}
+  isStackable: 0
+  baseLevel: 0
+  baseQuality: "\u5353\u8D8A"
+  prize: 2200
+  prizePerLv: 1.05
+  ItemInfo: "\u7528\u6728\u982D\u88FD\u4F5C\u7684\u76FE\u724C\u3002"
+  equipmentHp: 100
+  equipmentSpeed: 0
+  equipmentAttackDamage: 175
+  equipmentAbilityPower: 80
+  equipmentAttackArmor: 0
+  equipmentMagicArmor: 0
+  equipmentCriticalChance: 15
+  equipmentCriticalMultiply: 30
+  equipmentHpPerLv: 0
+  equipmentSpeedPerLv: 0
+  equipmentAttackDamagePerLv: 1.14
+  equipmentAbilityPowerPerLv: 1.12
+  equipmentAttackArmorPerLv: 0
+  equipmentMagicArmorPerLv: 0
+  equipmentCriticalChancePerLv: 1
+  equipmentCriticalMultiplyPerLv: 1

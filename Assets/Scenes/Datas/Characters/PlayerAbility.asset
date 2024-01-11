@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerAbility
   m_EditorClassIdentifier: 
   Abilitys:
-  - playerAbility: {fileID: 0}
+  - playerAbility: {fileID: 11400000, guid: ac96207a904c81f4d9d4e4b30e0cdf32, type: 2}
     abilityKey: 0
   - playerAbility: {fileID: 0}
     abilityKey: 0
-  - playerAbility: {fileID: 0}
+  - playerAbility: {fileID: 11400000, guid: 21d70eb981483904f974e4da83694aef, type: 2}
     abilityKey: 0
   - playerAbility: {fileID: 0}
     abilityKey: 0

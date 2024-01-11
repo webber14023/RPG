@@ -17,7 +17,7 @@ MonoBehaviour:
   currentHealth: 800
   attackDamage: 100
   abilityPower: 0
-  attackArmor: 350
+  attackArmor: 150
   magicArmor: 10
   speed: 3.2
   criticalChance: 0.1

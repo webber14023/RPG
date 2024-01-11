@@ -17,7 +17,7 @@ MonoBehaviour:
   ItemImage: {fileID: 21300000, guid: f2bd54367c4c9dd44a0294133bed8d86, type: 3}
   isStackable: 0
   baseLevel: 0
-  baseQuality: 
+  baseQuality: "\u512A\u826F"
   prize: 540
   prizePerLv: 1.05
   ItemInfo: wwwwwwwwwwww

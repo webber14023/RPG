@@ -16,11 +16,11 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: ce0dbd311ec03a5438d6f84220a54f60, type: 2}
     itemLevel: 10
     count: 1
-    itemQuality: "\u512A\u826F"
+    itemQuality: 
   material:
   - item: {fileID: 11400000, guid: d4bc47392e25a1549a2e31114f0b888b, type: 2}
     itemLevel: 0
-    count: 3
+    count: 5
     itemQuality: 
   - item: {fileID: 11400000, guid: 3a53477aa8130214bb6516f22002d039, type: 2}
     itemLevel: 0

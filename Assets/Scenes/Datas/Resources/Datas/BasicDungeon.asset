@@ -19,7 +19,7 @@ MonoBehaviour:
   enemyCount: 4
   minLevel: 1
   maxLevel: 100
-  roomCount: 3
+  roomCount: 10
   dungeonEnemy:
   - {fileID: 2756756266515007926, guid: 6f4fe04c735db7f4c96677119e614e36, type: 3}
   - {fileID: 6975369299909785047, guid: 099d1033344ce5c4aa6cdd49092210c8, type: 3}

@@ -41,7 +41,12 @@ public class GameTitleManager : MonoBehaviour
         confirmScreen.SetActive(false);
     }
 
+    public void BackToTitleScreen() {
+        SceneManager.LoadScene("Title Screen");
+    }
+
     private IEnumerator LoadingNewGame() {
+        PlayerPrefs.SetInt("ResetAbility", 0);
         var asyncLoadLevel = SceneManager.LoadSceneAsync("Vallage", LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone){
             Debug.Log("Loading the Scene"); 
